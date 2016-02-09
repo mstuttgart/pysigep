@@ -45,6 +45,7 @@ class CampoBase(object):
         if self.valor is None and self.obrigatorio:
             raise sigep_exceptions.ErroCampoObrigatorio(
                 u'Campo obrigatório vazio')
+        return True
 
 
 class CampoString(CampoBase):
@@ -72,7 +73,8 @@ class CampoString(CampoBase):
             raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.valor,
                                                              self.tamanho,
                                                              len(self.valor))
-        super(CampoString, self).validar()
+
+        return super(CampoString, self).validar()
 
 
 class CampoCEP(CampoString):
@@ -90,6 +92,3 @@ class CampoCEP(CampoString):
         val = val.replace('-', '')
         val = val.replace('.', '')
         super(CampoString).valor = val.rstrip()
-
-    def validar(self):
-        super(CampoCEP, self).validar()

@@ -27,7 +27,6 @@
 
 
 class SigepBaseException(Exception):
-
     def __init__(self, msg):
         self.message = msg
 
@@ -36,7 +35,6 @@ class SigepBaseException(Exception):
 
 
 class ErroSemConexaoComInternet(SigepBaseException):
-
     def __init__(self, msg, *args):
         self.message = u'Falha na conexão com a Internet'
 
@@ -45,37 +43,31 @@ class ErroSemConexaoComInternet(SigepBaseException):
 
 
 class ErroConexaoComServidor(SigepBaseException):
-
     def __str__(self):
         return repr(self.message)
 
 
 class ErroConexaoTimeOut(SigepBaseException):
-
     def __str__(self):
         return repr(self.message)
 
 
 class ErroRequisicao(SigepBaseException):
-
     def __str__(self):
         return repr(self.message)
 
 
 class ErroSSL(SigepBaseException):
-
     def __str__(self):
         return repr(self.message)
 
 
 class ErroInvalidSchema(SigepBaseException):
-
     def __str__(self):
         return repr(self.message)
 
 
 class ErroURLInvalida(SigepBaseException):
-
     def __str__(self):
         return repr(self.message)
 
@@ -96,7 +88,6 @@ class ErroValidacaoXML(SigepBaseException):
 
 
 class ErroCampoObrigatorio(SigepBaseException):
-
     def __init__(self, nome_campo):
         self.message = 'Campo ' + nome_campo + u'é de envio obrigatorio, ' \
                                                u'mas não foi preenchido!'
@@ -106,11 +97,10 @@ class ErroCampoObrigatorio(SigepBaseException):
 
 
 class ErroCampoTamanhoIncorreto(SigepBaseException):
-
     def __init__(self, nome_campo, tamanho_esperado, tamanho):
         self.message = 'Campo ' + nome_campo + u'possui tamanho incorreto.' \
-                                               u'Esperado é ' + tamanho_esperado + \
-                                               u'mas o encontrado foi ' + tamanho
+                                               u'Esperado é ' + \
+                       tamanho_esperado + u'mas o encontrado foi ' + tamanho
 
     def __str__(self):
         return repr(self.message)
