@@ -100,7 +100,8 @@ class ErroCampoTamanhoIncorreto(SigepBaseException):
     def __init__(self, nome_campo, tamanho_esperado, tamanho):
         self.message = 'Campo ' + nome_campo + u'possui tamanho incorreto.' \
                                                u'Esperado é ' + \
-                       tamanho_esperado + u'mas o encontrado foi ' + tamanho
+                       str(tamanho_esperado) + u'mas o encontrado foi ' + \
+                       str(tamanho)
 
     def __str__(self):
         return repr(self.message)

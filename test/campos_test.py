@@ -43,14 +43,15 @@ class TestCampoBase(TestCase):
         self.assertEqual(campo.validar(), True)
 
 
-class TestCampoString(CampoBase):
+class TestCampoString(TestCase):
 
     def test_validar(self):
 
-        if isinstance(self.valor, str):
-            raise ErroTipoIncorreto('Campo deve ser string')
+        campo = CampoString()
+        campo.valor = 'Teste'
+        campo.tamanho = '3'
 
-        if len(self.tamanho) != self.tamanho:
-            raise ErroCampoTamanhoIncorreto(self.valor, self.tamanho,
-                                            len(self.valor))
-        super(CampoString, self).validar()
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo.validar)
+
+        campo.tamanho = 5
+        self.assertEqual(campo.validar(), True)

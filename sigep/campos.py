@@ -58,18 +58,18 @@ class CampoString(CampoBase):
 
     @property
     def valor(self):
-        return super(CampoString).valor
+        return self._valor
 
     @valor.setter
     def valor(self, val):
-        super(CampoString).valor = val.rstrip()
+        self._valor = val.rstrip()
 
     def validar(self):
 
-        if isinstance(self.valor, str):
+        if not isinstance(self.valor, str):
             raise sigep_exceptions.ErroTipoIncorreto('Campo deve ser string')
 
-        if len(self.tamanho) != self.tamanho:
+        if len(self.valor) != self.tamanho:
             raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.valor,
                                                              self.tamanho,
                                                              len(self.valor))
@@ -85,10 +85,10 @@ class CampoCEP(CampoString):
 
     @property
     def valor(self):
-        return super(CampoCEP).valor
+        return self._valor
 
     @valor.setter
     def valor(self, val):
         val = val.replace('-', '')
         val = val.replace('.', '')
-        super(CampoString).valor = val.rstrip()
+        self._valor = val.rstrip()
