@@ -5,12 +5,10 @@ SIGEP Web - Correios
 [![Code Health](https://landscape.io/github/mstuttgart/python-sigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/python-sigep/develop)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
 
-Implementação do sistema SIGEP Web em Python permitindo integração com Web 
-Service do Correios. O Módulo funciona como uma interface de consulta para os 
-métodos fornecidos pelo webservice.
+Implementação do sistema SIGEP Web em Python permitindo integração com Web Service do Correios. O Módulo funciona como uma interface de consulta para os métodos fornecidos pelo webservice.
 
-Recursos
---------
+## Recursos
+
 Esta API pode:
 
 * TODO: Calcular preços e prazos de entrega da encomenda.
@@ -29,16 +27,14 @@ Esta API pode:
 
 * TODO: Gerar as etiquetas de postagem no formato PDF.
 
-Requisitos
-----------
+## Requisitos
 
 * python 2.7
 * requests 
 
 Instalação do requests: `sudo pip install requests`
 
-Como usar
----------
+## Como usar
 
 <pre lang="python"><code>
 from pysigep.sigepweb.consulta_cep import RequestConsultaCEP
@@ -61,8 +57,7 @@ print response.bairro.valor
 
 </code></pre>
 
-Contribuindo
-------------
+## Contribuindo
 
 1. Faça um fork
 2. Crie sua branch para a funcionalidade (`git checkout -b nova-funcionalidade`)
