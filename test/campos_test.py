@@ -32,7 +32,7 @@ from sigep.campos import CampoBase
 from sigep.campos import CampoString
 
 
-class CampoBaseTest(TestCase):
+class TestCampoBase(TestCase):
 
     def test_validar(self):
 
@@ -43,7 +43,7 @@ class CampoBaseTest(TestCase):
         self.assertEqual(campo.validar(), True)
 
 
-class CampoStringTest(CampoBase):
+class TestCampoString(CampoBase):
 
     def test_validar(self):
 
