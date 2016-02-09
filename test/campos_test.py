@@ -27,6 +27,7 @@
 from unittest import TestCase
 from sigep.sigep_exceptions import ErroCampoObrigatorio
 from sigep.sigep_exceptions import ErroCampoTamanhoIncorreto
+from sigep.sigep_exceptions import ErroCampoNaoNumerico
 from sigep.campos import CampoBase
 from sigep.campos import CampoString
 
@@ -35,22 +36,26 @@ class TestCampoBase(TestCase):
 
     def test_validar(self):
 
-        campo = CampoBase(obrigatorio=True)
-        self.assertRaises(ErroCampoObrigatorio, campo.validar)
+        campo_base = CampoBase('campo_base', obrigatorio=True)
+        self.assertRaises(ErroCampoObrigatorio, campo_base.validar)
 
-        campo.obrigatorio = False
-        self.assertEqual(campo.validar(), True)
+        campo_base.obrigatorio = False
+        self.assertEqual(campo_base.validar(), True)
 
 
 class TestCampoString(TestCase):
 
     def test_validar(self):
 
-        campo = CampoString()
-        campo.valor = 'Teste'
-        campo.tamanho = '3'
+        campo_string = CampoString('campo_string')
+        campo_string.valor = 'Teste'
+        campo_string.tamanho = '3'
 
-        self.assertRaises(ErroCampoTamanhoIncorreto, campo.validar)
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_string.validar)
 
-        campo.tamanho = 5
-        self.assertEqual(campo.validar(), True)
+        campo_string.tamanho = 5
+        self.assertEqual(campo_string.validar(), True)
+
+        campo_string.numerico = True
+        campo_string.valor = '254TE'
+        self.assertRaises(ErroCampoNaoNumerico, campo_string.validar)

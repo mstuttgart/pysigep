@@ -29,7 +29,8 @@ import sigep_exceptions
 
 class CampoBase(object):
 
-    def __init__(self, valor=None, obrigatorio=False):
+    def __init__(self, nome, valor=None, obrigatorio=False):
+        self.nome = nome
         self._valor = valor
         self.obrigatorio = obrigatorio
 
@@ -50,9 +51,10 @@ class CampoBase(object):
 
 class CampoString(CampoBase):
 
-    def __init__(self, valor=None, obrigatorio=False, tamanho=0,
+    def __init__(self, nome, valor=None, obrigatorio=False, tamanho=0,
                  numerico=False):
-        super(CampoString, self).__init__(valor=valor, obrigatorio=obrigatorio)
+        super(CampoString, self).__init__(nome=nome, valor=valor,
+                                          obrigatorio=obrigatorio)
         self.tamanho = tamanho
         self.numerico = numerico
 
@@ -70,9 +72,12 @@ class CampoString(CampoBase):
             raise sigep_exceptions.ErroTipoIncorreto('Campo deve ser string')
 
         if len(self.valor) != self.tamanho:
-            raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.valor,
+            raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.nome,
                                                              self.tamanho,
                                                              len(self.valor))
+
+        if self.numerico and not self.valor.isdigit():
+            raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
 
         return super(CampoString, self).validar()
 

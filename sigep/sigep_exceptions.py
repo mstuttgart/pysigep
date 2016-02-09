@@ -92,6 +92,12 @@ class ErroCampoObrigatorio(SigepBaseException):
         self.message = 'Campo ' + nome_campo + u'é de envio obrigatorio, ' \
                                                u'mas não foi preenchido!'
 
+
+class ErroCampoNaoNumerico(SigepBaseException):
+    def __init__(self, nome_campo):
+        self.message = 'Campo ' + nome_campo + u'não é constituído apenas ' \
+                                               u'por números!'
+
     def __str__(self):
         return repr(self.message)
 
