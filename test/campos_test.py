@@ -26,7 +26,6 @@
 ###############################################################################
 from unittest import TestCase
 from sigep.sigep_exceptions import ErroCampoObrigatorio
-from sigep.sigep_exceptions import ErroTipoIncorreto
 from sigep.sigep_exceptions import ErroCampoTamanhoIncorreto
 from sigep.campos import CampoBase
 from sigep.campos import CampoString
