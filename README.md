@@ -4,6 +4,7 @@ SIGEP Web - Correios
 [![Coverage Status](https://coveralls.io/repos/github/mstuttgart/python-sigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/python-sigep?branch=develop)
 [![Code Health](https://landscape.io/github/mstuttgart/python-sigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/python-sigep/develop)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
+
 Implementação do sistema SIGEP Web em Python permitindo integração com Web 
 Service do Correios. O Módulo funciona como uma interface de consulta para os 
 métodos fornecidos pelo webservice.
