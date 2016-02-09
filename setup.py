@@ -36,5 +36,8 @@ setup(
     author_email='michellstut@gmail.com',
     description=u'Interface python para uso dos serviços fornecidos pelo '
                 u'SIGEPWeb dos Correios ',
+    requires=[
+        'requests',
+    ],
     test_suite='test',
 )
