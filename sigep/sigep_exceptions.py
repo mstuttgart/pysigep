@@ -35,7 +35,7 @@ class SigepBaseException(Exception):
 
 
 class ErroSemConexaoComInternet(SigepBaseException):
-    def __init__(self, msg, *args):
+    def __init__(self, msg):
         self.message = u'Falha na conexão com a Internet'
 
     def __str__(self):
@@ -68,16 +68,6 @@ class ErroInvalidSchema(SigepBaseException):
 
 
 class ErroURLInvalida(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroTamanhoParamentroIncorreto(SigepBaseException):
-
-    def __init__(self, nome_campo, valor, tamanho):
-        self.message = 'Campo ' + nome_campo + 'possui tamanho incorreto. ' \
-                                               'Tamanho: %d' % tamanho
-
     def __str__(self):
         return repr(self.message)
 
