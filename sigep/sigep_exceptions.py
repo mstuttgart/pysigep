@@ -73,11 +73,21 @@ class ErroURLInvalida(SigepBaseException):
 
 
 class ErroTamanhoParamentroIncorreto(SigepBaseException):
+
+    def __init__(self, nome_campo, valor, tamanho):
+        self.message = 'Campo ' + nome_campo + 'possui tamanho incorreto. ' \
+                                               'Tamanho: %d' % tamanho
+
     def __str__(self):
         return repr(self.message)
 
 
 class ErroTipoIncorreto(SigepBaseException):
+
+    def __init__(self, nome_campo, tipo, tipo_correto):
+        self.message = 'Campo ' + nome_campo + 'deve ser' +\
+                       str(tipo_correto) + '. Tipo encontrado: %s' % str(tipo)
+
     def __str__(self):
         return repr(self.message)
 
