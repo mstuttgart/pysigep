@@ -13,15 +13,17 @@ Esta API pode:
 
 * TODO: Calcular preços e prazos de entrega da encomenda.
 
+* TODO: Obter dados do endereço a partir de um dado CEP.
+
 * TODO: Obter os dados de rastreamento das encomendas.
 
-* Verificar se um tipo de serviço (Sedex, PAC, ...) é permitido entre dois endereços.  
- 
-* Gerar e enviar o XML da pre-lista de postagem (PLP) para o Correios.   
+* TODO: Verificar se um tipo de serviço (Sedex, PAC, ...) é permitido entre dois endereços.  
 
-* Gerar novos números de etiquetas de postagem. 
+* TODO: Gerar e enviar o XML da pre-lista de postagem (PLP) para o Correios.   
 
-* Criar e/ou verificar validade do dígito verificador das etiquetas (através do web service ou não).   
+* TODO: Gerar novos números de etiquetas de postagem. 
+
+* TODO: Criar e/ou verificar validade do dígito verificador das etiquetas (através do web service ou não).  
 
 * TODO: Gerar o relatório da PLP no formato PDF.   
 
