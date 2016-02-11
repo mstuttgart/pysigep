@@ -29,10 +29,14 @@ import sigep_exceptions
 
 class CampoBase(object):
 
-    def __init__(self, nome, valor=None, obrigatorio=False):
+    def __init__(self, nome, obrigatorio=False):
         self.nome = nome
-        self._valor = valor
-        self.obrigatorio = obrigatorio
+        self._valor = None
+        self._obrigatorio = obrigatorio
+
+    @property
+    def obrigatorio(self):
+        return self._obrigatorio
 
     @property
     def valor(self):
@@ -40,60 +44,64 @@ class CampoBase(object):
 
     @valor.setter
     def valor(self, val):
-        self._valor = val
+        val = self._formata_valor(val)
+        if self._validar(val):
+            self._valor = val
 
-    def validar(self):
-        if self.valor is None and self.obrigatorio:
-            raise sigep_exceptions.ErroCampoObrigatorio(
-                u'Campo obrigatório vazio')
+    def _formata_valor(self, valor):
+        return valor
+
+    def _validar(self, valor):
+        if valor is None and self.obrigatorio:
+            raise sigep_exceptions.ErroCampoObrigatorio(self.nome)
         return True
 
 
 class CampoString(CampoBase):
 
-    def __init__(self, nome, valor=None, obrigatorio=False, tamanho=0,
-                 numerico=False):
-        super(CampoString, self).__init__(nome=nome, valor=valor,
-                                          obrigatorio=obrigatorio)
-        self.tamanho = tamanho
-        self.numerico = numerico
+    def __init__(self, nome, obrigatorio=False, tamanho=0):
+        super(CampoString, self).__init__(nome=nome, obrigatorio=obrigatorio)
+        self._tamanho = tamanho
 
     @property
-    def valor(self):
-        return self._valor
+    def tamanho(self):
+        return self._tamanho
 
-    @valor.setter
-    def valor(self, val):
-        self._valor = val.rstrip()
-
-    def validar(self):
-
+    def _formata_valor(self, valor):
         if not isinstance(self.valor, str):
-            raise sigep_exceptions.ErroTipoIncorreto('Campo deve ser string')
+            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
+                                                     type(valor),
+                                                     str)
+        return valor.rstrip()
 
-        if len(self.valor) != self.tamanho:
+    def _validar(self, valor):
+
+        if len(valor) != self.tamanho:
             raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.nome,
                                                              self.tamanho,
-                                                             len(self.valor))
-
-        if self.numerico and not self.valor.isdigit():
-            raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
-
-        return super(CampoString, self).validar()
+                                                             len(valor))
+        return super(CampoString, self)._validar(valor)
 
 
 class CampoCEP(CampoString):
 
-    def __init__(self, valor=None, obrigatorio=False):
-        super(CampoCEP, self).__init__(valor=valor, obrigatorio=obrigatorio,
-                                       tamanho=8, numerico=True)
+    def __init__(self, nome, obrigatorio=False):
+        super(CampoCEP, self).__init__(nome, obrigatorio=obrigatorio,
+                                       tamanho=8)
 
-    @property
-    def valor(self):
-        return self._valor
+    def _formata_valor(self, valor):
 
-    @valor.setter
-    def valor(self, val):
-        val = val.replace('-', '')
-        val = val.replace('.', '')
-        self._valor = val.rstrip()
+        if not isinstance(valor, str):
+            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
+                                                     type(valor),
+                                                     str)
+        valor = valor.replace('-', '')
+        valor = valor.replace('.', '')
+        return valor.rstrip()
+
+    def _validar(self, valor):
+
+        if not valor.isdigit():
+            raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
+
+        return super(CampoCEP, self)._validar(valor)

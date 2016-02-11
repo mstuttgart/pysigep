@@ -28,34 +28,49 @@ from unittest import TestCase
 from sigep.sigep_exceptions import ErroCampoObrigatorio
 from sigep.sigep_exceptions import ErroCampoTamanhoIncorreto
 from sigep.sigep_exceptions import ErroCampoNaoNumerico
+from sigep.sigep_exceptions import ErroTipoIncorreto
 from sigep.campos import CampoBase
 from sigep.campos import CampoString
+from sigep.campos import CampoCEP
 
 
 class TestCampoBase(TestCase):
 
-    def test_validar(self):
-
+    def test__validar(self):
         campo_base = CampoBase('campo_base', obrigatorio=True)
-        self.assertRaises(ErroCampoObrigatorio, campo_base.validar)
+        self.assertRaises(ErroCampoObrigatorio, campo_base._validar, None)
 
-        campo_base.obrigatorio = False
-        self.assertEqual(campo_base.validar(), True)
+        campo_base = CampoBase('campo_base', obrigatorio=False)
+        self.assertEqual(campo_base._validar('Teste'), True)
 
 
 class TestCampoString(TestCase):
 
-    def test_validar(self):
-
+    def test__formata_valor(self):
         campo_string = CampoString('campo_string')
-        campo_string.valor = 'Teste'
-        campo_string.tamanho = '3'
+        self.assertRaises(ErroTipoIncorreto, campo_string.valor, 5)
 
-        self.assertRaises(ErroCampoTamanhoIncorreto, campo_string.validar)
+    def test__validar(self):
 
-        campo_string.tamanho = 5
-        self.assertEqual(campo_string.validar(), True)
+        campo_string = CampoString('campo_string', tamanho=3)
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_string._validar,
+                          'Teste')
 
-        campo_string.numerico = True
-        campo_string.valor = '254TE'
-        self.assertRaises(ErroCampoNaoNumerico, campo_string.validar)
+        campo_string = CampoString('campo_string', tamanho=5)
+        self.assertEqual(campo_string._validar('Teste'), True)
+
+
+class TestCampoCEP(TestCase):
+
+    def test__formata_valor(self):
+        campo_cep = CampoCEP('campo_cep')
+        self.assertRaises(ErroTipoIncorreto, campo_cep._formata_valor, 5)
+        self.assertEqual(campo_cep._formata_valor('37.800-503'), '37800503')
+
+    def test__validar(self):
+        campo_cep = CampoCEP('cep')
+        self.assertEqual(campo_cep._validar('37800503'), True)
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_cep._validar,
+                          '3780050')
+        self.assertRaises(ErroCampoNaoNumerico, campo_cep._validar,
+                          '378005AB')
