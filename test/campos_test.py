@@ -24,6 +24,7 @@
 # SOFTWARE.
 #
 ###############################################################################
+
 from unittest import TestCase
 from sigep.sigep_exceptions import ErroCampoObrigatorio
 from sigep.sigep_exceptions import ErroCampoTamanhoIncorreto

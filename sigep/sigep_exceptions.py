@@ -27,90 +27,32 @@
 
 
 class SigepBaseException(Exception):
-    def __init__(self, msg):
-        self.message = msg
-
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroSemConexaoComInternet(SigepBaseException):
-    def __init__(self, msg):
-        self.message = u'Falha na conexão com a Internet'
-
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroConexaoComServidor(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroConexaoTimeOut(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroRequisicao(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroSSL(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroInvalidSchema(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroURLInvalida(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
+    pass
 
 
 class ErroTipoIncorreto(SigepBaseException):
 
     def __init__(self, nome_campo, tipo, tipo_correto):
-        self.message = 'Campo ' + nome_campo + 'deve ser' +\
-                       str(tipo_correto) + '. Tipo encontrado: %s' % str(tipo)
-
-    def __str__(self):
-        return repr(self.message)
-
-
-class ErroValidacaoXML(SigepBaseException):
-    def __str__(self):
-        return repr(self.message)
+        self.msg = u'''Campo %s deve ser %s . Tipo encontrado: %s''' % (
+            nome_campo, str(tipo_correto), str(tipo))
 
 
 class ErroCampoObrigatorio(SigepBaseException):
-    def __init__(self, nome_campo):
-        self.message = 'Campo ' + nome_campo + u'é de envio obrigatorio, ' \
-                                               u'mas não foi preenchido!'
 
-    def __str__(self):
-        return repr(self.message)
+    def __init__(self, nome_campo):
+        self.msg = u'''Campo %s é de envio obrigatorio, mas não foi
+        preenchido!''' % nome_campo
 
 
 class ErroCampoNaoNumerico(SigepBaseException):
-    def __init__(self, nome_campo):
-        self.message = 'Campo ' + nome_campo + u'não é constituído apenas ' \
-                                               u'por números!'
 
-    def __str__(self):
-        return repr(self.message)
+    def __init__(self, nome_campo):
+        self.msg = u'''Campo %s não é constituído apenas por números!''' % \
+                   nome_campo
 
 
 class ErroCampoTamanhoIncorreto(SigepBaseException):
-    def __init__(self, nome_campo, tamanho_esperado, tamanho):
-        self.message = 'Campo ' + nome_campo + u'possui tamanho incorreto.' \
-                                               u'Esperado é ' + \
-                       str(tamanho_esperado) + u'mas o encontrado foi ' + \
-                       str(tamanho)
 
-    def __str__(self):
-        return repr(self.message)
+    def __init__(self, nome_campo, tamanho_esperado, tamanho):
+        self.msg = u'''Campo %s possui tamanho incorreto. Esperado é %d mas o
+        encontrado foi %d.''' % (nome_campo, tamanho_esperado, tamanho)
