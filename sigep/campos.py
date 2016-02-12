@@ -77,7 +77,7 @@ class CampoString(CampoBase):
 
     def _validar(self, valor):
 
-        if len(valor) != self.tamanho:
+        if self.tamanho != 0 and len(valor) != self.tamanho:
             raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.nome,
                                                              self.tamanho,
                                                              len(valor))
