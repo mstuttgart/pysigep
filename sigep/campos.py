@@ -61,7 +61,7 @@ class CampoBase(object):
 class CampoString(CampoBase):
 
     def __init__(self, nome, obrigatorio=False, tamanho=0):
-        super(CampoString, self).__init__(nome=nome, obrigatorio=obrigatorio)
+        super(CampoString, self).__init__(nome, obrigatorio=obrigatorio)
         self._tamanho = tamanho
 
     @property
