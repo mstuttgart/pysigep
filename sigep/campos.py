@@ -69,10 +69,10 @@ class CampoString(CampoBase):
         return self._tamanho
 
     def _formata_valor(self, valor):
-        if not isinstance(valor, str):
+        if not isinstance(valor, basestring):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
                                                      type(valor),
-                                                     str)
+                                                     basestring)
         return valor.rstrip()
 
     def _validar(self, valor):

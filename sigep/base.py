@@ -45,6 +45,14 @@ class RequestBase(object):
         self._footer = '</soap:Body></soap:Envelope>'
 
     @property
+    def header(self):
+        return self._header
+
+    @property
+    def footer(self):
+        return self._footer
+
+    @property
     def response(self):
         return self._response
 
