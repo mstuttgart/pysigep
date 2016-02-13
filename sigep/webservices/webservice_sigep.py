@@ -86,11 +86,11 @@ class WebserviceSIGEP(WebserviceBase):
         except requests.Timeout as exc:
             raise sigep_exceptions.ErroConexaoTimeOut(exc.message)
 
-        except requests.exceptions.RequestException as exc:
-            raise sigep_exceptions.ErroRequisicao(exc.message)
-
         except requests.exceptions.InvalidSchema as exc:
             raise sigep_exceptions.ErroInvalidSchema(exc.message)
+
+        except requests.exceptions.RequestException as exc:
+            raise sigep_exceptions.ErroRequisicao(exc.message)
 
     @staticmethod
     def _parse_error(xml):
