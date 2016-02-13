@@ -52,7 +52,8 @@ COD_ADMIN = '08082650'
 
 server = WebserviceSIGEPWeb(WebserviceSIGEPWeb.AMBIENTE_HOMOLOGACAO)
 
-bcep = RequestConsultaCEP('37503-000')
+bcep = RequestConsultaCEP()
+bcep.cep.valor = '37503-000'
 response = server.request(bcep)
 print response.rua.valor
 print response.cidade.valor
