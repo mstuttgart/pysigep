@@ -64,7 +64,7 @@ print response.bairro.valor
 
 1. Faça um fork
 2. Crie sua branch para a funcionalidade (`git checkout -b nova-funcionalidade`)
-3. Faça o commit suas modificações (`git commit -am 'Adiciona nova funcionalidade'`)
+3. Faça o commit suas modificações (`git commit -am "Adiciona nova funcionalidade"`)
 4. Faça o push para a branch (`git push origin nova-funcionalidade`)
 5. Crie um novo Pull Request
 
