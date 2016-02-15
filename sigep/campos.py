@@ -106,3 +106,20 @@ class CampoCEP(CampoString):
             raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
 
         return super(CampoCEP, self)._validar(valor)
+
+
+class CampoBooleano(CampoBase):
+
+    def __init__(self, nome, obrigatorio=False):
+        super(CampoBooleano, self).__init__(nome, obrigatorio=obrigatorio)
+
+    def _formata_valor(self, valor):
+        return valor
+
+    def _validar(self, valor):
+
+        if not isinstance(valor, bool):
+            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
+                                                     type(valor),
+                                                     bool)
+        return super(CampoBooleano, self)._validar(valor)

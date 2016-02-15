@@ -33,6 +33,7 @@ from sigep.sigep_exceptions import ErroTipoIncorreto
 from sigep.campos import CampoBase
 from sigep.campos import CampoString
 from sigep.campos import CampoCEP
+from sigep.campos import CampoBooleano
 
 
 class TestCampoBase(TestCase):
@@ -88,3 +89,17 @@ class TestCampoCEP(TestCase):
                           '3780050')
         self.assertRaises(ErroCampoNaoNumerico, campo_cep._validar,
                           '378005AB')
+
+
+class TestCampoBoolean(TestCase):
+
+    def test__formata_valor(self):
+        campo_bool = CampoBooleano('boolean_teste')
+        self.assertEqual(campo_bool._formata_valor(True), True)
+        self.assertEqual(campo_bool._formata_valor(False), False)
+
+    def test__validar(self):
+        campo_bool = CampoBooleano('boolean_teste')
+        self.assertEqual(campo_bool._validar(True), True)
+        self.assertRaises(ErroTipoIncorreto, campo_bool._validar, 'True')
+        self.assertRaises(ErroTipoIncorreto, campo_bool._validar, 1)
