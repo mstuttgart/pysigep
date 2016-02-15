@@ -27,11 +27,11 @@
 
 import xml.etree.ElementTree as Et
 
-from pysigep.base import RequestBaseAutentic
-from pysigep.base import ResponseBase
-from pysigep.campos import CampoString
-from pysigep.campos import CampoCEP
-from pysigep.campos import CampoBooleano
+from sigep.base import RequestBaseAutentic
+from sigep.base import ResponseBase
+from sigep.campos import CampoString
+from sigep.campos import CampoCEP
+from sigep.campos import CampoBooleano
 
 
 class RequestDisponibilidadeServico(RequestBaseAutentic):
@@ -52,7 +52,7 @@ class RequestDisponibilidadeServico(RequestBaseAutentic):
         self._cod_administrativo.valor = cod_administrativo
         self._numero_servico.valor = numero_servico
         self._cep_origem.valor = cep_origem
-        self._cep_destino = cep_destino
+        self._cep_destino.valor = cep_destino
 
     @property
     def cod_administrativo(self):
