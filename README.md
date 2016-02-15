@@ -10,9 +10,8 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 
 ## Recursos
 
-### TODO:
-
 - [ ] Calcular preços e prazos de entrega da encomenda.
+- [ ] Verificar status do Cartão de Postagem.
 - [x] Obter dados do endereço a partir de um dado CEP.
 - [ ] Obter os dados de rastreamento das encomendas.
 - [x] Verificar se um tipo de serviço (Sedex, PAC, ...) é permitido entre dois endereços.  
