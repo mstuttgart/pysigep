@@ -31,6 +31,7 @@ from sigep.sigep.consulta_cep import ResponseBuscaCEP
 
 
 class TestRequestConsultaCEP(TestCase):
+
     def test_get_xml(self):
         req_cep = RequestConsultaCEP('37.503-005')
 
@@ -66,12 +67,12 @@ class TestResponseBuscaCEP(TestCase):
         </S:Body>
         </S:Envelope>'''
 
-        req_cep = ResponseBuscaCEP()
-        req_cep._parse_xml(xml)
+        resp_cep = ResponseBuscaCEP()
+        resp_cep._parse_xml(xml)
 
-        self.assertEqual(req_cep.logradouro.valor, u'SBN Quadra 1 Bloco A')
-        self.assertEqual(req_cep.bairro.valor, u'Asa Norte')
-        self.assertEqual(req_cep.cidade.valor, u'Brasília')
-        self.assertEqual(req_cep.uf.valor, u'DF')
-        self.assertEqual(req_cep.complemento.valor, u'')
-        self.assertEqual(req_cep.complemento_2.valor, u'')
+        self.assertEqual(resp_cep.logradouro.valor, u'SBN Quadra 1 Bloco A')
+        self.assertEqual(resp_cep.bairro.valor, u'Asa Norte')
+        self.assertEqual(resp_cep.cidade.valor, u'Brasília')
+        self.assertEqual(resp_cep.uf.valor, u'DF')
+        self.assertEqual(resp_cep.complemento.valor, u'')
+        self.assertEqual(resp_cep.complemento_2.valor, u'')
