@@ -63,13 +63,18 @@ class CampoBase(object):
 
 class CampoString(CampoBase):
 
-    def __init__(self, nome, obrigatorio=False, tamanho=0):
+    def __init__(self, nome, obrigatorio=False, tamanho=0, numerico=False):
         super(CampoString, self).__init__(nome, obrigatorio=obrigatorio)
         self._tamanho = tamanho
+        self._numerico = numerico
 
     @property
     def tamanho(self):
         return self._tamanho
+
+    @property
+    def numerico(self):
+        return self._numerico
 
     def _formata_valor(self, valor):
         if not isinstance(valor, basestring):
@@ -84,6 +89,10 @@ class CampoString(CampoBase):
             raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.nome,
                                                              self.tamanho,
                                                              len(valor))
+
+        if self.numerico and not valor.isdigit():
+            raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
+
         return super(CampoString, self)._validar(valor)
 
 
@@ -91,7 +100,7 @@ class CampoCEP(CampoString):
 
     def __init__(self, nome, obrigatorio=False):
         super(CampoCEP, self).__init__(nome, obrigatorio=obrigatorio,
-                                       tamanho=8)
+                                       tamanho=8, numerico=True)
 
     def _formata_valor(self, valor):
 
@@ -102,13 +111,6 @@ class CampoCEP(CampoString):
         valor = valor.replace('-', '')
         valor = valor.replace('.', '')
         return valor.rstrip()
-
-    def _validar(self, valor):
-
-        if not valor.isdigit():
-            raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
-
-        return super(CampoCEP, self)._validar(valor)
 
 
 class CampoBooleano(CampoBase):
