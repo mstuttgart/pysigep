@@ -34,6 +34,19 @@ from sigep.webservices.webservice_sigep import WebserviceSIGEP
 
 class TestWebserviceSIGEP(TestCase):
 
+    def test__init__(self):
+        wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
+        self.assertEqual(wb.ambiente, WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
+
+        wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_PRODUCAO)
+        self.assertEqual(wb.ambiente, WebserviceSIGEP.AMBIENTE_PRODUCAO)
+
+        wb = WebserviceSIGEP('HOMOLOG')
+        self.assertEqual(wb.ambiente, WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
+
+    def test_ambiente(self):
+        self.test__init__()
+
     def test_request(self):
         req_cep = RequestConsultaCEP('37.503-130')
         wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
