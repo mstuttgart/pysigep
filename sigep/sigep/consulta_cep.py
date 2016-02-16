@@ -47,7 +47,7 @@ class RequestConsultaCEP(RequestBase):
     def get_xml(self):
         xml = self._header
         xml += '<cli:consultaCEP>'
-        xml += '<cep>%s</cep>' % self.cep.valor
+        xml += self.cep.get_xml()
         xml += '</cli:consultaCEP>'
         xml += self._footer
         return xml

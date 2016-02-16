@@ -57,6 +57,9 @@ class CampoBase(object):
             raise sigep_exceptions.ErroCampoObrigatorio(self.nome)
         return True
 
+    def get_xml(self):
+        return '<{}>{}</{}>'.format(self.nome, self.valor, self.nome)
+
 
 class CampoString(CampoBase):
 

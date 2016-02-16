@@ -83,8 +83,8 @@ class RequestBaseAutentic(RequestBase):
         return self._senha
 
     def get_xml(self):
-        xml = u'<usuario>%s</usuario>' % self.usuario.valor
-        xml += u'<senha>%s</senha>' % self.senha.valor
+        xml = self.usuario.get_xml()
+        xml += self.senha.get_xml()
         return xml
 
 

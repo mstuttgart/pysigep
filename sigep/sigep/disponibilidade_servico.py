@@ -72,16 +72,15 @@ class RequestDisponibilidadeServico(RequestBaseAutentic):
 
     def get_xml(self):
 
-        xml = self._header
+        xml = self.header
         xml += '<cli:verificaDisponibilidadeServico>'
-        xml += '<codAdministrativo>%s</codAdministrativo>' % \
-               self.cod_administrativo.valor
-        xml += '<numeroServico>%s</numeroServico>' % self.numero_servico.valor
-        xml += '<cepOrigem>%s</cepOrigem>' % self.cep_origem.valor
-        xml += '<cepDestino>%s</cepDestino>' % self.cep_destino.valor
+        xml += self.cod_administrativo.get_xml()
+        xml += self.numero_servico.get_xml()
+        xml += self.cep_origem.get_xml()
+        xml += self.cep_destino.get_xml()
         xml += super(RequestDisponibilidadeServico, self).get_xml()
         xml += '</cli:verificaDisponibilidadeServico>'
-        xml += self._footer
+        xml += self.footer
 
         return xml
 
