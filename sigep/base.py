@@ -28,12 +28,6 @@
 from campos import CampoString
 
 
-class TagBase(object):
-
-    def get_xml(self):
-        pass
-
-
 class RequestBase(object):
 
     def __init__(self, response_obj):
@@ -57,7 +51,7 @@ class RequestBase(object):
         return self._response
 
     def get_xml(self):
-        pass
+        raise NotImplementedError
 
 
 class RequestBaseAutentic(RequestBase):
@@ -106,4 +100,4 @@ class ResponseBase(object):
         self._parse_xml(value)
 
     def _parse_xml(self, xml):
-        pass
+        raise NotImplementedError

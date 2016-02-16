@@ -45,31 +45,6 @@ class TestCampoBase(TestCase):
         campo_base = CampoBase('campo_base', obrigatorio=False)
         self.assertEqual(campo_base._validar('Teste'), True)
 
-    def test_valor(self):
-        campo_base = CampoBase('campo_base', obrigatorio=False)
-        campo_base.valor = True
-        self.assertEqual(campo_base.valor, True)
-
-        campo_base = CampoBase('campo_base', obrigatorio=True)
-        self.assertRaises(ErroCampoObrigatorio, campo_base.valor, None)
-
-    def test__formata_valor(self):
-        campo_base = CampoBase('campo_base', obrigatorio=True)
-        self.assertEqual(campo_base._formata_valor(10), 10)
-
-    def test_get_xml(self):
-        campo_base = CampoBase('campo_base', obrigatorio=True)
-        campo_base.valor = 10
-        self.assertEqual(campo_base.get_xml(), '<campo_base>10</campo_base>')
-
-        campo_base.valor = 'teste'
-        self.assertEqual(campo_base.get_xml(),
-                         '<campo_base>teste</campo_base>')
-
-        campo_base.valor = True
-        self.assertEqual(campo_base.get_xml(),
-                         '<campo_base>True</campo_base>')
-
 
 class TestCampoString(TestCase):
 

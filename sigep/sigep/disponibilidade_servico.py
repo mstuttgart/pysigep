@@ -45,7 +45,8 @@ class RequestDisponibilidadeServico(RequestBaseAutentic):
         self._cod_administrativo = CampoString('codAdministrativo',
                                                obrigatorio=True, tamanho=8)
         self._numero_servico = CampoString('numeroServico',
-                                           obrigatorio=True)
+                                           obrigatorio=True,
+                                           numerico=True)
         self._cep_origem = CampoCEP('cepOrigem', obrigatorio=True)
         self._cep_destino = CampoCEP('cepDestino', obrigatorio=True)
 

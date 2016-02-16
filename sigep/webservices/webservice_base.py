@@ -32,7 +32,7 @@ class WebserviceBase(object):
         self._url = url
 
     def post_xml(self, obj_param):
-        pass
+        raise NotImplementedError
 
     @property
     def url(self):

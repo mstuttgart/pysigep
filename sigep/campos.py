@@ -50,7 +50,7 @@ class CampoBase(object):
             self._valor = val
 
     def _formata_valor(self, valor):
-        return valor
+        raise NotImplementedError
 
     def _validar(self, valor):
         if valor is None and self.obrigatorio:
