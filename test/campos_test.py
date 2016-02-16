@@ -45,6 +45,11 @@ class TestCampoBase(TestCase):
         campo_base = CampoBase('campo_base', obrigatorio=False)
         self.assertEqual(campo_base._validar('Teste'), True)
 
+    def test__formata_valor(self):
+        campo_base = CampoBase('campo_base')
+        self.assertRaises(NotImplementedError, campo_base._formata_valor,
+                          'Teste')
+
 
 class TestCampoString(TestCase):
 
