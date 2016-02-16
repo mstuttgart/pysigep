@@ -11,7 +11,7 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 ## Recursos
 
 - [ ] Calcular preços e prazos de entrega da encomenda.
-- [ ] Verificar status do Cartão de Postagem.
+- [x] Verificar status do Cartão de Postagem.
 - [x] Obter dados do endereço a partir de um dado CEP.
 - [ ] Obter os dados de rastreamento das encomendas.
 - [x] Verificar se um tipo de serviço (Sedex, PAC, ...) é permitido entre dois endereços.  
@@ -34,7 +34,6 @@ Instalação do requests: `sudo pip install requests`
 from sigep.sigep.consulta_cep import RequestConsultaCEP
 from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
 from sigep.webservices.webservice_sigepweb import WebserviceSIGEP
-
 
 LOGIN = 'sigep'
 SENHA = 'n5f9t8'
@@ -68,8 +67,6 @@ print response.disponivel.valor
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
 * [Manual Calculo Preço e Prazo](http://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos)
 * [Manual Rastreamento](http://blog.correios.com.br/comercioeletronico/wp-content/uploads/2011/10/Guia-Tecnico-Rastreamento-XML-Cliente-Vers%C3%A3o-e-commerce-v-1-5.pdf)
-
-
 
 ## Contribuindo
 
