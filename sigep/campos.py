@@ -113,6 +113,24 @@ class CampoCEP(CampoString):
         return valor.rstrip()
 
 
+class CampoCNPJ(CampoString):
+
+    def __init__(self, nome, obrigatorio=False):
+        super(CampoCNPJ, self).__init__(nome, obrigatorio=obrigatorio,
+                                        tamanho=14, numerico=True)
+
+    def _formata_valor(self, valor):
+
+        if not isinstance(valor, str):
+            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
+                                                     type(valor),
+                                                     str)
+        valor = valor.replace('-', '')
+        valor = valor.replace('.', '')
+        valor = valor.replace('/', '')
+        return valor.rstrip()
+
+
 class CampoBooleano(CampoBase):
 
     def __init__(self, nome, obrigatorio=False):
@@ -128,3 +146,19 @@ class CampoBooleano(CampoBase):
                                                      type(valor),
                                                      bool)
         return super(CampoBooleano, self)._validar(valor)
+
+
+class CampoInteiro(CampoBase):
+
+    def __init__(self, nome, obrigatorio=False):
+        super(CampoInteiro, self).__init__(nome, obrigatorio=obrigatorio)
+
+    def _formata_valor(self, valor):
+        return valor
+
+    def _validar(self, valor):
+        if not isinstance(valor, int):
+            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
+                                                     type(valor),
+                                                     int)
+        return super(CampoInteiro, self)._validar(valor)
