@@ -41,7 +41,7 @@ class RequestGeraDigitoVerificador(RequestBaseAutentic):
 
         self._etiquetas = []
 
-        for etq in etiquetas.valor.split(','):
+        for etq in etiquetas.split(','):
             cmp_etq = CampoString('etiquetas', obrigatorio=True)
             cmp_etq.valor = etq
             self._etiquetas.append(cmp_etq)
@@ -73,5 +73,5 @@ class ResponseGeraDigitoVerificador(ResponseBase):
     def _parse_xml(self, xml):
         for end in Et.fromstring(xml).findall('.//return'):
             campo_int = CampoInteiro('digito_verificador')
-            campo_int.valor = end.text()
+            campo_int.valor = int(end.text)
             self.digito_verificador.append(campo_int)

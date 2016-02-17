@@ -54,7 +54,6 @@ print response.uf.valor
 print response.complemento.valor
 print response.complemento_2.valor
 
-
 verif_disp = RequestDisponibilidadeServico(COD_ADMIN, NUMERO_SERVICO, 
 CEP_ORIGEM, CEP_DESTINO, LOGIN, SENHA)
                                          
