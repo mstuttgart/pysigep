@@ -33,7 +33,9 @@ from sigep.sigep_exceptions import ErroTipoIncorreto
 from sigep.campos import CampoBase
 from sigep.campos import CampoString
 from sigep.campos import CampoCEP
+from sigep.campos import CampoCNPJ
 from sigep.campos import CampoBooleano
+from sigep.campos import CampoInteiro
 
 
 class TestCampoBase(TestCase):
@@ -84,6 +86,23 @@ class TestCampoCEP(TestCase):
                           '378005AB')
 
 
+class TestCampoCNPJ(TestCase):
+
+    def test__formata_valor(self):
+        campo_cnpj = CampoCNPJ('campo_cnpj')
+        self.assertRaises(ErroTipoIncorreto, campo_cnpj._formata_valor, 5)
+        self.assertEqual(campo_cnpj._formata_valor('12.345.678./0001-96'),
+                         '12345678000196')
+
+    def test__validar(self):
+        campo_cnpj = CampoCNPJ('campo_cnpj')
+        self.assertEqual(campo_cnpj._validar('12345678000196'), True)
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_cnpj._validar,
+                          '1234567800019')
+        self.assertRaises(ErroCampoNaoNumerico, campo_cnpj._validar,
+                          '123456780001AB')
+
+
 class TestCampoBoolean(TestCase):
 
     def test__formata_valor(self):
@@ -96,3 +115,16 @@ class TestCampoBoolean(TestCase):
         self.assertEqual(campo_bool._validar(True), True)
         self.assertRaises(ErroTipoIncorreto, campo_bool._validar, 'True')
         self.assertRaises(ErroTipoIncorreto, campo_bool._validar, 1)
+
+
+class TestCampoInteiro(TestCase):
+
+    def test__formata_valor(self):
+        campo_int = CampoInteiro('int_teste')
+        self.assertEqual(campo_int._formata_valor(10), 10)
+
+    def test__validar(self):
+        campo_int = CampoInteiro('int_teste')
+        self.assertEqual(campo_int._validar(20), True)
+        self.assertRaises(ErroTipoIncorreto, campo_int._validar, 'True')
+        self.assertRaises(ErroTipoIncorreto, campo_int._validar, 10.5)
