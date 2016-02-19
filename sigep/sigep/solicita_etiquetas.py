@@ -92,4 +92,4 @@ class ResponseSolicitaEtiqueta(ResponseBase):
 
     def _parse_xml(self, xml):
         end = Et.fromstring(xml).find('.//return')
-        self.intervalo_etiquetas.valor = end.text()
+        self.intervalo_etiquetas.valor = end.text
