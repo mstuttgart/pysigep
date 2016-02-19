@@ -10,18 +10,17 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 
 ## Recursos
 
-- [ ] Calcular preços e prazos de entrega da encomenda.
-- [x] Verificar status do Cartão de Postagem.
-- [x] Obter dados do endereço a partir de um dado CEP.
-- [ ] Obter os dados de rastreamento das encomendas.
-- [x] Verificar se um tipo de serviço (Sedex, PAC, ...) é permitido entre dois endereços.  
-- [ ] Gerar e enviar o XML da pre-lista de postagem (PLP) para o Correios.   
-- [ ] Gerar novos números de etiquetas de postagem. 
-- [x] Criar e/ou verificar validade do dígito verificador das etiquetas (através do web service ou não).  
-- [ ] Gerar o relatório da PLP no formato PDF.   
-- [ ] Gerar as etiquetas de postagem no formato PDF.
+- [ ] Consultar custo do frete e prazos para entrega dado um endereço.
+- [ ] Realizar o rastreamento de uma mercadoria através do seu número de rastreamento.
+- [x] Verificar *status* de um Cartão de Postagem
+- [x] Obter dados do endereço a partir de seu respectivo CEP.
+- [x] Verificar disponibilidade de um dado serviço.  
+- [ ] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.   
+- [ ] Gerar etiquetas para postagem de mercadoria e posterior rastreamento. 
+- [ ] Imprimir etiqueta da PLP em formato PDF.   
+- [ ] Imprimir Chancela em formato PDF.
 
-## Requisitos
+## Dependências
 
 * python 2.7
 * requests 
@@ -66,12 +65,3 @@ print response.disponivel.valor
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
 * [Manual Calculo Preço e Prazo](http://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos)
 * [Manual Rastreamento](http://blog.correios.com.br/comercioeletronico/wp-content/uploads/2011/10/Guia-Tecnico-Rastreamento-XML-Cliente-Vers%C3%A3o-e-commerce-v-1-5.pdf)
-
-## Contribuindo
-
-1. Faça um fork
-2. Crie sua branch para a funcionalidade (`git checkout -b nova_funcionalidade`)
-3. Faça o commit suas modificações (`git commit -am "Adiciona nova funcionalidade"`)
-4. Faça o push para a branch (`git push origin nova_funcionalidade`)
-5. Crie um novo Pull Request
-
