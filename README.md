@@ -17,7 +17,7 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 - [x] Verificar se um tipo de serviço (Sedex, PAC, ...) é permitido entre dois endereços.  
 - [ ] Gerar e enviar o XML da pre-lista de postagem (PLP) para o Correios.   
 - [ ] Gerar novos números de etiquetas de postagem. 
-- [ ] Criar e/ou verificar validade do dígito verificador das etiquetas (através do web service ou não).  
+- [x] Criar e/ou verificar validade do dígito verificador das etiquetas (através do web service ou não).  
 - [ ] Gerar o relatório da PLP no formato PDF.   
 - [ ] Gerar as etiquetas de postagem no formato PDF.
 
@@ -45,8 +45,8 @@ CEP_DESTINO = '99200-000'
 server = WebserviceSIGEPWeb(WebserviceSIGEPWeb.AMBIENTE_HOMOLOGACAO)
 
 bcep = RequestConsultaCEP('37503-000')
-
 response = server.request(bcep)
+
 print response.rua.valor
 print response.bairro.valor
 print response.cidade.valor
