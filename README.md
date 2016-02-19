@@ -16,7 +16,7 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 - [x] Obter dados do endereço a partir de seu respectivo CEP.
 - [x] Verificar disponibilidade de um dado serviço.  
 - [ ] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.   
-- [ ] Gerar etiquetas para postagem de mercadoria e posterior rastreamento. 
+- [x] Gerar etiquetas para postagem de mercadoria e posterior rastreamento. 
 - [ ] Imprimir etiqueta da PLP em formato PDF.   
 - [ ] Imprimir Chancela em formato PDF.
 
