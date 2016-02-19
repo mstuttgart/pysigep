@@ -41,8 +41,6 @@ class TestRequestGeraDigitoVerificador(TestCase):
         self.assertEqual(req.etiquetas[0].valor, 'DL76023727 BR')
         self.assertEqual(req.etiquetas[1].valor, 'DL76023728 BR')
 
-        req.etiquetas
-
     def test_etiquetas(self):
         self.test__init__()
 
