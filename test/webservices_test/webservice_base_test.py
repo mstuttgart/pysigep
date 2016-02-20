@@ -31,6 +31,6 @@ from sigep.webservices.webservice_sigep import WebserviceSIGEP
 
 class TestWebserviceBase(TestCase):
 
-    def test_post_xml(self):
+    def test_request(self):
         wb = WebserviceSIGEP('https://github.com/mstuttgart/python-sigep')
-        self.assertRaises(NotImplementedError, wb.post_xml, None)
+        self.assertRaises(NotImplementedError, wb.request, None)

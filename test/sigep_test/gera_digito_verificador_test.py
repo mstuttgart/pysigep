@@ -26,7 +26,7 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.sigep.gera_digito_verificador import RequestGeraDigitoVerificador
+from sigep.sigep.gera_digito_verificador import RequestGeraDigitoVerificadorSIGEP
 from sigep.sigep.gera_digito_verificador import ResponseGeraDigitoVerificador
 
 
@@ -35,7 +35,7 @@ class TestRequestGeraDigitoVerificador(TestCase):
     def test__init__(self):
 
         etiquetas = 'DL76023727 BR,DL76023728 BR'
-        req = RequestGeraDigitoVerificador(etiquetas, 'sigep', 'n5f9t8')
+        req = RequestGeraDigitoVerificadorSIGEP(etiquetas, 'sigep', 'n5f9t8')
 
         self.assertEqual(len(req.etiquetas), 2)
         self.assertEqual(req.etiquetas[0].valor, 'DL76023727 BR')
@@ -47,7 +47,7 @@ class TestRequestGeraDigitoVerificador(TestCase):
     def test_get_xml(self):
 
         etiquetas = 'DL76023727 BR,DL76023728 BR'
-        req = RequestGeraDigitoVerificador(etiquetas, 'sigep', 'n5f9t8')
+        req = RequestGeraDigitoVerificadorSIGEP(etiquetas, 'sigep', 'n5f9t8')
 
         xml = req.header
         xml += '<cli:geraDigitoVerificadorEtiquetas>'

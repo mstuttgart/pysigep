@@ -162,3 +162,19 @@ class CampoInteiro(CampoBase):
                                                      type(valor),
                                                      int)
         return super(CampoInteiro, self)._validar(valor)
+
+
+class CampoDecimal(CampoBase):
+
+    def __init__(self, nome, obrigatorio=False):
+        super(CampoDecimal, self).__init__(nome, obrigatorio=obrigatorio)
+
+    def _formata_valor(self, valor):
+        return valor
+
+    def _validar(self, valor):
+        if not isinstance(valor, float):
+            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
+                                                     type(valor),
+                                                     float)
+        return super(CampoDecimal, self)._validar(valor)

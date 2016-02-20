@@ -27,15 +27,15 @@
 
 import xml.etree.ElementTree as Et
 
-from sigep.base import RequestBaseAutentic
+from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 
 
-class RequestStatusCartaoPostagem(RequestBaseAutentic):
+class RequestStatusCartaoPostagemSIGEP(RequestBaseSIGEPAutentic):
 
     def __init__(self, num_cartao_postagem, usuario, senha):
-        super(RequestStatusCartaoPostagem, self).__init__(
+        super(RequestStatusCartaoPostagemSIGEP, self).__init__(
             ResponseStatusCartaoPostagem, usuario, senha)
 
         self._numero_cartao_postagem = CampoString('numeroCartaoPostagem',
@@ -53,7 +53,7 @@ class RequestStatusCartaoPostagem(RequestBaseAutentic):
         xml = self.header
         xml += '<cli:getStatusCartaoPostagem>'
         xml += self.numero_cartao_postagem.get_xml()
-        xml += super(RequestStatusCartaoPostagem, self).get_xml()
+        xml += super(RequestStatusCartaoPostagemSIGEP, self).get_xml()
         xml += '</cli:getStatusCartaoPostagem>'
         xml += self.footer
         return xml

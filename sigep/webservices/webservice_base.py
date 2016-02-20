@@ -31,7 +31,7 @@ class WebserviceBase(object):
     def __init__(self, url):
         self._url = url
 
-    def post_xml(self, obj_param):
+    def request(self, obj_param, ssl_verify=False):
         raise NotImplementedError
 
     @property

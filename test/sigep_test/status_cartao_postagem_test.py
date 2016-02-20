@@ -26,7 +26,7 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
+from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagemSIGEP
 from sigep.sigep.status_cartao_postagem import ResponseStatusCartaoPostagem
 
 
@@ -37,7 +37,7 @@ class TestRequestStatusCartaoPostagem(TestCase):
         senha = 'n5f9t8'
         cartao_postagem = '0057018901'
 
-        req_status = RequestStatusCartaoPostagem(cartao_postagem, login, senha)
+        req_status = RequestStatusCartaoPostagemSIGEP(cartao_postagem, login, senha)
 
         xml = req_status.header
         xml += '<cli:getStatusCartaoPostagem>'

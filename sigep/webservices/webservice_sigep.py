@@ -67,8 +67,7 @@ class WebserviceSIGEP(WebserviceBase):
                                      verify=ssl_verify)
 
             if not resposta.ok:
-                msg = WebserviceSIGEP._parse_error(
-                    resposta.text.encode('utf8'))
+                msg = WebserviceSIGEP._parse_error(resposta.text.encode('utf8'))
                 raise sigep_exceptions.ErroValidacaoXML(msg)
 
             # Criamos um response dinamicamente para cada tipo de classe

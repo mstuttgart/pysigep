@@ -38,11 +38,8 @@ class RequestBase(object):
 
     def __init__(self, response_obj):
         self._response = response_obj
-        self._header = \
-            '''<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"
-            xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-            <soap:Header/><soap:Body>'''
-        self._footer = '</soap:Body></soap:Envelope>'
+        self._header = None
+        self._footer = None
 
     @property
     def header(self):
@@ -60,19 +57,26 @@ class RequestBase(object):
         raise NotImplementedError
 
 
-class RequestBaseAutentic(RequestBase):
+class RequestBaseSIGEP(object):
+
+    def __init__(self, response_obj):
+        super(RequestBaseSIGEP, self).__init__(response_obj)
+        self._header = \
+            '''<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"
+            xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
+            <soap:Header/><soap:Body>'''
+        self._footer = '</soap:Body></soap:Envelope>'
+
+
+class RequestBaseSIGEPAutentic(RequestBaseSIGEP):
 
     def __init__(self, response_obj, usuario, senha):
-        super(RequestBaseAutentic, self).__init__(response_obj)
+        super(RequestBaseSIGEPAutentic, self).__init__(response_obj)
         self._usuario = CampoString('usuario', obrigatorio=True)
         self._senha = CampoString('senha', obrigatorio=True)
 
         self._usuario.valor = usuario
         self._senha.valor = senha
-
-    @property
-    def response(self):
-        return self._response
 
     @property
     def usuario(self):
@@ -86,6 +90,16 @@ class RequestBaseAutentic(RequestBase):
         xml = self.usuario.get_xml()
         xml += self.senha.get_xml()
         return xml
+
+
+class RequestBaseFrete(RequestBase):
+
+    def __init__(self, response_obj):
+        super(RequestBaseFrete, self).__init__(response_obj)
+        self._header = '''<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/
+        XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
+        xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'''
+        self._footer = '</soap:Body></soap:Envelope>'
 
 
 class ResponseBase(object):
