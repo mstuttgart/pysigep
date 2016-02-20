@@ -57,7 +57,7 @@ class RequestBase(object):
         raise NotImplementedError
 
 
-class RequestBaseSIGEP(object):
+class RequestBaseSIGEP(RequestBase):
 
     def __init__(self, response_obj):
         super(RequestBaseSIGEP, self).__init__(response_obj)

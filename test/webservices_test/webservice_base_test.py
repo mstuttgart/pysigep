@@ -26,11 +26,11 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.webservices.webservice_sigep import WebserviceSIGEP
+from sigep.webservices.webservice_sigep import WebserviceBase
 
 
 class TestWebserviceBase(TestCase):
 
     def test_request(self):
-        wb = WebserviceSIGEP('https://github.com/mstuttgart/python-sigep')
+        wb = WebserviceBase('https://github.com/mstuttgart/python-sigep')
         self.assertRaises(NotImplementedError, wb.request, None)

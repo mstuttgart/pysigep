@@ -34,12 +34,12 @@ from sigep.campos import CampoCEP
 from sigep.campos import CampoBooleano
 
 
-class RequestDisponibilidadeServicoSIGEP(RequestBaseSIGEPAutentic):
+class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
 
     def __init__(self, cod_administrativo, numero_servico, cep_origem,
                  cep_destino, usuario, senha):
 
-        super(RequestDisponibilidadeServicoSIGEP, self).__init__(
+        super(RequestDisponibilidadeServico, self).__init__(
             ResponseDisponibilidadeServico, usuario, senha)
 
         self._cod_administrativo = CampoString('codAdministrativo',
@@ -79,7 +79,7 @@ class RequestDisponibilidadeServicoSIGEP(RequestBaseSIGEPAutentic):
         xml += self.numero_servico.get_xml()
         xml += self.cep_origem.get_xml()
         xml += self.cep_destino.get_xml()
-        xml += super(RequestDisponibilidadeServicoSIGEP, self).get_xml()
+        xml += super(RequestDisponibilidadeServico, self).get_xml()
         xml += '</cli:verificaDisponibilidadeServico>'
         xml += self.footer
 

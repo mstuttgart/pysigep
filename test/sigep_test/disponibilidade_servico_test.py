@@ -26,7 +26,7 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServicoSIGEP
+from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
 from sigep.sigep.disponibilidade_servico import ResponseDisponibilidadeServico
 
 
@@ -37,9 +37,9 @@ class TestRequestDisponibilidadeServico(TestCase):
         SENHA = 'n5f9t8'
         COD_ADMIN = '08082650'
 
-        res_disp = RequestDisponibilidadeServicoSIGEP(COD_ADMIN, '40436',
+        res_disp = RequestDisponibilidadeServico(COD_ADMIN, '40436',
                                                  '99200-000', '99200-000',
-                                                      LOGIN, SENHA)
+                                                 LOGIN, SENHA)
 
         xml = res_disp.header
         xml += '<cli:verificaDisponibilidadeServico>'
@@ -49,7 +49,7 @@ class TestRequestDisponibilidadeServico(TestCase):
                res_disp.numero_servico.valor
         xml += '<cepOrigem>%s</cepOrigem>' % res_disp.cep_origem.valor
         xml += '<cepDestino>%s</cepDestino>' % res_disp.cep_destino.valor
-        xml += super(RequestDisponibilidadeServicoSIGEP, res_disp).get_xml()
+        xml += super(RequestDisponibilidadeServico, res_disp).get_xml()
         xml += '</cli:verificaDisponibilidadeServico>'
         xml += res_disp.footer
 
