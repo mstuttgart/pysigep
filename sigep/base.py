@@ -28,6 +28,12 @@
 from campos import CampoString
 
 
+class TagBase(object):
+
+    def get_xml(self):
+        raise NotImplementedError
+
+
 class RequestBase(object):
 
     def __init__(self, response_obj):

@@ -26,9 +26,17 @@
 ###############################################################################
 
 from unittest import TestCase
+from sigep.base import TagBase
 from sigep.base import RequestBase
 from sigep.base import RequestBaseAutentic
 from sigep.base import ResponseBase
+
+
+class TestTagBase(TestCase):
+
+    def test_get_xml(self):
+        tag = TagBase()
+        self.assertRaises(NotImplementedError, tag.get_xml)
 
 
 class TestRequestBase(TestCase):
