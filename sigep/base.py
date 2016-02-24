@@ -67,6 +67,9 @@ class RequestBaseSIGEP(RequestBase):
             <soap:Header/><soap:Body>'''
         self._footer = '</soap:Body></soap:Envelope>'
 
+    def get_xml(self):
+        raise NotImplementedError
+
 
 class RequestBaseSIGEPAutentic(RequestBaseSIGEP):
 
@@ -96,10 +99,14 @@ class RequestBaseFrete(RequestBase):
 
     def __init__(self, response_obj):
         super(RequestBaseFrete, self).__init__(response_obj)
-        self._header = '''<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/
-        XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"
-        xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'''
+        self._header = '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/' \
+                       'XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/' \
+                       '2001/XMLSchema\" xmlns:soap=\"http://' \
+                       'schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'
         self._footer = '</soap:Body></soap:Envelope>'
+
+    def get_xml(self):
+        raise NotImplementedError
 
 
 class ResponseBase(object):

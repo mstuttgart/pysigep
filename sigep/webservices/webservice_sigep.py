@@ -25,9 +25,7 @@
 #
 ###############################################################################
 
-import requests
 from webservice_base import WebserviceBase
-from sigep import sigep_exceptions
 
 
 class WebserviceSIGEP(WebserviceBase):
@@ -48,50 +46,14 @@ class WebserviceSIGEP(WebserviceBase):
 
         try:
             super(WebserviceSIGEP, self).__init__(amb[ambiente])
-            self._ambiente = ambiente
         except KeyError as exp:
             print exp.message
             super(WebserviceSIGEP, self).__init__(
                 amb[WebserviceSIGEP.AMBIENTE_HOMOLOGACAO])
-            self._ambiente = WebserviceSIGEP.AMBIENTE_HOMOLOGACAO
+            ambiente = WebserviceSIGEP.AMBIENTE_HOMOLOGACAO
+
+        self._ambiente = ambiente
 
     @property
     def ambiente(self):
         return self._ambiente
-
-    def request(self, obj_param, ssl_verify=False):
-        try:
-
-            resposta = requests.post(self.url, data=obj_param.get_xml(),
-                                     headers={'Content-type': 'text/xml'},
-                                     verify=ssl_verify)
-
-            if not resposta.ok:
-                msg = WebserviceSIGEP._parse_error(resposta.text.encode('utf8'))
-                raise sigep_exceptions.ErroValidacaoXML(msg)
-
-            # Criamos um response dinamicamente para cada tipo de classe
-            response = obj_param.response()
-
-            response.status_code = resposta.status_code
-            response.encoding = resposta.encoding
-            response.xml = resposta.text.encode('utf8')
-            response.body_request = resposta.request.body
-            return response
-
-        except requests.ConnectionError as exc:
-            raise sigep_exceptions.ErroConexaoComServidor(exc.message)
-
-        except requests.Timeout as exc:
-            raise sigep_exceptions.ErroConexaoTimeOut(exc.message)
-
-        except requests.exceptions.InvalidSchema as exc:
-            raise sigep_exceptions.ErroInvalidSchema(exc.message)
-
-        except requests.exceptions.RequestException as exc:
-            raise sigep_exceptions.ErroRequisicao(exc.message)
-
-    @staticmethod
-    def _parse_error(xml):
-        import xml.etree.ElementTree as Et
-        return Et.fromstring(xml).findtext('.//faultstring')
