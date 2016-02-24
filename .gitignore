@@ -57,9 +57,11 @@ docs/_build/
 
 # PyBuilder
 target/
+/coverage.json
 
 #Ipython Notebook
 .ipynb_checkpoints
 
 .idea
+/htmlcov
 main.py
