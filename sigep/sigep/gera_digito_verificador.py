@@ -39,16 +39,12 @@ class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
         super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
             ResponseGeraDigitoVerificador, usuario, senha)
 
-        self._etiquetas = []
+        self.etiquetas = []
 
         for etq in etiquetas.split(','):
             cmp_etq = CampoString('etiquetas', obrigatorio=True)
             cmp_etq.valor = etq
-            self._etiquetas.append(cmp_etq)
-
-    @property
-    def etiquetas(self):
-        return self._etiquetas
+            self.etiquetas.append(cmp_etq)
 
     def get_xml(self):
 

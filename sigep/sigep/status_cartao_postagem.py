@@ -38,16 +38,12 @@ class RequestStatusCartaoPostagemSIGEP(RequestBaseSIGEPAutentic):
         super(RequestStatusCartaoPostagemSIGEP, self).__init__(
             ResponseStatusCartaoPostagem, usuario, senha)
 
-        self._numero_cartao_postagem = CampoString('numeroCartaoPostagem',
-                                                   obrigatorio=True,
-                                                   tamanho=10,
-                                                   numerico=True)
+        self.numero_cartao_postagem = CampoString('numeroCartaoPostagem',
+                                                  obrigatorio=True,
+                                                  tamanho=10,
+                                                  numerico=True)
 
-        self._numero_cartao_postagem.valor = num_cartao_postagem
-
-    @property
-    def numero_cartao_postagem(self):
-        return self._numero_cartao_postagem
+        self.numero_cartao_postagem.valor = num_cartao_postagem
 
     def get_xml(self):
         xml = self.header

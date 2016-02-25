@@ -40,33 +40,17 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
         super(RequestSolicitaEtiquetaSIGEP, self).__init__(
             ResponseSolicitaEtiqueta, usuario, senha)
 
-        self._tipo_destinatario = CampoString('tipoDestinatario',
-                                              obrigatorio=True,
-                                              tamanho=1)
-        self._cnpj = CampoCNPJ('identificador', obrigatorio=True)
-        self._id_servico = CampoInteiro('idServico', obrigatorio=True)
-        self._qtd_etiquetas = CampoInteiro('qtdEtiquetas', obrigatorio=True)
+        self.tipo_destinatario = CampoString('tipoDestinatario',
+                                             obrigatorio=True,
+                                             tamanho=1)
+        self.cnpj = CampoCNPJ('identificador', obrigatorio=True)
+        self.id_servico = CampoInteiro('idServico', obrigatorio=True)
+        self.qtd_etiquetas = CampoInteiro('qtdEtiquetas', obrigatorio=True)
 
-        self._tipo_destinatario.valor = 'c'
-        self._cnpj.valor = cnpj
-        self._id_servico.valor = id_servico
-        self._qtd_etiquetas.valor = qtd_etiquetas
-
-    @property
-    def tipo_destinatario(self):
-        return self._tipo_destinatario
-
-    @property
-    def cnpj(self):
-        return self._cnpj
-
-    @property
-    def id_servico(self):
-        return self._id_servico
-
-    @property
-    def qtd_etiquetas(self):
-        return self._qtd_etiquetas
+        self.tipo_destinatario.valor = 'c'
+        self.cnpj.valor = cnpj
+        self.id_servico.valor = id_servico
+        self.qtd_etiquetas.valor = qtd_etiquetas
 
     def get_xml(self):
 

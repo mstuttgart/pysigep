@@ -37,7 +37,7 @@ class TagBase(object):
 class RequestBase(object):
 
     def __init__(self, response_obj):
-        self._response = response_obj
+        self.response = response_obj
         self._header = None
         self._footer = None
 
@@ -48,10 +48,6 @@ class RequestBase(object):
     @property
     def footer(self):
         return self._footer
-
-    @property
-    def response(self):
-        return self._response
 
     def get_xml(self):
         raise NotImplementedError
@@ -75,19 +71,11 @@ class RequestBaseSIGEPAutentic(RequestBaseSIGEP):
 
     def __init__(self, response_obj, usuario, senha):
         super(RequestBaseSIGEPAutentic, self).__init__(response_obj)
-        self._usuario = CampoString('usuario', obrigatorio=True)
-        self._senha = CampoString('senha', obrigatorio=True)
+        self.usuario = CampoString('usuario', obrigatorio=True)
+        self.senha = CampoString('senha', obrigatorio=True)
 
-        self._usuario.valor = usuario
-        self._senha.valor = senha
-
-    @property
-    def usuario(self):
-        return self._usuario
-
-    @property
-    def senha(self):
-        return self._senha
+        self.usuario.valor = usuario
+        self.senha.valor = senha
 
     def get_xml(self):
         xml = self.usuario.get_xml()
