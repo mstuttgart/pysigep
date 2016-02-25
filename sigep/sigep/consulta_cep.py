@@ -30,7 +30,6 @@ import xml.etree.cElementTree as Et
 from sigep.base import RequestBaseSIGEP
 from sigep.base import ResponseBase
 from sigep.campos import CampoCEP
-from sigep.campos import CampoString
 
 
 class RequestConsultaCEP(RequestBaseSIGEP):
@@ -52,19 +51,15 @@ class ResponseBuscaCEP(ResponseBase):
 
     def __init__(self):
         super(ResponseBuscaCEP, self).__init__()
-        self.logradouro = CampoString('logradouro', obrigatorio=True)
-        self.bairro = CampoString('bairro', obrigatorio=True)
-        self.cidade = CampoString('cidade', obrigatorio=True)
-        self.uf = CampoString('uf', obrigatorio=True, tamanho=2)
-        self.complemento = CampoString('complemento')
-        self.complemento_2 = CampoString('complemento_2')
 
     def _parse_xml(self, xml):
 
         end = Et.fromstring(xml).find('.//return')
-        self.logradouro.valor = end.findtext('end')
-        self.bairro.valor = end.findtext('bairro')
-        self.cidade.valor = end.findtext('cidade')
-        self.uf.valor = end.findtext('uf')
-        self.complemento.valor = end.findtext('complemento')
-        self.complemento_2.valor = end.findtext('complemento2')
+        self.resposta = {
+            'logradouro': end.findtext('end'),
+            'bairro': end.findtext('bairro'),
+            'cidade': end.findtext('cidade'),
+            'uf': end.findtext('uf'),
+            'complemento': end.findtext('complemento'),
+            'complemento_2': end.findtext('complemento2')
+        }
