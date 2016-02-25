@@ -104,7 +104,7 @@ class ResponseBase(object):
         self.encoding = None
         self._xml = None
         self.body_request = None
-        self.resposta = {}
+        self.resposta = None
 
     @property
     def xml(self):

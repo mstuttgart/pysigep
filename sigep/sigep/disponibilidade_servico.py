@@ -74,8 +74,9 @@ class ResponseDisponibilidadeServico(ResponseBase):
 
     def __init__(self):
         super(ResponseDisponibilidadeServico, self).__init__()
-        self.disponivel = CampoBooleano('disponivel', obrigatorio=True)
 
     def _parse_xml(self, xml):
-        end = Et.fromstring(xml).find('.//return')
-        self.disponivel.valor = True if end.text == 'true' else False
+        for end in Et.fromstring(xml).findall('.//return'):
+            self.resposta = {
+                'disponibilidade': True if end.text == 'true' else False
+            }
