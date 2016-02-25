@@ -42,34 +42,19 @@ class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
         super(RequestDisponibilidadeServico, self).__init__(
             ResponseDisponibilidadeServico, usuario, senha)
 
-        self._cod_administrativo = CampoString('codAdministrativo',
-                                               obrigatorio=True, tamanho=8)
-        self._numero_servico = CampoString('numeroServico',
-                                           obrigatorio=True,
-                                           numerico=True)
-        self._cep_origem = CampoCEP('cepOrigem', obrigatorio=True)
-        self._cep_destino = CampoCEP('cepDestino', obrigatorio=True)
+        self.cod_administrativo = CampoString('codAdministrativo',
+                                              obrigatorio=True,
+                                              tamanho=8)
+        self.numero_servico = CampoString('numeroServico',
+                                          obrigatorio=True,
+                                          numerico=True)
+        self.cep_origem = CampoCEP('cepOrigem', obrigatorio=True)
+        self.cep_destino = CampoCEP('cepDestino', obrigatorio=True)
 
-        self._cod_administrativo.valor = cod_administrativo
-        self._numero_servico.valor = numero_servico
-        self._cep_origem.valor = cep_origem
-        self._cep_destino.valor = cep_destino
-
-    @property
-    def cod_administrativo(self):
-        return self._cod_administrativo
-
-    @property
-    def numero_servico(self):
-        return self._numero_servico
-
-    @property
-    def cep_origem(self):
-        return self._cep_origem
-
-    @property
-    def cep_destino(self):
-        return self._cep_destino
+        self.cod_administrativo.valor = cod_administrativo
+        self.numero_servico.valor = numero_servico
+        self.cep_origem.valor = cep_origem
+        self.cep_destino.valor = cep_destino
 
     def get_xml(self):
 

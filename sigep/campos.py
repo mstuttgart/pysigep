@@ -33,11 +33,7 @@ class CampoBase(object):
     def __init__(self, nome, obrigatorio=False):
         self.nome = nome
         self._valor = None
-        self._obrigatorio = obrigatorio
-
-    @property
-    def obrigatorio(self):
-        return self._obrigatorio
+        self.obrigatorio = obrigatorio
 
     @property
     def valor(self):
@@ -65,16 +61,8 @@ class CampoString(CampoBase):
 
     def __init__(self, nome, obrigatorio=False, tamanho=0, numerico=False):
         super(CampoString, self).__init__(nome, obrigatorio=obrigatorio)
-        self._tamanho = tamanho
-        self._numerico = numerico
-
-    @property
-    def tamanho(self):
-        return self._tamanho
-
-    @property
-    def numerico(self):
-        return self._numerico
+        self.tamanho = tamanho
+        self.numerico = numerico
 
     def _formata_valor(self, valor):
         if not isinstance(valor, basestring):

@@ -52,8 +52,4 @@ class WebserviceSIGEP(WebserviceBase):
                 amb[WebserviceSIGEP.AMBIENTE_HOMOLOGACAO])
             ambiente = WebserviceSIGEP.AMBIENTE_HOMOLOGACAO
 
-        self._ambiente = ambiente
-
-    @property
-    def ambiente(self):
-        return self._ambiente
+        self.ambiente = ambiente
