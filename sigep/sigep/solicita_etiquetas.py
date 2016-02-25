@@ -40,17 +40,13 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
         super(RequestSolicitaEtiquetaSIGEP, self).__init__(
             ResponseSolicitaEtiqueta, usuario, senha)
 
-        self.tipo_destinatario = CampoString('tipoDestinatario',
-                                             obrigatorio=True,
-                                             tamanho=1)
-        self.cnpj = CampoCNPJ('identificador', obrigatorio=True)
-        self.id_servico = CampoInteiro('idServico', obrigatorio=True)
-        self.qtd_etiquetas = CampoInteiro('qtdEtiquetas', obrigatorio=True)
-
-        self.tipo_destinatario.valor = 'c'
-        self.cnpj.valor = cnpj
-        self.id_servico.valor = id_servico
-        self.qtd_etiquetas.valor = qtd_etiquetas
+        self.tipo_destinatario = CampoString('tipoDestinatario', valor='c',
+                                             obrigatorio=True, tamanho=1)
+        self.cnpj = CampoCNPJ('identificador', valor=cnpj, obrigatorio=True)
+        self.id_servico = CampoInteiro('idServico', valor=id_servico,
+                                       obrigatorio=True)
+        self.qtd_etiquetas = CampoInteiro('qtdEtiquetas', valor=qtd_etiquetas,
+                                          obrigatorio=True)
 
     def get_xml(self):
 

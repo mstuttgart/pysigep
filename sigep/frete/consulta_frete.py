@@ -48,35 +48,33 @@ class RequestCalcPrecoPrazo(RequestBaseFrete):
 
         super(RequestCalcPrecoPrazo, self).__init__(ResponseCalcPrecoPrazo)
 
-        self.ncdempresa = CampoString('nCdEmpresa')
-        self.sdssenha = CampoString('sDsSenha')
-        self.nCdServico = CampoString('nCdServico', obrigatorio=True)
-        self.sCepOrigem = CampoCEP('sCepOrigem', obrigatorio=True)
-        self.sCepDestino = CampoCEP('sCepDestino', obrigatorio=True)
-        self.nVlPeso = CampoString('nVlPeso', obrigatorio=True)
-        self.nCdFormato = CampoInteiro('nCdFormato', obrigatorio=True)
-        self.nVlComprimento = CampoDecimal('nVlComprimento', obrigatorio=True)
-        self.nVlAltura = CampoDecimal('nVlAltura', obrigatorio=True)
-        self.nVlLargura = CampoDecimal('nVlLargura', obrigatorio=True)
-        self.nVlDiametro = CampoDecimal('nVlDiametro', obrigatorio=True)
-        self.sCdMaoPropria = CampoString('sCdMaoPropria', obrigatorio=True)
-        self.nVlValorDeclarado = CampoDecimal('nVlValorDeclarado')
-        self.sCdAvisoRecebimento = CampoString('sCdAvisoRecebimento')
-
-        self.ncdempresa.valor = ''
-        self.sdssenha.valor = ''
-        self.nCdServico.valor = nCdServico
-        self.sCepOrigem.valor = sCepOrigem
-        self.sCepDestino.valor = sCepDestino
-        self.nVlPeso.valor = nVlPeso
-        self.nCdFormato.valor = nCdFormato
-        self.nVlComprimento.valor = nVlComprimento
-        self.nVlAltura.valor = nVlAltura
-        self.nVlLargura.valor = nVlLargura
-        self.nVlDiametro.valor = nVlDiametro
-        self.sCdMaoPropria.valor = 'S' if sCdMaoPropria else 'N'
-        self.nVlValorDeclarado.valor = nVlValorDeclarado
-        self.sCdAvisoRecebimento.valor = 'S' if sCdAvisoRecebimento else 'N'
+        self.ncdempresa = CampoString('nCdEmpresa', valor='')
+        self.sdssenha = CampoString('sDsSenha', valor='')
+        self.nCdServico = CampoString('nCdServico', valor=nCdServico,
+                                      obrigatorio=True)
+        self.sCepOrigem = CampoCEP('sCepOrigem', valor=sCepOrigem,
+                                   obrigatorio=True)
+        self.sCepDestino = CampoCEP('sCepDestino', valor=sCepDestino,
+                                    obrigatorio=True)
+        self.nVlPeso = CampoString('nVlPeso', valor=nVlPeso, obrigatorio=True)
+        self.nCdFormato = CampoInteiro('nCdFormato', valor=nCdFormato,
+                                       obrigatorio=True)
+        self.nVlComprimento = CampoDecimal('nVlComprimento',
+                                           valor=nVlComprimento,
+                                           obrigatorio=True)
+        self.nVlAltura = CampoDecimal('nVlAltura', valor=nVlAltura,
+                                      obrigatorio=True)
+        self.nVlLargura = CampoDecimal('nVlLargura', valor=nVlLargura,
+                                       obrigatorio=True)
+        self.nVlDiametro = CampoDecimal('nVlDiametro', valor=nVlDiametro,
+                                        obrigatorio=True)
+        self.sCdMaoPropria = CampoString('sCdMaoPropria', obrigatorio=True,
+                                         valor='S' if sCdMaoPropria else 'N')
+        self.nVlValorDeclarado = CampoDecimal('nVlValorDeclarado',
+                                              valor=nVlValorDeclarado)
+        self.sCdAvisoRecebimento = CampoString('sCdAvisoRecebimento',
+                                               valor='S' if sCdAvisoRecebimento
+                                               else 'N')
 
     def get_xml(self):
 

@@ -39,12 +39,9 @@ class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
         super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
             ResponseGeraDigitoVerificador, usuario, senha)
 
-        self.etiquetas = []
-
-        for etq in etiquetas.split(','):
-            cmp_etq = CampoString('etiquetas', obrigatorio=True)
-            cmp_etq.valor = etq
-            self.etiquetas.append(cmp_etq)
+        self.etiquetas = [
+            CampoString('etiquetas', valor=etq, obrigatorio=True)
+            for etq in etiquetas.split(',')]
 
     def get_xml(self):
 
@@ -67,7 +64,8 @@ class ResponseGeraDigitoVerificador(ResponseBase):
         self.digito_verificador = []
 
     def _parse_xml(self, xml):
+        self.digito_verificador = []
+
         for end in Et.fromstring(xml).findall('.//return'):
-            campo_int = CampoInteiro('digito_verificador')
-            campo_int.valor = int(end.text)
+            campo_int = CampoInteiro('digito_verificador', valor=int(end.text))
             self.digito_verificador.append(campo_int)

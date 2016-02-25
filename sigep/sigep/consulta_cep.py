@@ -37,8 +37,7 @@ class RequestConsultaCEP(RequestBaseSIGEP):
 
     def __init__(self, cep):
         super(RequestConsultaCEP, self).__init__(ResponseBuscaCEP)
-        self.cep = CampoCEP('cep', obrigatorio=True)
-        self.cep.valor = cep
+        self.cep = CampoCEP('cep', valor=cep, obrigatorio=True)
 
     def get_xml(self):
         xml = self.header

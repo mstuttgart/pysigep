@@ -30,9 +30,9 @@ import sigep_exceptions
 
 class CampoBase(object):
 
-    def __init__(self, nome, obrigatorio=False):
+    def __init__(self, nome, valor=None, obrigatorio=False):
         self.nome = nome
-        self._valor = None
+        self._valor = valor
         self.obrigatorio = obrigatorio
 
     @property
@@ -54,10 +54,15 @@ class CampoBase(object):
 
 class CampoString(CampoBase):
 
-    def __init__(self, nome, obrigatorio=False, tamanho=0, numerico=False):
-        super(CampoString, self).__init__(nome, obrigatorio=obrigatorio)
+    def __init__(self, nome, valor=None, obrigatorio=False, tamanho=0,
+                 numerico=False):
+        super(CampoString, self).__init__(nome, valor=valor,
+                                          obrigatorio=obrigatorio)
         self.tamanho = tamanho
         self.numerico = numerico
+
+        if valor:
+            self.valor = valor
 
     @property
     def valor(self):
@@ -90,43 +95,38 @@ class CampoString(CampoBase):
 
 class CampoCEP(CampoString):
 
-    def __init__(self, nome, obrigatorio=False):
-        super(CampoCEP, self).__init__(nome, obrigatorio=obrigatorio,
+    def __init__(self, nome, valor=None, obrigatorio=False):
+        super(CampoCEP, self).__init__(nome, valor=valor,
+                                       obrigatorio=obrigatorio,
                                        tamanho=8, numerico=True)
 
     def _formata_valor(self, valor):
-
-        if not isinstance(valor, str):
-            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
-                                                     type(valor),
-                                                     str)
+        valor = super(CampoCEP, self)._formata_valor(valor)
         valor = valor.replace('-', '')
         valor = valor.replace('.', '')
-        return valor.rstrip()
+        return valor
 
 
 class CampoCNPJ(CampoString):
 
-    def __init__(self, nome, obrigatorio=False):
-        super(CampoCNPJ, self).__init__(nome, obrigatorio=obrigatorio,
+    def __init__(self, nome, valor=None, obrigatorio=False):
+        super(CampoCNPJ, self).__init__(nome, valor=valor,
+                                        obrigatorio=obrigatorio,
                                         tamanho=14, numerico=True)
 
     def _formata_valor(self, valor):
-
-        if not isinstance(valor, str):
-            raise sigep_exceptions.ErroTipoIncorreto(self.nome,
-                                                     type(valor),
-                                                     str)
+        valor = super(CampoCNPJ, self)._formata_valor(valor)
         valor = valor.replace('-', '')
         valor = valor.replace('.', '')
         valor = valor.replace('/', '')
-        return valor.rstrip()
+        return valor
 
 
 class CampoBooleano(CampoBase):
 
-    def __init__(self, nome, obrigatorio=False):
-        super(CampoBooleano, self).__init__(nome, obrigatorio=obrigatorio)
+    def __init__(self, nome, valor=None, obrigatorio=False):
+        super(CampoBooleano, self).__init__(nome, valor=valor,
+                                            obrigatorio=obrigatorio)
 
     def validar(self, valor):
 
@@ -139,8 +139,9 @@ class CampoBooleano(CampoBase):
 
 class CampoInteiro(CampoBase):
 
-    def __init__(self, nome, obrigatorio=False):
-        super(CampoInteiro, self).__init__(nome, obrigatorio=obrigatorio)
+    def __init__(self, nome, valor=None, obrigatorio=False):
+        super(CampoInteiro, self).__init__(nome, valor=valor,
+                                           obrigatorio=obrigatorio)
 
     def validar(self, valor):
         if not isinstance(valor, int):
@@ -152,8 +153,9 @@ class CampoInteiro(CampoBase):
 
 class CampoDecimal(CampoBase):
 
-    def __init__(self, nome, obrigatorio=False):
-        super(CampoDecimal, self).__init__(nome, obrigatorio=obrigatorio)
+    def __init__(self, nome, valor=None, obrigatorio=False):
+        super(CampoDecimal, self).__init__(nome, valor=valor,
+                                           obrigatorio=obrigatorio)
 
     def validar(self, valor):
         if not isinstance(valor, float):

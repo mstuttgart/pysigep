@@ -40,10 +40,9 @@ class RequestStatusCartaoPostagemSIGEP(RequestBaseSIGEPAutentic):
 
         self.numero_cartao_postagem = CampoString('numeroCartaoPostagem',
                                                   obrigatorio=True,
+                                                  valor=num_cartao_postagem,
                                                   tamanho=10,
                                                   numerico=True)
-
-        self.numero_cartao_postagem.valor = num_cartao_postagem
 
     def get_xml(self):
         xml = self.header

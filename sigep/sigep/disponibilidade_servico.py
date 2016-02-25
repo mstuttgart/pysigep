@@ -44,17 +44,16 @@ class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
 
         self.cod_administrativo = CampoString('codAdministrativo',
                                               obrigatorio=True,
+                                              valor=cod_administrativo,
                                               tamanho=8)
         self.numero_servico = CampoString('numeroServico',
+                                          valor=numero_servico,
                                           obrigatorio=True,
                                           numerico=True)
-        self.cep_origem = CampoCEP('cepOrigem', obrigatorio=True)
-        self.cep_destino = CampoCEP('cepDestino', obrigatorio=True)
-
-        self.cod_administrativo.valor = cod_administrativo
-        self.numero_servico.valor = numero_servico
-        self.cep_origem.valor = cep_origem
-        self.cep_destino.valor = cep_destino
+        self.cep_origem = CampoCEP('cepOrigem', valor=cep_origem,
+                                   obrigatorio=True)
+        self.cep_destino = CampoCEP('cepDestino', valor=cep_destino,
+                                    obrigatorio=True)
 
     def get_xml(self):
 
