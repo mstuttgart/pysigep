@@ -28,6 +28,8 @@
 from unittest import TestCase
 from sigep.base import TagBase
 from sigep.base import RequestBase
+from sigep.base import RequestBaseFrete
+from sigep.base import RequestBaseSIGEP
 from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
 
@@ -51,6 +53,13 @@ class TestRequestBase(TestCase):
         self.assertRaises(NotImplementedError, req.get_xml)
 
 
+class TestRequestBaseSIGEP(TestCase):
+
+    def test_get_xml(self):
+        req = RequestBaseSIGEP(ResponseBase())
+        self.assertRaises(NotImplementedError, req.get_xml)
+
+
 class TestRequestBaseAutentic(TestCase):
 
     def test_response(self):
@@ -65,3 +74,17 @@ class TestRequestBaseAutentic(TestCase):
         xml += u'<senha>%s</senha>' % req.senha.valor
 
         self.assertEqual(req.get_xml(), xml)
+
+
+class TestRequestBaseFrete(TestCase):
+
+    def test_get_xml(self):
+        req = RequestBaseFrete(ResponseBase())
+        self.assertRaises(NotImplementedError, req.get_xml)
+
+
+class TestResponseBase(TestCase):
+
+    def test__parse_xml(self):
+        resp = ResponseBase()
+        self.assertRaises(NotImplementedError, resp._parse_xml, '')
