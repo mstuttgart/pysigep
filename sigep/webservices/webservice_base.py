@@ -69,5 +69,5 @@ class WebserviceBase(object):
 
     @staticmethod
     def _parse_error(xml):
-        import xml.etree.ElementTree as Et
+        import xml.etree.cElementTree as Et
         return Et.fromstring(xml).findtext('.//faultstring')

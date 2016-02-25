@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-import xml.etree.ElementTree as Et
+import xml.etree.cElementTree as Et
 
 from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
