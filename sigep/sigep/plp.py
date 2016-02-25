@@ -34,14 +34,10 @@ from sigep.campos import CampoDecimal
 
 class XmlPLP(TagBase):
     def __init__(self):
-        self._forma_pagamento = CampoString(valor='')
+        self.forma_pagamento = CampoString(valor='')
         self.plp = TagPLP()
         self.remetente = TagRemetente()
         self.lista_objeto_postal = []
-
-    @property
-    def forma_pagamento(self):
-        return self._forma_pagamento
 
     def get_xml(self):
         xml = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>'
@@ -60,13 +56,9 @@ class XmlPLP(TagBase):
 class TagPLP(TagBase):
     def __init__(self):
         super(TagPLP, self).__init__()
-        self._cartao_postagem = CampoString('cartao_postagem',
+        self.cartao_postagem = CampoString('cartao_postagem',
                                             obrigatorio=True,
                                             tamanho=10)
-
-    @property
-    def cartao_postagem(self):
-        return self._cartao_postagem
 
     def get_xml(self):
         xml = '<plp>'
@@ -79,89 +71,34 @@ class TagPLP(TagBase):
 
 
 class TagRemetente(TagBase):
+
     def __init__(self):
         super(TagRemetente, self).__init__()
-        self._numero_contrato = CampoString('numero_contrato',
-                                            obrigatorio=True, tamanho=10)
-        self._numero_diretoria = CampoInteiro('numero_diretoria',
-                                              obrigatorio=True)
-        self._codigo_administrativo = CampoString('codigo_administrativo',
-                                                  obrigatorio=True, tamanho=8)
-        self._nome = CampoString('nome_remetente', obrigatorio=True, tamanho=50)
-        self._logradouro = CampoString('logradouro_remetente',
-                                       obrigatorio=True, tamanho=40)
-        self._numero = CampoString('numero_remetente',
-                                   obrigatorio=True, tamanho=5)
-        self._complemento = CampoString('complemento_remetente',
-                                        obrigatorio=False,
-                                        tamanho=20)
-        self._bairro = CampoString('bairro_remetente', obrigatorio=True,
-                                   tamanho=20)
-        self._cep = CampoCEP('cep_remetente', obrigatorio=True)
-        self._cidade = CampoString('cidade_remetente',
-                                   obrigatorio=True, tamanho=30)
-        self._uf = CampoString('uf_remetente', obrigatorio=True, tamanho=2)
-        self._telefone = CampoString('telefone_remetente',
+
+        self.numero_contrato = CampoString('numero_contrato', tamanho=10,
+                                           obrigatorio=True)
+        self.numero_diretoria = CampoInteiro('numero_diretoria',
+                                             obrigatorio=True)
+        self.codigo_administrativo = CampoString('codigo_administrativo',
+                                                 obrigatorio=True, tamanho=8)
+        self.nome = CampoString('nome_remetente', obrigatorio=True, tamanho=50)
+        self.logradouro = CampoString('logradouro_remetente', tamanho=40,
+                                      obrigatorio=True)
+        self.numero = CampoString('numero_remetente', tamanho=5,
+                                  obrigatorio=True)
+        self.complemento = CampoString('complemento_remetente', tamanho=20,
+                                       obrigatorio=False)
+        self.bairro = CampoString('bairro_remetente', obrigatorio=True,
+                                  tamanho=20)
+        self.cep = CampoCEP('cep_remetente', obrigatorio=True)
+        self.cidade = CampoString('cidade_remetente', tamanho=30,
+                                  obrigatorio=True)
+        self.uf = CampoString('uf_remetente', obrigatorio=True, tamanho=2)
+        self.telefone = CampoString('telefone_remetente',
                                      obrigatorio=False, tamanho=12)
-        self._fax = CampoString('fax_remetente', obrigatorio=False, tamanho=12)
-        self._email = CampoString('email_remetente', obrigatorio=False,
-                                  tamanho=50)
-
-    @property
-    def numero_contrato(self):
-        return self._numero_contrato
-
-    @property
-    def numero_diretoria(self):
-        return self._numero_diretoria
-
-    @property
-    def codigo_administrativo(self):
-        return self._codigo_administrativo
-
-    @property
-    def nome(self):
-        return self._nome
-
-    @property
-    def logradouro(self):
-        return self._logradouro
-
-    @property
-    def numero(self):
-        return self._numero
-
-    @property
-    def complemento(self):
-        return self._complemento
-
-    @property
-    def bairro(self):
-        return self._bairro
-
-    @property
-    def cep(self):
-        return self._cep
-
-    @property
-    def cidade(self):
-        return self._cidade
-
-    @property
-    def uf(self):
-        return self._uf
-
-    @property
-    def telefone(self):
-        return self._telefone
-
-    @property
-    def fax(self):
-        return self._fax
-
-    @property
-    def email(self):
-        return self._email
+        self.fax = CampoString('fax_remetente', obrigatorio=False, tamanho=12)
+        self.email = CampoString('email_remetente', tamanho=50,
+                                 obrigatorio=False)
 
     def get_xml(self):
 
@@ -188,87 +125,27 @@ class TagRemetente(TagBase):
 class TagObjetoPostal(TagBase):
 
     def __init__(self, numero_servico, tipo_objeto):
-        self._numero_etiqueta = CampoString('numero_etiqueta', obrigatorio=True,
+        self.numero_etiqueta = CampoString('numero_etiqueta', obrigatorio=True,
                                             tamanho=13)
-        self._codigo_objeto_cliente = CampoString('codigo_objeto_cliente',
+        self.codigo_objeto_cliente = CampoString('codigo_objeto_cliente',
                                                   tamanho=20)
-        self._codigo_servico_postagem = CampoString('codigo_servico_postagem',
+        self.codigo_servico_postagem = CampoString('codigo_servico_postagem',
                                                     obrigatorio=True,
                                                     tamanho=5)
-        self._cubagem = CampoDecimal('cubagem')
-        self._peso = CampoInteiro('peso', obrigatorio=True)
-        self._rt1 = CampoString('rt1', tamanho=255)
-        self._rt2 = CampoString('rt2', tamanho=255)
-        self._destinatario = TagDestinatario()
-        self._nacional = TagNacional(numero_servico)
-        self._servico_adicional = TagServicoAdcional()
-        self._dimensao_objeto = TagDimesaoObjeto()
-        self._data_postagem_sara = CampoString('data_postagem_sara')
-        self._status_processamento = CampoString('status_processamento',
+        self.cubagem = CampoDecimal('cubagem')
+        self.peso = CampoInteiro('peso', obrigatorio=True)
+        self.rt1 = CampoString('rt1', tamanho=255)
+        self.rt2 = CampoString('rt2', tamanho=255)
+        self.destinatario = TagDestinatario()
+        self.nacional = TagNacional(numero_servico)
+        self.servico_adicional = TagServicoAdcional()
+        self.dimensao_objeto = TagDimesaoObjeto()
+        self.data_postagem_sara = CampoString('data_postagem_sara')
+        self.status_processamento = CampoString('status_processamento',
                                                  tamanho=1)
-        self._numero_comprovante_postagem = \
+        self.numero_comprovante_postagem = \
             CampoInteiro('numero_comprovante_postagem')
-        self._valor_cobrado = CampoDecimal('valor_cobrado')
-
-    @property
-    def numero_etiqueta(self):
-        return self._numero_etiqueta
-
-    @property
-    def codigo_objeto_cliente(self):
-        return self._codigo_objeto_cliente
-
-    @property
-    def codigo_servico_postagem(self):
-        return self._codigo_servico_postagem
-
-    @property
-    def cubagem(self):
-        return self._cubagem
-
-    @property
-    def peso(self):
-        return self._peso
-
-    @property
-    def rt1(self):
-        return self._rt1
-
-    @property
-    def rt2(self):
-        return self._rt2
-
-    @property
-    def destinatario(self):
-        return self._destinatario
-
-    @property
-    def nacional(self):
-        return self._nacional
-
-    @property
-    def servico_adicional(self):
-        return self._servico_adicional
-
-    @property
-    def dimensao_objeto(self):
-        return self._dimensao_objeto
-
-    @property
-    def data_postagem_sara(self):
-        return self._data_postagem_sara
-
-    @property
-    def status_processamento(self):
-        return self._status_processamento
-
-    @property
-    def numero_comprovante_postagem(self):
-        return self._numero_comprovante_postagem
-
-    @property
-    def valor_cobrado(self):
-        return self._valor_cobrado
+        self.valor_cobrado = CampoDecimal('valor_cobrado')
 
     def get_xml(self):
 
@@ -297,44 +174,16 @@ class TagDestinatario(TagBase):
 
     def __init__(self):
         super(TagRemetente, self).__init__()
-        self._nome = CampoString('nome_destinatario', obrigatorio=True,
+        self.nome = CampoString('nome_destinatario', obrigatorio=True,
                                  tamanho=50)
-        self._telefone = CampoString('telefone_destinatario', tamanho=12)
-        self._celular = CampoString('celular_destinatario', tamanho=12)
-        self._email = CampoString('email_destinatario', tamanho=50)
-        self._logradouro = CampoString('logradouro_destinatario',
+        self.telefone = CampoString('telefone_destinatario', tamanho=12)
+        self.celular = CampoString('celular_destinatario', tamanho=12)
+        self.email = CampoString('email_destinatario', tamanho=50)
+        self.logradouro = CampoString('logradouro_destinatario',
                                        obrigatorio=True, tamanho=50)
-        self._numero = CampoString('numero_end_destinatario', obrigatorio=True,
+        self.numero = CampoString('numero_end_destinatario', obrigatorio=True,
                                    tamanho=5)
-        self._complemento = CampoString('complemento_destinatario', tamanho=30)
-
-    @property
-    def nome(self):
-        return self._nome
-
-    @property
-    def logradouro(self):
-        return self._logradouro
-
-    @property
-    def numero(self):
-        return self._numero
-
-    @property
-    def complemento(self):
-        return self._complemento
-
-    @property
-    def telefone(self):
-        return self._telefone
-
-    @property
-    def celular(self):
-        return self._celular
-
-    @property
-    def email(self):
-        return self._email
+        self.complemento = CampoString('complemento_destinatario', tamanho=30)
 
     def get_xml(self):
 
@@ -357,193 +206,121 @@ class TagNacional(TagBase):
 
         obrigatorio = True if numero_servico == '41068' else False
 
-        self._bairro = CampoString(obrigatorio=True, tamanho=20)
-        self._cep = CampoCEP(obrigatorio=True)
-        self._cidade = CampoString(obrigatorio=True, tamanho=30)
-        self._uf = CampoString(obrigatorio=True, tamanho=2)
-        self._codigo_usuario_postal = CampoString(valor='', tamanho=20)
-        self._centro_custo_cliente = CampoString(valor='', tamanho=20)
-        self._numero_nfe = CampoString(valor='', obrigatorio=obrigatorio)
-        self._serie_nfe = CampoString(valor='', obrigatorio=obrigatorio)
-        self._valor_nfe = CampoDecimal(minimo=0, maximo=999999999)
-        self._natureza_nfe = CampoString(valor='', tamanho=20)
-        self._descricao_objeto = CampoString(valor='', tamanho=20)
-        self._valor_a_cobrar = CampoDecimal(minimo=0, maximo=999999999)
+        self.bairro = CampoString('bairro_destinatario', obrigatorio=True,
+                                  tamanho=20)
+        self.cep = CampoCEP('cep_destinatario', obrigatorio=True)
+        self.cidade = CampoString('cidade_destinatario', obrigatorio=True,
+                                  tamanho=30)
+        self.uf = CampoString('uf_destinatario', obrigatorio=True, tamanho=2)
+        self.codigo_usuario_postal = CampoString('codigo_usuario_postal',
+                                                 valor='', tamanho=20)
+        self.centro_custo_cliente = CampoString('centro_custo_cliente',
+                                                valor='', tamanho=20)
+        self.numero_nfe = CampoString('numero_nota_fiscal', valor='',
+                                      obrigatorio=obrigatorio)
+        self.serie_nfe = CampoString('serie_nota_fiscal', valor='',
+                                     obrigatorio=obrigatorio)
+        self.valor_nfe = CampoDecimal('valor_nota_fiscal')
+        self.natureza_nfe = CampoString('natureza_nota_fiscal', valor='',
+                                        tamanho=20)
+        self.descricao_objeto = CampoString('descricao_objeto', valor='',
+                                            tamanho=20)
+        self.valor_a_cobrar = CampoDecimal('valor_a_cobrar', valor=0.00)
 
     def set_numero_servico(self, numero_servico):
         obrigatorio = True if numero_servico == '41068' else False
-        self._numero_nfe.obrigatorio = obrigatorio
-        self._serie_nfe.obrigatorio = obrigatorio
-
-    @property
-    def bairro(self):
-        return self._bairro
-
-    @property
-    def cep(self):
-        return self._cep
-
-    @property
-    def cidade(self):
-        return self._cidade
-
-    @property
-    def uf(self):
-        return self._uf
-
-    @property
-    def codigo_usuario_postal(self):
-        return self._codigo_usuario_postal
-
-    @property
-    def centro_custo_cliente(self):
-        return self._centro_custo_cliente
-
-    @property
-    def numero_nfe(self):
-        return self._numero_nfe
-
-    @property
-    def serie_nfe(self):
-        return self._serie_nfe
-
-    @property
-    def valor_nfe(self):
-        return self._valor_nfe
-
-    @property
-    def natureza_nfe(self):
-        return self._natureza_nfe
-
-    @property
-    def descricao_objeto(self):
-        return self._descricao_objeto
-
-    @property
-    def valor_a_cobrar(self):
-        return self._valor_a_cobrar
+        self.numero_nfe.obrigatorio = obrigatorio
+        self.serie_nfe.obrigatorio = obrigatorio
 
     def get_xml(self):
         xml = u'<nacional>'
-
-        xml += u'<bairro_destinatario><![CDATA[%s]]></bairro_destinatario>' % \
-               self.bairro.valor
-        xml += u'<cidade_destinatario><![CDATA[%s]]></cidade_destinatario>' % \
-               self.cidade.valor
-        xml += u'<uf_destinatario>%s</uf_destinatario>' % self.uf.valor
-        xml += u'<cep_destinatario><![CDATA[%s]]></cep_destinatario>' % \
-               self.cep.valor
-        xml += u'<codigo_usuario_postal>%s</codigo_usuario_postal>' % \
-               self.codigo_usuario_postal.valor
-        xml += u'<centro_custo_cliente>%s</centro_custo_cliente>' % \
-               self.centro_custo_cliente.valor
-        xml += u'<numero_nota_fiscal>%s</numero_nota_fiscal>' % \
-               self.numero_nfe.valor
-        xml += u'<serie_nota_fiscal>%s</serie_nota_fiscal>' % \
-               self.serie_nfe.valor
-        xml += u'<valor_nota_fiscal>%1.2%f</valor_nota_fiscal>' % \
-               self.valor_nfe.valor
-        xml += u'<natureza_nota_fiscal><![CDATA[%s]]></natureza_nota_fiscal>' % \
-               self.natureza_nfe.valor
-        xml += u'<descricao_objeto><![CDATA[%s]]></descricao_objeto>' % \
-               self.descricao_objeto.valor
-        xml += u'<valor_a_cobrar>1.2%f</valor_a_cobrar>' % \
-               self.valor_a_cobrar.valor
+        xml += self.bairro.get_xml()
+        xml += self.cidade.get_xml()
+        xml += self.uf.get_xml()
+        xml += self.cep.get_xml()
+        xml += self.codigo_usuario_postal.get_xml()
+        xml += self.centro_custo_cliente.get_xml()
+        xml += self.numero_nfe.get_xml()
+        xml += self.serie_nfe.get_xml()
+        xml += self.valor_nfe.get_xml()
+        xml += self.natureza_nfe.get_xml()
+        xml += self.descricao_objeto.get_xml()
+        xml += self.valor_a_cobrar.get_xml()
         xml += u'</nacional>'
-
         return xml
 
 
 class TagServicoAdcional(TagBase):
 
     def __init__(self):
-
-        self._lista_codigo_servico_adicional = [
+        self.lista_codigo_servico_adicional = [
             CampoString('codigo_servico_adicional', valor='025', tamanho=3)]
 
-        self._valor_declarado = CampoDecimal('valor_declarado', minimo=0,
+        self.valor_declarado = CampoDecimal('valor_declarado', minimo=0,
                                              maximo=999999999)
 
-    @property
-    def lista_codigo_servico_adicional(self):
-        return self._lista_codigo_servico_adicional
-
     def add_codigo_servico_adicional(self, valor):
-        self._codigo_servico_adicional.append(CampoString(
+        self.codigo_servico_adicional.append(CampoString(
             valor=valor, tamanho=3))
-
-        self._valor_declarado.obrigatorio = True if valor == '019' else False
-
-    @property
-    def valor_declarado(self):
-        return self._valor_declarado
+        self.valor_declarado.obrigatorio = True if valor == '019' else False
 
     def get_xml(self):
-
         xml = u'<servico_adicional>'
-        for serv_adic in self._codigo_servico_adicional:
-            xml += serv_adic.get_xml()
+
+        for serv_adicional in self._codigo_servico_adicional:
+            xml += serv_adicional.get_xml()
+
         xml += self.valor_declarado.get_xml()
         xml += u'</servico_adicional>'
-
         return xml
 
 
 class TagDimesaoObjeto(TagBase):
+
     TIPO_ENVELOPE = '001'
     TIPO_CAIXA = '002'
     TIPO_CILINDRO = '003'
 
     def __init__(self):
         tipo_objeto = TagDimesaoObjeto.TIPO_CAIXA
-        self.tipo_objeto = CampoString(obrigatorio=True, valor=tipo_objeto,
-                                       tamanho=3)
-        self._altura = CampoInteiro(obrigatorio=True if tipo_objeto == '002'
-        else False, valor=2, minimo=2, maximo=105)
-        self._largura = CampoInteiro(obrigatorio=True if tipo_objeto == '002'
-        else False, valor=11, minimo=11, maximo=105)
-        self._comprimento = CampoInteiro(
-            obrigatorio=True if tipo_objeto != '001'
-            else False, valor=16, minimo=16, maximo=105)
-        self._diametro = CampoInteiro(obrigatorio=True if tipo_objeto == '003'
-        else False, valor=2, minimo=2, maximo=105)
 
-    def set_tipo_objeto(self, tipo_objeto):
-        self._altura.obrigatorio = True if tipo_objeto == '002' else False
-        self._largura.obrigatorio = True if tipo_objeto == '002' else False
-        self._comprimento.obrigatorio = True if tipo_objeto != '001' else False
-        self._diametro.obrigatorio = True if tipo_objeto == '003' else False
-
-        self._comprimento.minimo = 16 if tipo_objeto != '003' else 18
+        self._tipo_objeto = CampoString('tipo_objeto',
+                                        obrigatorio=True,
+                                        valor=tipo_objeto,
+                                        tamanho=3)
+        self.altura = CampoInteiro('dimensao_altura',
+                                   obrigatorio=True if tipo_objeto == '002'
+                                   else False, valor=2)
+        self.largura = CampoInteiro('dimensao_largura',
+                                    obrigatorio=True if tipo_objeto == '002'
+                                    else False, valor=11)
+        self.comprimento = CampoInteiro('dimensao_comprimento',
+                                        valor=16,
+                                        obrigatorio=True if
+                                        tipo_objeto != '001' else False)
+        self.diametro = CampoInteiro(
+            'dimensao_diametro', obrigatorio=True if tipo_objeto == '003'
+            else False, valor=2)
 
     @property
     def tipo_objeto(self):
-        return self.tipo_objeto
+        return self._tipo_objeto
 
-    @property
-    def altura(self):
-        return self._altura
-
-    @property
-    def largura(self):
-        return self._largura
-
-    @property
-    def comprimento(self):
-        return self._comprimento
-
-    @property
-    def diametro(self):
-        return self._diametro
+    @tipo_objeto.setter
+    def tipo_objeto(self, tipo_objeto):
+        self._tipo_objeto = tipo_objeto
+        self.altura.obrigatorio = True if tipo_objeto == '002' else False
+        self.largura.obrigatorio = True if tipo_objeto == '002' else False
+        self.comprimento.obrigatorio = True if tipo_objeto != '001' else False
+        self.diametro.obrigatorio = True if tipo_objeto == '003' else False
+        self.comprimento.minimo = 16 if tipo_objeto != '003' else 18
 
     def get_xml(self):
         xml = u'<dimensao_objeto>\n'
-        xml += u'<tipo_objeto>%s</tipo_objeto>\n' % self.codigo.valor
-        xml += u'<dimensao_altura>%d</dimensao_altura>\n' % self.altura.valor
-        xml += u'<dimensao_largura>%d</dimensao_largura>\n' % self.largura.valor
-        xml += u'<dimensao_comprimento>%d</dimensao_comprimento>\n' % \
-               self.comprimento.valor
-        xml += u'<dimensao_diametro>%d</dimensao_diametro>\n' % self.diametro.valor
+        xml += self.codigo.get_xml()
+        xml += self.altura.get_xml()
+        xml += self.largura.get_xml()
+        xml += self.comprimento.get_xml()
+        xml += self.diametro.get_xml()
         xml += u'</dimensao_objeto>\n'
-
         return xml
