@@ -33,8 +33,8 @@ class SigepBaseException(Exception):
 class ErroTipoIncorreto(SigepBaseException):
 
     def __init__(self, nome_campo, tipo, tipo_correto):
-        self.msg = u'''Campo %s deve ser %s . Tipo encontrado: %s''' % (
-            nome_campo, str(tipo_correto), str(tipo))
+        self.msg = u'Campo %s deve ser %s . Tipo encontrado: %s' % \
+                   (nome_campo, str(tipo_correto), str(tipo))
 
     def __str__(self):
         return self.msg
@@ -43,8 +43,8 @@ class ErroTipoIncorreto(SigepBaseException):
 class ErroCampoObrigatorio(SigepBaseException):
 
     def __init__(self, nome_campo):
-        self.msg = u'''Campo %s é de envio obrigatorio, mas não foi
-        preenchido!''' % nome_campo
+        self.msg = u'Campo %s é de envio obrigatorio, mas não foi ' \
+                   u'preenchido!' % nome_campo
 
     def __str__(self):
         return self.msg
@@ -53,7 +53,7 @@ class ErroCampoObrigatorio(SigepBaseException):
 class ErroCampoNaoNumerico(SigepBaseException):
 
     def __init__(self, nome_campo):
-        self.msg = u'''Campo %s não é constituído apenas por números!''' % \
+        self.msg = u'Campo %s não é constituído apenas por números!' % \
                    nome_campo
 
     def __str__(self):
@@ -63,8 +63,9 @@ class ErroCampoNaoNumerico(SigepBaseException):
 class ErroCampoTamanhoIncorreto(SigepBaseException):
 
     def __init__(self, nome_campo, tamanho_esperado, tamanho):
-        self.msg = u'''Campo %s possui tamanho incorreto. Esperado é %d mas o
-        encontrado foi %d.''' % (nome_campo, tamanho_esperado, tamanho)
+        self.msg = u'Campo %s possui tamanho incorreto. Esperado é %d mas o' \
+                   u' encontrado foi %d.' % (nome_campo, tamanho_esperado,
+                                             tamanho)
 
     def __str__(self):
         return self.msg
@@ -73,7 +74,7 @@ class ErroCampoTamanhoIncorreto(SigepBaseException):
 class ErroSemConexaoComInternet(SigepBaseException):
 
     def __init__(self, msg):
-        self.msg = u'''Falha na conexão com a Internet. %s''' % msg
+        self.msg = u'Falha na conexão com a Internet. %s' % msg
 
     def __str__(self):
         return self.msg
@@ -82,7 +83,7 @@ class ErroSemConexaoComInternet(SigepBaseException):
 class ErroConexaoComServidor(SigepBaseException):
 
     def __init__(self, msg):
-        self.msg = u'''Erro de conexão com o servidor. %s''' % msg
+        self.msg = u'Erro de conexão com o servidor. %s' % msg
 
     def __str__(self):
         return self.msg
@@ -91,7 +92,7 @@ class ErroConexaoComServidor(SigepBaseException):
 class ErroConexaoTimeOut(SigepBaseException):
 
     def __init__(self, msg):
-        self.msg = u'''Erro de timeout. %s''' % msg
+        self.msg = u'Erro de timeout. %s' % msg
 
     def __str__(self):
         return self.msg
@@ -100,7 +101,7 @@ class ErroConexaoTimeOut(SigepBaseException):
 class ErroRequisicao(SigepBaseException):
 
     def __init__(self, msg):
-        self.msg = u'''Falha na requisição. %s''' % msg
+        self.msg = u'Falha na requisição. %s' % msg
 
     def __str__(self):
         return self.msg
@@ -109,7 +110,7 @@ class ErroRequisicao(SigepBaseException):
 class ErroSSL(SigepBaseException):
 
     def __init__(self, msg):
-        self.msg = u'''Erro SSL. %s''' % msg
+        self.msg = u'Erro SSL. %s' % msg
 
     def __str__(self):
         return self.msg
@@ -118,7 +119,7 @@ class ErroSSL(SigepBaseException):
 class ErroValidacaoXML(SigepBaseException):
 
     def __init__(self, msg):
-        self.msg = u'''Erro durante valdação do XML. %s''' % msg
+        self.msg = u'Erro durante validação do XML. %s' % msg
 
     def __str__(self):
         return self.msg
