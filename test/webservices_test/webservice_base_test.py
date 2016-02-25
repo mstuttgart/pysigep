@@ -30,7 +30,3 @@ from unittest import TestCase
 
 class TestWebserviceBase(TestCase):
     pass
-
-    # def test_request(self):
-    #     wb = WebserviceBase('https://github.com/mstuttgart/python-sigep')
-    #     self.assertRaises(NotImplementedError, wb.request, None)

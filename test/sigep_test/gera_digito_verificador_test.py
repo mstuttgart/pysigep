@@ -78,6 +78,6 @@ xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
 
         resp._parse_xml(xml)
 
-        self.assertEqual(len(resp.digito_verificador), 2)
-        self.assertEqual(resp.digito_verificador[0].valor, 6)
-        self.assertEqual(resp.digito_verificador[1].valor, 7)
+        self.assertEqual(len(resp.resposta), 2)
+        self.assertEqual(resp.resposta[0], 6)
+        self.assertEqual(resp.resposta[1], 7)

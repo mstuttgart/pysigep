@@ -30,7 +30,6 @@ import xml.etree.cElementTree as Et
 from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
-from sigep.campos import CampoInteiro
 
 
 class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
@@ -44,13 +43,10 @@ class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
             for etq in etiquetas.split(',')]
 
     def get_xml(self):
-
         xml = self.header
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
-
         for etq in self.etiquetas:
             xml += etq.get_xml()
-
         xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_xml()
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         xml += self.footer
@@ -61,11 +57,7 @@ class ResponseGeraDigitoVerificador(ResponseBase):
 
     def __init__(self):
         super(ResponseGeraDigitoVerificador, self).__init__()
-        self.digito_verificador = []
 
     def _parse_xml(self, xml):
-        self.digito_verificador = []
-
-        for end in Et.fromstring(xml).findall('.//return'):
-            campo_int = CampoInteiro('digito_verificador', valor=int(end.text))
-            self.digito_verificador.append(campo_int)
+        self.resposta = [int(end.text) for end in Et.fromstring(
+            xml).findall('.//return')]

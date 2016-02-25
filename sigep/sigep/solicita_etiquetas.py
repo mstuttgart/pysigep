@@ -49,7 +49,6 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
                                           obrigatorio=True)
 
     def get_xml(self):
-
         xml = self.header
         xml += '<cli:solicitaEtiquetas>'
         xml += self.tipo_destinatario.get_xml()
@@ -59,7 +58,6 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
         xml += super(RequestSolicitaEtiquetaSIGEP, self).get_xml()
         xml += '</<cli:solicitaEtiquetas>'
         xml += self.footer
-
         return xml
 
 
@@ -67,9 +65,7 @@ class ResponseSolicitaEtiqueta(ResponseBase):
 
     def __init__(self):
         super(ResponseSolicitaEtiqueta, self).__init__()
-        self.intervalo_etiquetas = CampoString('intervalo_etiquetas',
-                                               obrigatorio=True)
 
     def _parse_xml(self, xml):
-        end = Et.fromstring(xml).find('.//return')
-        self.intervalo_etiquetas.valor = end.text
+        for end in Et.fromstring(xml).findall('.//return'):
+            self.resposta = [etq for etq in end.text.split(',')]

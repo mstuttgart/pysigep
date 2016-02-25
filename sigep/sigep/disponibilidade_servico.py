@@ -31,7 +31,6 @@ from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 from sigep.campos import CampoCEP
-from sigep.campos import CampoBooleano
 
 
 class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
@@ -77,6 +76,4 @@ class ResponseDisponibilidadeServico(ResponseBase):
 
     def _parse_xml(self, xml):
         for end in Et.fromstring(xml).findall('.//return'):
-            self.resposta = {
-                'disponibilidade': True if end.text == 'true' else False
-            }
+            self.resposta = True if end.text == 'true' else False

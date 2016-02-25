@@ -63,12 +63,12 @@ class TestResponseSolicitaEtiqueta(TestCase):
 <S:Body>
 <ns2:solicitaEtiquetasResponse
 xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-<return>DL76023727 BR,DL76023727 BR</return>
+<return>DL76023726 BR,DL76023727 BR</return>
 </ns2:solicitaEtiquetasResponse>
 </S:Body>
 </S:Envelope>'''
 
         resp = ResponseSolicitaEtiqueta()
         resp._parse_xml(xml)
-        self.assertEqual(resp.intervalo_etiquetas.valor,
-                         'DL76023727 BR,DL76023727 BR')
+        self.assertEqual(resp.resposta[0], 'DL76023726 BR')
+        self.assertEqual(resp.resposta[1], 'DL76023727 BR')

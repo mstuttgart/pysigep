@@ -47,18 +47,18 @@ class TestWebserviceSIGEP(TestCase):
     def test_ambiente(self):
         self.test__init__()
 
-    # def test_request(self):
-    #     req_cep = RequestConsultaCEP('37.503-130')
-    #     wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
-    #     res = wb.request(req_cep)
-    #
-    #     self.assertIsInstance(res, ResponseBuscaCEP)
-    #
-    #     req_cep = RequestConsultaCEP('37.503-130')
-    #     wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_PRODUCAO)
-    #     res = wb.request(req_cep)
-    #
-    #     self.assertIsInstance(res, ResponseBuscaCEP)
-    #
-    #     req_cep = RequestConsultaCEP('37.000-000')
-    #     self.assertRaises(ErroValidacaoXML, wb.request, req_cep)
+    def test_request(self):
+        req_cep = RequestConsultaCEP('37.503-130')
+        wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
+        res = wb.request(req_cep)
+
+        self.assertIsInstance(res, ResponseBuscaCEP)
+
+        req_cep = RequestConsultaCEP('37.503-130')
+        wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_PRODUCAO)
+        res = wb.request(req_cep)
+
+        self.assertIsInstance(res, ResponseBuscaCEP)
+
+        req_cep = RequestConsultaCEP('37.000-000')
+        self.assertRaises(ErroValidacaoXML, wb.request, req_cep)
