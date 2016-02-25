@@ -25,15 +25,49 @@
 #
 ###############################################################################
 
+import requests
+from sigep import sigep_exceptions
+
 
 class WebserviceBase(object):
 
     def __init__(self, url):
         self._url = url
 
-    def post_xml(self, obj_param):
-        raise NotImplementedError
-
     @property
     def url(self):
         return self._url
+
+    def request(self, obj_param, ssl_verify=False):
+        try:
+
+            resposta = requests.post(self.url, data=obj_param.get_xml(),
+                                     headers={'Content-type': 'text/xml'},
+                                     verify=ssl_verify)
+
+            if not resposta.ok:
+                msg = WebserviceBase._parse_error(resposta.text.encode('utf8'))
+                raise sigep_exceptions.ErroValidacaoXML(msg)
+
+            # Criamos um response dinamicamente para cada tipo de classe
+            response = obj_param.response()
+
+            response.status_code = resposta.status_code
+            response.encoding = resposta.encoding
+            response.xml = resposta.text.encode('utf8')
+            response.body_request = resposta.request.body
+            return response
+
+        except requests.ConnectionError as exc:
+            raise sigep_exceptions.ErroConexaoComServidor(exc.message)
+
+        except requests.Timeout as exc:
+            raise sigep_exceptions.ErroConexaoTimeOut(exc.message)
+
+        except requests.exceptions.RequestException as exc:
+            raise sigep_exceptions.ErroRequisicao(exc.message)
+
+    @staticmethod
+    def _parse_error(xml):
+        import xml.etree.cElementTree as Et
+        return Et.fromstring(xml).findtext('.//faultstring')

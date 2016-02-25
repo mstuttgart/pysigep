@@ -25,15 +25,15 @@
 #
 ###############################################################################
 
-import xml.etree.ElementTree as Et
+import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBase
+from sigep.base import RequestBaseSIGEP
 from sigep.base import ResponseBase
 from sigep.campos import CampoCEP
 from sigep.campos import CampoString
 
 
-class RequestConsultaCEP(RequestBase):
+class RequestConsultaCEP(RequestBaseSIGEP):
 
     def __init__(self, cep):
         super(RequestConsultaCEP, self).__init__(ResponseBuscaCEP)
@@ -45,11 +45,11 @@ class RequestConsultaCEP(RequestBase):
         return self._cep
 
     def get_xml(self):
-        xml = self._header
+        xml = self.header
         xml += '<cli:consultaCEP>'
         xml += self.cep.get_xml()
         xml += '</cli:consultaCEP>'
-        xml += self._footer
+        xml += self.footer
         return xml
 
 

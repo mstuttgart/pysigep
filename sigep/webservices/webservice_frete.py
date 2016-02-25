@@ -25,43 +25,11 @@
 #
 ###############################################################################
 
-from unittest import TestCase
-from sigep.base import TagBase
-from sigep.base import RequestBase
-from sigep.base import RequestBaseSIGEPAutentic
-from sigep.base import ResponseBase
+from webservice_base import WebserviceBase
 
 
-class TestTagBase(TestCase):
+class WebserviceFrete(WebserviceBase):
 
-    def test_get_xml(self):
-        tag = TagBase()
-        self.assertRaises(NotImplementedError, tag.get_xml)
-
-
-class TestRequestBase(TestCase):
-
-    def test_response(self):
-        response_obj = ResponseBase()
-        req = RequestBase(response_obj)
-        self.assertEqual(req.response, response_obj)
-
-    def test_get_xml(self):
-        req = RequestBase(ResponseBase())
-        self.assertRaises(NotImplementedError, req.get_xml)
-
-
-class TestRequestBaseAutentic(TestCase):
-
-    def test_response(self):
-        response_obj = ResponseBase()
-        req = RequestBaseSIGEPAutentic(response_obj, 'sigep', '12345')
-        self.assertEqual(req.response, response_obj)
-
-    def test_get_xml(self):
-
-        req = RequestBaseSIGEPAutentic(ResponseBase(), 'sigep', '12345')
-        xml = u'<usuario>%s</usuario>' % req.usuario.valor
-        xml += u'<senha>%s</senha>' % req.senha.valor
-
-        self.assertEqual(req.get_xml(), xml)
+    def __init__(self):
+        super(WebserviceFrete, self).__init__(
+            'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL')

@@ -25,18 +25,18 @@
 #
 ###############################################################################
 
-import xml.etree.ElementTree as Et
+import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseAutentic
+from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 from sigep.campos import CampoInteiro
 
 
-class RequestGeraDigitoVerificador(RequestBaseAutentic):
+class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
 
     def __init__(self, etiquetas, usuario, senha):
-        super(RequestGeraDigitoVerificador, self).__init__(
+        super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
             ResponseGeraDigitoVerificador, usuario, senha)
 
         self._etiquetas = []
@@ -58,7 +58,7 @@ class RequestGeraDigitoVerificador(RequestBaseAutentic):
         for etq in self.etiquetas:
             xml += etq.get_xml()
 
-        xml += super(RequestGeraDigitoVerificador, self).get_xml()
+        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_xml()
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         xml += self.footer
         return xml

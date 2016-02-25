@@ -10,13 +10,13 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 
 ## Recursos
 
-- [ ] Consultar custo do frete e prazos para entrega dado um endereço.
+- [x] Consultar custo do frete e prazos para entrega dado um endereço.
 - [ ] Realizar o rastreamento de uma mercadoria através do seu número de rastreamento.
 - [x] Verificar *status* de um Cartão de Postagem
 - [x] Obter dados do endereço a partir de seu respectivo CEP.
 - [x] Verificar disponibilidade de um dado serviço.  
-- [ ] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.   
 - [x] Gerar etiquetas para postagem de mercadoria e posterior rastreamento. 
+- [ ] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.   
 - [ ] Imprimir etiqueta da PLP em formato PDF.   
 - [ ] Imprimir Chancela em formato PDF.
 

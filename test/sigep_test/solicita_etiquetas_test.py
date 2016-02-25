@@ -26,7 +26,7 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.sigep.solicita_etiquetas import RequestSolicitaEtiqueta
+from sigep.sigep.solicita_etiquetas import RequestSolicitaEtiquetaSIGEP
 from sigep.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
 
 
@@ -39,7 +39,7 @@ class TestRequestSolicitaEtiqueta(TestCase):
         cnpj = '12345678000196'
         id_servico = 104625
 
-        req = RequestSolicitaEtiqueta(cnpj, id_servico, 1, login, senha)
+        req = RequestSolicitaEtiquetaSIGEP(cnpj, id_servico, 1, login, senha)
 
         xml = req.header
         xml += '<cli:solicitaEtiquetas>'

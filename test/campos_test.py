@@ -36,6 +36,7 @@ from sigep.campos import CampoCEP
 from sigep.campos import CampoCNPJ
 from sigep.campos import CampoBooleano
 from sigep.campos import CampoInteiro
+from sigep.campos import CampoDecimal
 
 
 class TestCampoBase(TestCase):
@@ -128,3 +129,16 @@ class TestCampoInteiro(TestCase):
         self.assertEqual(campo_int._validar(20), True)
         self.assertRaises(ErroTipoIncorreto, campo_int._validar, 'True')
         self.assertRaises(ErroTipoIncorreto, campo_int._validar, 10.5)
+
+
+class TestCampoDecimal(TestCase):
+
+    def test__formata_valor(self):
+        campo_dec = CampoDecimal('decimal_teste')
+        self.assertEqual(campo_dec._formata_valor(10.2), 10.2)
+
+    def test__validar(self):
+        campo_dec = CampoDecimal('decimal_teste')
+        self.assertEqual(campo_dec._validar(20.5), True)
+        self.assertRaises(ErroTipoIncorreto, campo_dec._validar, 'True')
+        self.assertRaises(ErroTipoIncorreto, campo_dec._validar, 10)
