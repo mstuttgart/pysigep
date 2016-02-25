@@ -32,7 +32,11 @@ Instalação do requests: `sudo pip install requests`
 <pre lang="python"><code>
 from sigep.sigep.consulta_cep import RequestConsultaCEP
 from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
-from sigep.webservices.webservice_sigepweb import WebserviceSIGEP
+from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
+from sigep.frete.consulta_frete import RequestCalcPrecoPrazo
+from sigep.webservices.webservice_sigep import WebserviceSIGEP
+from sigep.webservices.webservice_frete import WebserviceFrete
+from sigep.sigep_exceptions import ErroValidacaoXML
 
 LOGIN = 'sigep'
 SENHA = 'n5f9t8'
@@ -40,24 +44,52 @@ COD_ADMIN = '08082650'
 NUMERO_SERVICO = '40436'
 CEP_ORIGEM = '99200-000'
 CEP_DESTINO = '99200-000'
+CARTAO_POSTAGEM = '0057018901'
 
-server = WebserviceSIGEPWeb(WebserviceSIGEPWeb.AMBIENTE_HOMOLOGACAO)
+# Cliente do webservice do sistema sigep Correios
+server = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
 
-bcep = RequestConsultaCEP('37503-000')
-response = server.request(bcep)
+# Requisição para serviço ConsultaCEP
+req = RequestConsultaCEP('37503-000')
 
-print response.rua.valor
-print response.bairro.valor
-print response.cidade.valor
-print response.uf.valor
-print response.complemento.valor
-print response.complemento_2.valor
+# Executando a requisição
+response = server.request(req)
 
-verif_disp = RequestDisponibilidadeServico(COD_ADMIN, NUMERO_SERVICO, 
-CEP_ORIGEM, CEP_DESTINO, LOGIN, SENHA)
-                                         
-response = server.request(verif_disp)
-print response.disponivel.valor
+print response.resposta['logradouro']
+print response.resposta['bairro']
+print response.resposta['cidade']
+print response.resposta['uf']
+print response.resposta['complemento']
+print response.resposta['complemento_2']
+
+# Requisição para serviço ConsultaDisponibilidadeServico
+req = RequestDisponibilidadeServico(COD_ADMIN, NUMERO_SERVICO,
+                                    CEP_ORIGEM, CEP_DESTINO,
+                                    LOGIN, SENHA)
+
+# Executando a requisição
+response = server.request(req)
+print response.resposta
+
+# Requisição para servico ConsultaStatusCartaoPostagem
+req = RequestStatusCartaoPostagem(CARTAO_POSTAGEM, LOGIN, SENHA)
+
+response = server.request(req)
+print response.resposta
+
+# Cliente para webservice de calculo de preço e prazo
+server = WebserviceFrete()
+
+# Requisição para o Servico CalcPrecoPrazo
+req = RequestCalcPrecoPrazo('40436,40215', CEP_ORIGEM, '37503130', '2',
+                            RequestCalcPrecoPrazo.FORMATO_CAIXA_PACOTE,
+                            100.0, 100.0, 100.0, 0.0, False, 0.00, False)
+
+try:
+    # Executando a requisição
+    resp = server.request(req)
+except ErroValidacaoXML as exc:
+    print exc.message
 
 </code></pre>
 
