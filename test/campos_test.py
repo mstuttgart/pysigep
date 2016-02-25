@@ -41,17 +41,12 @@ from sigep.campos import CampoDecimal
 
 class TestCampoBase(TestCase):
 
-    def test__validar(self):
+    def test_validar(self):
         campo_base = CampoBase('campo_base', obrigatorio=True)
-        self.assertRaises(ErroCampoObrigatorio, campo_base._validar, None)
+        self.assertRaises(ErroCampoObrigatorio, campo_base.validar, None)
 
         campo_base = CampoBase('campo_base', obrigatorio=False)
-        self.assertEqual(campo_base._validar('Teste'), True)
-
-    def test__formata_valor(self):
-        campo_base = CampoBase('campo_base')
-        self.assertRaises(NotImplementedError, campo_base._formata_valor,
-                          'Teste')
+        self.assertEqual(campo_base.validar('Teste'), True)
 
 
 class TestCampoString(TestCase):
@@ -61,14 +56,14 @@ class TestCampoString(TestCase):
         self.assertRaises(ErroTipoIncorreto, campo_string._formata_valor, 5)
         self.assertEqual(campo_string._formata_valor('Teste  '), 'Teste')
 
-    def test__validar(self):
+    def test_validar(self):
 
         campo_string = CampoString('campo_string', tamanho=3)
-        self.assertRaises(ErroCampoTamanhoIncorreto, campo_string._validar,
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_string.validar,
                           'Teste')
 
         campo_string = CampoString('campo_string', tamanho=5)
-        self.assertEqual(campo_string._validar('Teste'), True)
+        self.assertEqual(campo_string.validar('Teste'), True)
 
 
 class TestCampoCEP(TestCase):
@@ -78,12 +73,12 @@ class TestCampoCEP(TestCase):
         self.assertRaises(ErroTipoIncorreto, campo_cep._formata_valor, 5)
         self.assertEqual(campo_cep._formata_valor('37.800-503'), '37800503')
 
-    def test__validar(self):
+    def test_validar(self):
         campo_cep = CampoCEP('cep')
-        self.assertEqual(campo_cep._validar('37800503'), True)
-        self.assertRaises(ErroCampoTamanhoIncorreto, campo_cep._validar,
+        self.assertEqual(campo_cep.validar('37800503'), True)
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_cep.validar,
                           '3780050')
-        self.assertRaises(ErroCampoNaoNumerico, campo_cep._validar,
+        self.assertRaises(ErroCampoNaoNumerico, campo_cep.validar,
                           '378005AB')
 
 
@@ -95,50 +90,37 @@ class TestCampoCNPJ(TestCase):
         self.assertEqual(campo_cnpj._formata_valor('12.345.678./0001-96'),
                          '12345678000196')
 
-    def test__validar(self):
+    def test_validar(self):
         campo_cnpj = CampoCNPJ('campo_cnpj')
-        self.assertEqual(campo_cnpj._validar('12345678000196'), True)
-        self.assertRaises(ErroCampoTamanhoIncorreto, campo_cnpj._validar,
+        self.assertEqual(campo_cnpj.validar('12345678000196'), True)
+        self.assertRaises(ErroCampoTamanhoIncorreto, campo_cnpj.validar,
                           '1234567800019')
-        self.assertRaises(ErroCampoNaoNumerico, campo_cnpj._validar,
+        self.assertRaises(ErroCampoNaoNumerico, campo_cnpj.validar,
                           '123456780001AB')
 
 
 class TestCampoBoolean(TestCase):
 
-    def test__formata_valor(self):
+    def test_validar(self):
         campo_bool = CampoBooleano('boolean_teste')
-        self.assertEqual(campo_bool._formata_valor(True), True)
-        self.assertEqual(campo_bool._formata_valor(False), False)
-
-    def test__validar(self):
-        campo_bool = CampoBooleano('boolean_teste')
-        self.assertEqual(campo_bool._validar(True), True)
-        self.assertRaises(ErroTipoIncorreto, campo_bool._validar, 'True')
-        self.assertRaises(ErroTipoIncorreto, campo_bool._validar, 1)
+        self.assertEqual(campo_bool.validar(True), True)
+        self.assertRaises(ErroTipoIncorreto, campo_bool.validar, 'True')
+        self.assertRaises(ErroTipoIncorreto, campo_bool.validar, 1)
 
 
 class TestCampoInteiro(TestCase):
 
-    def test__formata_valor(self):
+    def test_validar(self):
         campo_int = CampoInteiro('int_teste')
-        self.assertEqual(campo_int._formata_valor(10), 10)
-
-    def test__validar(self):
-        campo_int = CampoInteiro('int_teste')
-        self.assertEqual(campo_int._validar(20), True)
-        self.assertRaises(ErroTipoIncorreto, campo_int._validar, 'True')
-        self.assertRaises(ErroTipoIncorreto, campo_int._validar, 10.5)
+        self.assertEqual(campo_int.validar(20), True)
+        self.assertRaises(ErroTipoIncorreto, campo_int.validar, 'True')
+        self.assertRaises(ErroTipoIncorreto, campo_int.validar, 10.5)
 
 
 class TestCampoDecimal(TestCase):
 
-    def test__formata_valor(self):
+    def test_validar(self):
         campo_dec = CampoDecimal('decimal_teste')
-        self.assertEqual(campo_dec._formata_valor(10.2), 10.2)
-
-    def test__validar(self):
-        campo_dec = CampoDecimal('decimal_teste')
-        self.assertEqual(campo_dec._validar(20.5), True)
-        self.assertRaises(ErroTipoIncorreto, campo_dec._validar, 'True')
-        self.assertRaises(ErroTipoIncorreto, campo_dec._validar, 10)
+        self.assertEqual(campo_dec.validar(20.5), True)
+        self.assertRaises(ErroTipoIncorreto, campo_dec.validar, 'True')
+        self.assertRaises(ErroTipoIncorreto, campo_dec.validar, 10)

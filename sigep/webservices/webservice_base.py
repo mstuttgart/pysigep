@@ -25,6 +25,7 @@
 #
 ###############################################################################
 
+import xml.etree.cElementTree as Et
 import requests
 from sigep import sigep_exceptions
 
@@ -69,5 +70,4 @@ class WebserviceBase(object):
 
     @staticmethod
     def _parse_error(xml):
-        import xml.etree.cElementTree as Et
         return Et.fromstring(xml).findtext('.//faultstring')

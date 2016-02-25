@@ -40,20 +40,15 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
         super(RequestSolicitaEtiquetaSIGEP, self).__init__(
             ResponseSolicitaEtiqueta, usuario, senha)
 
-        self.tipo_destinatario = CampoString('tipoDestinatario',
-                                             obrigatorio=True,
-                                             tamanho=1)
-        self.cnpj = CampoCNPJ('identificador', obrigatorio=True)
-        self.id_servico = CampoInteiro('idServico', obrigatorio=True)
-        self.qtd_etiquetas = CampoInteiro('qtdEtiquetas', obrigatorio=True)
-
-        self.tipo_destinatario.valor = 'c'
-        self.cnpj.valor = cnpj
-        self.id_servico.valor = id_servico
-        self.qtd_etiquetas.valor = qtd_etiquetas
+        self.tipo_destinatario = CampoString('tipoDestinatario', valor='c',
+                                             obrigatorio=True, tamanho=1)
+        self.cnpj = CampoCNPJ('identificador', valor=cnpj, obrigatorio=True)
+        self.id_servico = CampoInteiro('idServico', valor=id_servico,
+                                       obrigatorio=True)
+        self.qtd_etiquetas = CampoInteiro('qtdEtiquetas', valor=qtd_etiquetas,
+                                          obrigatorio=True)
 
     def get_xml(self):
-
         xml = self.header
         xml += '<cli:solicitaEtiquetas>'
         xml += self.tipo_destinatario.get_xml()
@@ -63,7 +58,6 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
         xml += super(RequestSolicitaEtiquetaSIGEP, self).get_xml()
         xml += '</<cli:solicitaEtiquetas>'
         xml += self.footer
-
         return xml
 
 
@@ -71,9 +65,7 @@ class ResponseSolicitaEtiqueta(ResponseBase):
 
     def __init__(self):
         super(ResponseSolicitaEtiqueta, self).__init__()
-        self.intervalo_etiquetas = CampoString('intervalo_etiquetas',
-                                               obrigatorio=True)
 
     def _parse_xml(self, xml):
-        end = Et.fromstring(xml).find('.//return')
-        self.intervalo_etiquetas.valor = end.text
+        for end in Et.fromstring(xml).findall('.//return'):
+            self.resposta = [etq for etq in end.text.split(',')]

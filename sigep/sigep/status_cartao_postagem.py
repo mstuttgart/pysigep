@@ -32,24 +32,23 @@ from sigep.base import ResponseBase
 from sigep.campos import CampoString
 
 
-class RequestStatusCartaoPostagemSIGEP(RequestBaseSIGEPAutentic):
+class RequestStatusCartaoPostagem(RequestBaseSIGEPAutentic):
 
     def __init__(self, num_cartao_postagem, usuario, senha):
-        super(RequestStatusCartaoPostagemSIGEP, self).__init__(
+        super(RequestStatusCartaoPostagem, self).__init__(
             ResponseStatusCartaoPostagem, usuario, senha)
 
         self.numero_cartao_postagem = CampoString('numeroCartaoPostagem',
                                                   obrigatorio=True,
+                                                  valor=num_cartao_postagem,
                                                   tamanho=10,
                                                   numerico=True)
-
-        self.numero_cartao_postagem.valor = num_cartao_postagem
 
     def get_xml(self):
         xml = self.header
         xml += '<cli:getStatusCartaoPostagem>'
         xml += self.numero_cartao_postagem.get_xml()
-        xml += super(RequestStatusCartaoPostagemSIGEP, self).get_xml()
+        xml += super(RequestStatusCartaoPostagem, self).get_xml()
         xml += '</cli:getStatusCartaoPostagem>'
         xml += self.footer
         return xml
@@ -59,8 +58,7 @@ class ResponseStatusCartaoPostagem(ResponseBase):
 
     def __init__(self):
         super(ResponseStatusCartaoPostagem, self).__init__()
-        self.status = CampoString('status', obrigatorio=True)
 
     def _parse_xml(self, xml):
-        end = Et.fromstring(xml).find('.//return')
-        self.status.valor = end.text
+        for end in Et.fromstring(xml).findall('.//return'):
+            self.resposta = end.text

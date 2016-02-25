@@ -31,7 +31,6 @@ from sigep.base import RequestBaseSIGEPAutentic
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 from sigep.campos import CampoCEP
-from sigep.campos import CampoBooleano
 
 
 class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
@@ -44,17 +43,16 @@ class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
 
         self.cod_administrativo = CampoString('codAdministrativo',
                                               obrigatorio=True,
+                                              valor=cod_administrativo,
                                               tamanho=8)
         self.numero_servico = CampoString('numeroServico',
+                                          valor=numero_servico,
                                           obrigatorio=True,
                                           numerico=True)
-        self.cep_origem = CampoCEP('cepOrigem', obrigatorio=True)
-        self.cep_destino = CampoCEP('cepDestino', obrigatorio=True)
-
-        self.cod_administrativo.valor = cod_administrativo
-        self.numero_servico.valor = numero_servico
-        self.cep_origem.valor = cep_origem
-        self.cep_destino.valor = cep_destino
+        self.cep_origem = CampoCEP('cepOrigem', valor=cep_origem,
+                                   obrigatorio=True)
+        self.cep_destino = CampoCEP('cepDestino', valor=cep_destino,
+                                    obrigatorio=True)
 
     def get_xml(self):
 
@@ -75,8 +73,7 @@ class ResponseDisponibilidadeServico(ResponseBase):
 
     def __init__(self):
         super(ResponseDisponibilidadeServico, self).__init__()
-        self.disponivel = CampoBooleano('disponivel', obrigatorio=True)
 
     def _parse_xml(self, xml):
-        end = Et.fromstring(xml).find('.//return')
-        self.disponivel.valor = True if end.text == 'true' else False
+        for end in Et.fromstring(xml).findall('.//return'):
+            self.resposta = True if end.text == 'true' else False

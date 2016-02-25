@@ -65,14 +65,15 @@ class TestResponseBuscaCEP(TestCase):
             </return>
         </ns2:consultaCEPResponse>
         </S:Body>
-        </S:Envelope>'''
+        </S:Envelope>'''.replace('\n', '')
 
         resp_cep = ResponseBuscaCEP()
         resp_cep._parse_xml(xml)
 
-        self.assertEqual(resp_cep.logradouro.valor, u'SBN Quadra 1 Bloco A')
-        self.assertEqual(resp_cep.bairro.valor, u'Asa Norte')
-        self.assertEqual(resp_cep.cidade.valor, u'Brasília')
-        self.assertEqual(resp_cep.uf.valor, u'DF')
-        self.assertEqual(resp_cep.complemento.valor, u'')
-        self.assertEqual(resp_cep.complemento_2.valor, u'')
+        self.assertEqual(resp_cep.resposta['logradouro'], u'SBN Quadra 1 '
+                                                          u'Bloco A')
+        self.assertEqual(resp_cep.resposta['bairro'], u'Asa Norte')
+        self.assertEqual(resp_cep.resposta['cidade'], u'Brasília')
+        self.assertEqual(resp_cep.resposta['uf'], u'DF')
+        self.assertEqual(resp_cep.resposta['complemento'], u'')
+        self.assertEqual(resp_cep.resposta['complemento_2'], u'')
