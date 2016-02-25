@@ -65,7 +65,7 @@ class TestResponseBuscaCEP(TestCase):
             </return>
         </ns2:consultaCEPResponse>
         </S:Body>
-        </S:Envelope>'''
+        </S:Envelope>'''.replace('\n', '')
 
         resp_cep = ResponseBuscaCEP()
         resp_cep._parse_xml(xml)

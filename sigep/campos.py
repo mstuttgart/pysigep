@@ -41,14 +41,9 @@ class CampoBase(object):
 
     @valor.setter
     def valor(self, val):
-        val = self._formata_valor(val)
-        if self._validar(val):
-            self._valor = val
+        self._valor = val
 
-    def _formata_valor(self, valor):
-        raise NotImplementedError
-
-    def _validar(self, valor):
+    def validar(self, valor):
         if valor is None and self.obrigatorio:
             raise sigep_exceptions.ErroCampoObrigatorio(self.nome)
         return True
@@ -64,6 +59,15 @@ class CampoString(CampoBase):
         self.tamanho = tamanho
         self.numerico = numerico
 
+    @property
+    def valor(self):
+        return self._valor
+
+    @valor.setter
+    def valor(self, val):
+        val = self._formata_valor(val)
+        self._valor = val
+
     def _formata_valor(self, valor):
         if not isinstance(valor, basestring):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
@@ -71,7 +75,7 @@ class CampoString(CampoBase):
                                                      basestring)
         return valor.rstrip()
 
-    def _validar(self, valor):
+    def validar(self, valor):
 
         if self.tamanho != 0 and len(valor) != self.tamanho:
             raise sigep_exceptions.ErroCampoTamanhoIncorreto(self.nome,
@@ -81,7 +85,7 @@ class CampoString(CampoBase):
         if self.numerico and not valor.isdigit():
             raise sigep_exceptions.ErroCampoNaoNumerico(self.nome)
 
-        return super(CampoString, self)._validar(valor)
+        return super(CampoString, self).validar(valor)
 
 
 class CampoCEP(CampoString):
@@ -124,16 +128,13 @@ class CampoBooleano(CampoBase):
     def __init__(self, nome, obrigatorio=False):
         super(CampoBooleano, self).__init__(nome, obrigatorio=obrigatorio)
 
-    def _formata_valor(self, valor):
-        return valor
-
-    def _validar(self, valor):
+    def validar(self, valor):
 
         if not isinstance(valor, bool):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
                                                      type(valor),
                                                      bool)
-        return super(CampoBooleano, self)._validar(valor)
+        return super(CampoBooleano, self).validar(valor)
 
 
 class CampoInteiro(CampoBase):
@@ -141,15 +142,12 @@ class CampoInteiro(CampoBase):
     def __init__(self, nome, obrigatorio=False):
         super(CampoInteiro, self).__init__(nome, obrigatorio=obrigatorio)
 
-    def _formata_valor(self, valor):
-        return valor
-
-    def _validar(self, valor):
+    def validar(self, valor):
         if not isinstance(valor, int):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
                                                      type(valor),
                                                      int)
-        return super(CampoInteiro, self)._validar(valor)
+        return super(CampoInteiro, self).validar(valor)
 
 
 class CampoDecimal(CampoBase):
@@ -157,12 +155,9 @@ class CampoDecimal(CampoBase):
     def __init__(self, nome, obrigatorio=False):
         super(CampoDecimal, self).__init__(nome, obrigatorio=obrigatorio)
 
-    def _formata_valor(self, valor):
-        return valor
-
-    def _validar(self, valor):
+    def validar(self, valor):
         if not isinstance(valor, float):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
                                                      type(valor),
                                                      float)
-        return super(CampoDecimal, self)._validar(valor)
+        return super(CampoDecimal, self).validar(valor)
