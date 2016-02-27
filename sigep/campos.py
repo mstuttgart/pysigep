@@ -93,6 +93,20 @@ class CampoString(CampoBase):
         return super(CampoString, self).validar(valor)
 
 
+class CampoUnicode(CampoString):
+
+    def __init__(self, nome, valor=None, obrigatorio=False, tamanho=0,
+                 numerico=False):
+        super(CampoUnicode, self).__init__(nome, valor=valor,
+                                           numerico=numerico,
+                                           obrigatorio=obrigatorio,
+                                           tamanho=tamanho)
+
+    def get_xml(self):
+        return '<{}><![CDATA[{}]]></{}>'.format(self.nome, self.valor,
+                                                self.nome)
+
+
 class CampoCEP(CampoString):
 
     def __init__(self, nome, valor=None, obrigatorio=False):
