@@ -27,6 +27,9 @@
 
 from unittest import TestCase
 from sigep.sigep_exceptions import ErroValidacaoXML
+from sigep.sigep_exceptions import ErroConexaoComServidor
+from sigep.sigep_exceptions import ErroConexaoTimeOut
+from sigep.sigep_exceptions import ErroRequisicao
 from sigep.sigep.consulta_cep import RequestConsultaCEP
 from sigep.sigep.consulta_cep import ResponseBuscaCEP
 from sigep.webservices.webservice_sigep import WebserviceSIGEP
@@ -50,7 +53,15 @@ class TestWebserviceSIGEP(TestCase):
     def test_request(self):
         req_cep = RequestConsultaCEP('37.503-130')
         wb = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
-        res = wb.request(req_cep)
+
+        try:
+            res = wb.request(req_cep)
+        except ErroConexaoComServidor as exc:
+            print exc.message
+        except ErroConexaoTimeOut as exc:
+            print exc.message
+        except ErroRequisicao as exc:
+            print exc.message
 
         self.assertIsInstance(res, ResponseBuscaCEP)
 

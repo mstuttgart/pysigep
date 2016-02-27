@@ -32,6 +32,7 @@ from sigep.sigep_exceptions import ErroCampoNaoNumerico
 from sigep.sigep_exceptions import ErroTipoIncorreto
 from sigep.campos import CampoBase
 from sigep.campos import CampoString
+from sigep.campos import CampoUnicode
 from sigep.campos import CampoCEP
 from sigep.campos import CampoCNPJ
 from sigep.campos import CampoBooleano
@@ -40,6 +41,11 @@ from sigep.campos import CampoDecimal
 
 
 class TestCampoBase(TestCase):
+
+    def test_valor(self):
+        campo_base = CampoBase('campo_base', obrigatorio=True)
+        campo_base.valor = 'TESTE'
+        self.assertEqual(campo_base.valor, 'TESTE')
 
     def test_validar(self):
         campo_base = CampoBase('campo_base', obrigatorio=True)
@@ -64,6 +70,15 @@ class TestCampoString(TestCase):
 
         campo_string = CampoString('campo_string', tamanho=5)
         self.assertEqual(campo_string.validar('Teste'), True)
+
+
+class TestCampoUnicode(TestCase):
+
+    def test_get_xml(self):
+        campo_unicode = CampoUnicode('nome_remetente', valor=u'Empresa Ltda')
+        self.assertEqual(campo_unicode.get_xml(), '<nome_remetente>'
+                                                  '<![CDATA[Empresa Ltda]]>'
+                                                  '</nome_remetente>')
 
 
 class TestCampoCEP(TestCase):
