@@ -43,12 +43,12 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
 
         self.xml_plp = CampoString('xml', valor=xml_plp, obrigatorio=True)
         self.id_plp_cliente = CampoInteiro('idPlpCliente',
-                                            valor=id_plp_cliente,
-                                            obrigatorio=True)
+                                           valor=id_plp_cliente,
+                                           obrigatorio=True)
         self.num_cartao_postagem = CampoString('cartaoPostagem',
-                                                obrigatorio=True,
-                                                valor=num_cartao_postagem,
-                                                tamanho=10)
+                                               obrigatorio=True,
+                                               valor=num_cartao_postagem,
+                                               tamanho=10)
         self.lista_etiquetas = []
         for etq in lista_etiquetas:
             obj_etq = CampoString('listaEtiquetas',
@@ -58,7 +58,6 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
             self.lista_etiquetas.append(obj_etq)
 
     def get_xml(self):
-
         xml = self.header
         xml += '<cli:fechaPlpVariosServicos>'
         xml += self.xml_plp.get_xml()
@@ -71,7 +70,6 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
         xml += super(RequestFechaPLPVariosServicos, self).get_xml()
         xml += '</<cli:fechaPlpVariosServicos>'
         xml += self.footer
-
         return xml
 
 

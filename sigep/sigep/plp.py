@@ -28,11 +28,13 @@
 from sigep.base import TagBase
 from sigep.campos import CampoCEP
 from sigep.campos import CampoString
+from sigep.campos import CampoUnicode
 from sigep.campos import CampoInteiro
 from sigep.campos import CampoDecimal
 
 
 class XmlPLP(TagBase):
+
     def __init__(self):
         self.forma_pagamento = CampoString(valor='')
         self.plp = TagPLP()
@@ -57,8 +59,8 @@ class TagPLP(TagBase):
     def __init__(self):
         super(TagPLP, self).__init__()
         self.cartao_postagem = CampoString('cartao_postagem',
-                                            obrigatorio=True,
-                                            tamanho=10)
+                                           obrigatorio=True,
+                                           tamanho=10)
 
     def get_xml(self):
         xml = '<plp>'
@@ -81,21 +83,22 @@ class TagRemetente(TagBase):
                                              obrigatorio=True)
         self.codigo_administrativo = CampoString('codigo_administrativo',
                                                  obrigatorio=True, tamanho=8)
-        self.nome = CampoString('nome_remetente', obrigatorio=True, tamanho=50)
-        self.logradouro = CampoString('logradouro_remetente', tamanho=40,
-                                      obrigatorio=True)
+        self.nome = CampoUnicode('nome_remetente', obrigatorio=True,
+                                 tamanho=50)
+        self.logradouro = CampoUnicode('logradouro_remetente', tamanho=40,
+                                       obrigatorio=True)
         self.numero = CampoString('numero_remetente', tamanho=5,
                                   obrigatorio=True)
         self.complemento = CampoString('complemento_remetente', tamanho=20,
                                        obrigatorio=False)
-        self.bairro = CampoString('bairro_remetente', obrigatorio=True,
-                                  tamanho=20)
+        self.bairro = CampoUnicode('bairro_remetente', obrigatorio=True,
+                                   tamanho=20)
         self.cep = CampoCEP('cep_remetente', obrigatorio=True)
-        self.cidade = CampoString('cidade_remetente', tamanho=30,
-                                  obrigatorio=True)
+        self.CampoUnicode = CampoString('cidade_remetente', tamanho=30,
+                                        obrigatorio=True)
         self.uf = CampoString('uf_remetente', obrigatorio=True, tamanho=2)
         self.telefone = CampoString('telefone_remetente',
-                                     obrigatorio=False, tamanho=12)
+                                    obrigatorio=False, tamanho=12)
         self.fax = CampoString('fax_remetente', obrigatorio=False, tamanho=12)
         self.email = CampoString('email_remetente', tamanho=50,
                                  obrigatorio=False)
@@ -126,12 +129,12 @@ class TagObjetoPostal(TagBase):
 
     def __init__(self, numero_servico, tipo_objeto):
         self.numero_etiqueta = CampoString('numero_etiqueta', obrigatorio=True,
-                                            tamanho=13)
+                                           tamanho=13)
         self.codigo_objeto_cliente = CampoString('codigo_objeto_cliente',
-                                                  tamanho=20)
+                                                 tamanho=20)
         self.codigo_servico_postagem = CampoString('codigo_servico_postagem',
-                                                    obrigatorio=True,
-                                                    tamanho=5)
+                                                   obrigatorio=True,
+                                                   tamanho=5)
         self.cubagem = CampoDecimal('cubagem')
         self.peso = CampoInteiro('peso', obrigatorio=True)
         self.rt1 = CampoString('rt1', tamanho=255)
@@ -142,7 +145,7 @@ class TagObjetoPostal(TagBase):
         self.dimensao_objeto = TagDimesaoObjeto()
         self.data_postagem_sara = CampoString('data_postagem_sara')
         self.status_processamento = CampoString('status_processamento',
-                                                 tamanho=1)
+                                                tamanho=1)
         self.numero_comprovante_postagem = \
             CampoInteiro('numero_comprovante_postagem')
         self.valor_cobrado = CampoDecimal('valor_cobrado')
@@ -166,7 +169,6 @@ class TagObjetoPostal(TagBase):
         xml += self.numero_comprovante_postagem.get_xml()
         xml += self.valor_cobrado.get_xml()
         xml += u'</objeto_postal>'
-
         return xml
 
 
@@ -174,16 +176,16 @@ class TagDestinatario(TagBase):
 
     def __init__(self):
         super(TagRemetente, self).__init__()
-        self.nome = CampoString('nome_destinatario', obrigatorio=True,
+        self.nome = CampoUnicode('nome_destinatario', obrigatorio=True,
                                  tamanho=50)
         self.telefone = CampoString('telefone_destinatario', tamanho=12)
         self.celular = CampoString('celular_destinatario', tamanho=12)
         self.email = CampoString('email_destinatario', tamanho=50)
-        self.logradouro = CampoString('logradouro_destinatario',
+        self.logradouro = CampoUnicode('logradouro_destinatario',
                                        obrigatorio=True, tamanho=50)
         self.numero = CampoString('numero_end_destinatario', obrigatorio=True,
-                                   tamanho=5)
-        self.complemento = CampoString('complemento_destinatario', tamanho=30)
+                                  tamanho=5)
+        self.complemento = CampoUnicode('complemento_destinatario', tamanho=30)
 
     def get_xml(self):
 
@@ -206,11 +208,11 @@ class TagNacional(TagBase):
 
         obrigatorio = True if numero_servico == '41068' else False
 
-        self.bairro = CampoString('bairro_destinatario', obrigatorio=True,
-                                  tamanho=20)
+        self.bairro = CampoUnicode('bairro_destinatario', obrigatorio=True,
+                                   tamanho=20)
         self.cep = CampoCEP('cep_destinatario', obrigatorio=True)
-        self.cidade = CampoString('cidade_destinatario', obrigatorio=True,
-                                  tamanho=30)
+        self.cidade = CampoUnicode('cidade_destinatario', obrigatorio=True,
+                                   tamanho=30)
         self.uf = CampoString('uf_destinatario', obrigatorio=True, tamanho=2)
         self.codigo_usuario_postal = CampoString('codigo_usuario_postal',
                                                  valor='', tamanho=20)
@@ -223,8 +225,8 @@ class TagNacional(TagBase):
         self.valor_nfe = CampoDecimal('valor_nota_fiscal')
         self.natureza_nfe = CampoString('natureza_nota_fiscal', valor='',
                                         tamanho=20)
-        self.descricao_objeto = CampoString('descricao_objeto', valor='',
-                                            tamanho=20)
+        self.descricao_objeto = CampoUnicode('descricao_objeto', valor='',
+                                             tamanho=20)
         self.valor_a_cobrar = CampoDecimal('valor_a_cobrar', valor=0.00)
 
     def set_numero_servico(self, numero_servico):
@@ -256,8 +258,7 @@ class TagServicoAdcional(TagBase):
         self.lista_codigo_servico_adicional = [
             CampoString('codigo_servico_adicional', valor='025', tamanho=3)]
 
-        self.valor_declarado = CampoDecimal('valor_declarado', minimo=0,
-                                             maximo=999999999)
+        self.valor_declarado = CampoDecimal('valor_declarado')
 
     def add_codigo_servico_adicional(self, valor):
         self.codigo_servico_adicional.append(CampoString(
