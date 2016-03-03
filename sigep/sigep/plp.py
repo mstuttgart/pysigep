@@ -34,7 +34,6 @@ from sigep.campos import CampoDecimal
 
 
 class XmlPLP(TagBase):
-
     def __init__(self):
         self.forma_pagamento = CampoString(valor='')
         self.plp = TagPLP()
@@ -73,7 +72,6 @@ class TagPLP(TagBase):
 
 
 class TagRemetente(TagBase):
-
     def __init__(self):
         super(TagRemetente, self).__init__()
 
@@ -104,7 +102,6 @@ class TagRemetente(TagBase):
                                  obrigatorio=False)
 
     def get_xml(self):
-
         xml = '<remetente>'
         xml += self.numero_contrato.get_xml()
         xml += self.numero_diretoria.get_xml()
@@ -126,7 +123,6 @@ class TagRemetente(TagBase):
 
 
 class TagObjetoPostal(TagBase):
-
     def __init__(self, numero_servico, tipo_objeto):
         self.numero_etiqueta = CampoString('numero_etiqueta', obrigatorio=True,
                                            tamanho=13)
@@ -141,7 +137,7 @@ class TagObjetoPostal(TagBase):
         self.rt2 = CampoString('rt2', tamanho=255)
         self.destinatario = TagDestinatario()
         self.nacional = TagNacional(numero_servico)
-        self.servico_adicional = TagServicoAdcional()
+        self.servico_adicional = TagServicoAdicional()
         self.dimensao_objeto = TagDimesaoObjeto()
         self.data_postagem_sara = CampoString('data_postagem_sara')
         self.status_processamento = CampoString('status_processamento',
@@ -151,7 +147,6 @@ class TagObjetoPostal(TagBase):
         self.valor_cobrado = CampoDecimal('valor_cobrado')
 
     def get_xml(self):
-
         xml = u'<objeto_postal>'
         xml += self.numero_etiqueta.get_xml()
         xml += self.codigo_objeto_cliente.get_xml()
@@ -173,7 +168,6 @@ class TagObjetoPostal(TagBase):
 
 
 class TagDestinatario(TagBase):
-
     def __init__(self):
         super(TagRemetente, self).__init__()
         self.nome = CampoUnicode('nome_destinatario', obrigatorio=True,
@@ -188,7 +182,6 @@ class TagDestinatario(TagBase):
         self.complemento = CampoUnicode('complemento_destinatario', tamanho=30)
 
     def get_xml(self):
-
         xml = '<destinatario>'
         xml += self.nome.get_xml()
         xml += self.telefone.get_xml()
@@ -203,9 +196,7 @@ class TagDestinatario(TagBase):
 
 
 class TagNacional(TagBase):
-
     def __init__(self, numero_servico):
-
         obrigatorio = True if numero_servico == '41068' else False
 
         self.bairro = CampoUnicode('bairro_destinatario', obrigatorio=True,
@@ -252,27 +243,24 @@ class TagNacional(TagBase):
         return xml
 
 
-class TagServicoAdcional(TagBase):
-
+class TagServicoAdicional(TagBase):
     def __init__(self):
-        self.lista_codigo_servico_adicional = [
-            CampoString('codigo_servico_adicional', valor='025', tamanho=3)]
-
+        self.lista_codigo_servico_adicional = []
         self.valor_declarado = CampoDecimal('valor_declarado')
 
     def add_codigo_servico_adicional(self, valor):
         self.codigo_servico_adicional.append(CampoString(
-            valor=valor, tamanho=3))
+            'codigo_servico_adicional', valor=valor, tamanho=3))
         self.valor_declarado.obrigatorio = True if valor == '019' else False
 
     def get_xml(self):
-        xml = u'<servico_adicional>'
-
+        xml = '<servico_adicional>'
+        xml += '<codigo_servico_adicional>025</codigo_servico_adicional>'
         for serv_adicional in self._codigo_servico_adicional:
             xml += serv_adicional.get_xml()
 
         xml += self.valor_declarado.get_xml()
-        xml += u'</servico_adicional>'
+        xml += '</servico_adicional>'
         return xml
 
 
@@ -283,45 +271,74 @@ class TagDimesaoObjeto(TagBase):
     TIPO_CILINDRO = '003'
 
     def __init__(self):
-        tipo_objeto = TagDimesaoObjeto.TIPO_CAIXA
+        self.tipo_objeto = TagDimensionTipoObjeto('tipo_objeto',
+                                                  obrigatorio=True,
+                                                  tamanho=3)
 
-        self._tipo_objeto = CampoString('tipo_objeto',
-                                        obrigatorio=True,
-                                        valor=tipo_objeto,
-                                        tamanho=3)
-        self.altura = CampoInteiro('dimensao_altura',
-                                   obrigatorio=True if tipo_objeto == '002'
-                                   else False, valor=2)
-        self.largura = CampoInteiro('dimensao_largura',
-                                    obrigatorio=True if tipo_objeto == '002'
-                                    else False, valor=11)
-        self.comprimento = CampoInteiro('dimensao_comprimento',
-                                        valor=16,
-                                        obrigatorio=True if
-                                        tipo_objeto != '001' else False)
-        self.diametro = CampoInteiro(
-            'dimensao_diametro', obrigatorio=True if tipo_objeto == '003'
-            else False, valor=2)
+        self.altura = TagDimensionAlturaLargura('dimensao_altura', valor=2)
+        self.largura = TagDimensionAlturaLargura('dimensao_largura', valor=11)
+        self.comprimento = TagDimensionComprimento('dimensao_comprimento',
+                                                   valor=16)
+        self.diametro = TagDimensionDiametro('dimensao_diametro', valor=2)
 
-    @property
-    def tipo_objeto(self):
-        return self._tipo_objeto
+        self.tipo_objeto.tags.append(self.altura)
+        self.tipo_objeto.tags.append(self.largura)
+        self.tipo_objeto.tags.append(self.comprimento)
+        self.tipo_objeto.tags.append(self.diametro)
 
-    @tipo_objeto.setter
-    def tipo_objeto(self, tipo_objeto):
-        self._tipo_objeto = tipo_objeto
-        self.altura.obrigatorio = True if tipo_objeto == '002' else False
-        self.largura.obrigatorio = True if tipo_objeto == '002' else False
-        self.comprimento.obrigatorio = True if tipo_objeto != '001' else False
-        self.diametro.obrigatorio = True if tipo_objeto == '003' else False
-        self.comprimento.minimo = 16 if tipo_objeto != '003' else 18
+        self.tipo_objeto.valor = TagDimesaoObjeto.TIPO_CAIXA
 
     def get_xml(self):
-        xml = u'<dimensao_objeto>\n'
-        xml += self.codigo.get_xml()
+        xml = '<dimensao_objeto>'
+        xml += self.tipo_objeto.get_xml()
         xml += self.altura.get_xml()
         xml += self.largura.get_xml()
         xml += self.comprimento.get_xml()
         xml += self.diametro.get_xml()
-        xml += u'</dimensao_objeto>\n'
+        xml += '</dimensao_objeto>'
         return xml
+
+
+class TagDimensionTipoObjeto(CampoString):
+
+    def __init__(self, nome, valor=None, obrigatorio=False, tamanho=0,
+                 numerico=False):
+
+        super(TagDimensionTipoObjeto, self).__init__(nome,
+                                                     numerico=numerico,
+                                                     obrigatorio=obrigatorio,
+                                                     tamanho=tamanho)
+
+        self.tags = []
+
+    @property
+    def valor(self):
+        return self._valor
+
+    @valor.setter
+    def valor(self, val):
+        val = self._formata_valor(val)
+        self.update_tags(val)
+        self._valor = val
+
+    def update_tags(self, tipo_objeto):
+        for tag in self.tags:
+            tag.update(tipo_objeto)
+
+
+class TagDimensionAlturaLargura(CampoInteiro):
+
+    def update(self, tipo_objeto):
+        self.obrigatorio = True if tipo_objeto == '002' else False
+
+
+class TagDimensionComprimento(CampoInteiro):
+
+    def update(self, tipo_objeto):
+        self.obrigatorio = True if tipo_objeto != '001' else False
+
+
+class TagDimensionDiametro(CampoInteiro):
+
+    def update(self, tipo_objeto):
+        self.obrigatorio = True if tipo_objeto == '003' else False
