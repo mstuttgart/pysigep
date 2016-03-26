@@ -158,7 +158,8 @@ class TestXmlPLP(TestCase):
         xml += u'<nacional>'
         xml += u'<bairro_destinatario><![CDATA[Setor Industrial]]>' \
                u'</bairro_destinatario>'
-        xml += u'<cidade_destinatario><![CDATA[Goiânia]]></cidade_destinatario>'
+        xml += u'<cidade_destinatario><![CDATA[Goiânia]]>' \
+               u'</cidade_destinatario>'
         xml += u'<uf_destinatario>GO</uf_destinatario>'
         xml += u'<cep_destinatario>74000100</cep_destinatario>'
         xml += u'<codigo_usuario_postal></codigo_usuario_postal>'
@@ -321,7 +322,8 @@ class TestTagObjetoPostal(TestCase):
         xml += u'<nacional>'
         xml += u'<bairro_destinatario><![CDATA[Setor Industrial]]>' \
                u'</bairro_destinatario>'
-        xml += u'<cidade_destinatario><![CDATA[Goiânia]]></cidade_destinatario>'
+        xml += u'<cidade_destinatario><![CDATA[Goiânia]]>' \
+               u'</cidade_destinatario>'
         xml += u'<uf_destinatario>GO</uf_destinatario>'
         xml += u'<cep_destinatario>74000100</cep_destinatario>'
         xml += u'<codigo_usuario_postal></codigo_usuario_postal>'
@@ -371,7 +373,7 @@ class TestTagDestinatario(TestCase):
         xml += u'<celular_destinatario>003591419415</celular_destinatario>'
         xml += u'<email_destinatario></email_destinatario>'
         xml += u'<logradouro_destinatario><![CDATA[Rua Geraldino Campista]]>' \
-              u'</logradouro_destinatario>'
+               u'</logradouro_destinatario>'
         xml += u'<complemento_destinatario><![CDATA[]]>' \
                u'</complemento_destinatario>'
         xml += u'<numero_end_destinatario>123</numero_end_destinatario>'
@@ -396,7 +398,8 @@ class TestTagNacional(TestCase):
         xml = u'<nacional>'
         xml += u'<bairro_destinatario><![CDATA[Vila Poddis]]>' \
                u'</bairro_destinatario>'
-        xml += u'<cidade_destinatario><![CDATA[Itajubá]]></cidade_destinatario>'
+        xml += u'<cidade_destinatario><![CDATA[Itajubá]]>' \
+               u'</cidade_destinatario>'
         xml += u'<uf_destinatario>MG</uf_destinatario>'
         xml += u'<cep_destinatario>37503003</cep_destinatario>'
         xml += u'<codigo_usuario_postal></codigo_usuario_postal>'
