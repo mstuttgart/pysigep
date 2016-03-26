@@ -47,7 +47,8 @@ class XmlPLP(TagBase):
         xml += '<versao_arquivo>2.3</versao_arquivo>'
         xml += self.plp.get_xml()
         xml += self.remetente.get_xml()
-
+        xml += self.forma_pagamento.get_xml()
+        
         for obj_post in self.lista_objeto_postal:
             xml += obj_post.get_xml()
 
