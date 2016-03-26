@@ -41,7 +41,7 @@ class XmlPLP(TagBase):
         self.lista_objeto_postal = []
 
     def get_xml(self):
-        xml = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>'
+        xml = '<?xml version=\"1.0\" encoding=\"UTF-8\" ?>'
         xml += '<correioslog>'
         xml += '<tipo_arquivo>Postagem</tipo_arquivo>'
         xml += '<versao_arquivo>2.3</versao_arquivo>'
@@ -66,10 +66,10 @@ class TagPLP(TagBase):
 
     def get_xml(self):
         xml = '<plp>'
-        xml += '<id_plp/>'
-        xml += '<valor_global/>'
-        xml += '<mcu_unidade_postagem/>'
-        xml += '<nome_unidade_postagem/>'
+        xml += '<id_plp></id_plp>'
+        xml += '<valor_global></valor_global>'
+        xml += '<mcu_unidade_postagem></mcu_unidade_postagem>'
+        xml += '<nome_unidade_postagem></nome_unidade_postagem>'
         xml += self.cartao_postagem.get_xml()
         xml += '</plp>'
 
