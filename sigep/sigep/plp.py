@@ -156,7 +156,7 @@ class TagObjetoPostal(TagBase):
         self.valor_cobrado = CampoDecimal('valor_cobrado')
 
     def get_xml(self):
-        xml = u'<objeto_postal>'
+        xml = '<objeto_postal>'
         xml += self.numero_etiqueta.get_xml()
         xml += self.codigo_objeto_cliente.get_xml()
         xml += self.codigo_servico_postagem.get_xml()
@@ -172,7 +172,7 @@ class TagObjetoPostal(TagBase):
         xml += self.status_processamento.get_xml()
         xml += self.numero_comprovante_postagem.get_xml()
         xml += self.valor_cobrado.get_xml()
-        xml += u'</objeto_postal>'
+        xml += '</objeto_postal>'
         return xml
 
 
@@ -196,7 +196,7 @@ class TagDestinatario(TagBase):
 
     def get_xml(self):
 
-        xml = u'<destinatario>'
+        xml = '<destinatario>'
         xml += self.nome.get_xml()
         xml += self.telefone.get_xml()
         xml += self.celular.get_xml()
@@ -204,7 +204,7 @@ class TagDestinatario(TagBase):
         xml += self.logradouro.get_xml()
         xml += self.complemento.get_xml()
         xml += self.numero.get_xml()
-        xml += u'</destinatario>'
+        xml += '</destinatario>'
 
         return xml
 
@@ -237,7 +237,7 @@ class TagNacional(TagBase):
         self.valor_a_cobrar = CampoDecimal('valor_a_cobrar', valor=0.00)
 
     def get_xml(self):
-        xml = u'<nacional>'
+        xml = '<nacional>'
         xml += self.bairro.get_xml()
         xml += self.cidade.get_xml()
         xml += self.uf.get_xml()
@@ -250,7 +250,7 @@ class TagNacional(TagBase):
         xml += self.natureza_nfe.get_xml()
         xml += self.descricao_objeto.get_xml()
         xml += self.valor_a_cobrar.get_xml()
-        xml += u'</nacional>'
+        xml += '</nacional>'
         return xml
 
 

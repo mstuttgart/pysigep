@@ -50,7 +50,7 @@ class CampoBase(object):
 
     def get_xml(self):
         valor = self.valor if self.valor is not None else ''
-        return '<{}>{}</{}>'.format(self.nome, valor, self.nome)
+        return u'<{}>{}</{}>'.format(self.nome, valor, self.nome)
 
 
 class CampoString(CampoBase):

@@ -36,7 +36,7 @@ from sigep.campos import CampoInteiro
 class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
 
     def __init__(self, xml_plp, id_plp_cliente, num_cartao_postagem,
-                 lista_etiquetas, usuario, senha):
+                 etiquetas, usuario, senha):
 
         super(RequestFechaPLPVariosServicos, self).__init__(
             ResponseFechaPLPVariosServicos, usuario, senha)
@@ -50,9 +50,9 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
                                                valor=num_cartao_postagem,
                                                tamanho=10)
         self.lista_etiquetas = []
-        for etq in lista_etiquetas:
+        for etq in etiquetas:
             obj_etq = CampoString('listaEtiquetas',
-                                  valor=etq.valor[:10] + etq.valor[11:],
+                                  valor=etq[:10] + etq[11:],
                                   obrigatorio=True,
                                   tamanho=12)
             self.lista_etiquetas.append(obj_etq)
@@ -68,7 +68,7 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
             xml += etq.get_xml()
 
         xml += super(RequestFechaPLPVariosServicos, self).get_xml()
-        xml += '</<cli:fechaPlpVariosServicos>'
+        xml += '</cli:fechaPlpVariosServicos>'
         xml += self.footer
         return xml
 
@@ -79,5 +79,5 @@ class ResponseFechaPLPVariosServicos(ResponseBase):
         super(ResponseFechaPLPVariosServicos, self).__init__()
 
     def _parse_xml(self, xml):
-        for end in Et.fromstring(xml).find('.//return'):
+        for end in Et.fromstring(xml).findall('.//return'):
             self.resposta = end.text
