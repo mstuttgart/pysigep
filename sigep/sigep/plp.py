@@ -55,6 +55,7 @@ class XmlPLP(TagBase):
 
 
 class TagPLP(TagBase):
+
     def __init__(self):
         super(TagPLP, self).__init__()
         self.cartao_postagem = CampoString('cartao_postagem',
@@ -70,8 +71,11 @@ class TagPLP(TagBase):
         xml += self.cartao_postagem.get_xml()
         xml += '</plp>'
 
+        return xml
+
 
 class TagRemetente(TagBase):
+
     def __init__(self):
         super(TagRemetente, self).__init__()
 
@@ -123,6 +127,7 @@ class TagRemetente(TagBase):
 
 
 class TagObjetoPostal(TagBase):
+
     def __init__(self, numero_servico, tipo_objeto):
         self.numero_etiqueta = CampoString('numero_etiqueta', obrigatorio=True,
                                            tamanho=13)
@@ -168,21 +173,26 @@ class TagObjetoPostal(TagBase):
 
 
 class TagDestinatario(TagBase):
+
     def __init__(self):
-        super(TagRemetente, self).__init__()
+        super(TagDestinatario, self).__init__()
         self.nome = CampoUnicode('nome_destinatario', obrigatorio=True,
                                  tamanho=50)
-        self.telefone = CampoString('telefone_destinatario', tamanho=12)
-        self.celular = CampoString('celular_destinatario', tamanho=12)
-        self.email = CampoString('email_destinatario', tamanho=50)
+        self.telefone = CampoString('telefone_destinatario', tamanho=12,
+                                    valor='')
+        self.celular = CampoString('celular_destinatario', tamanho=12,
+                                   valor='')
+        self.email = CampoString('email_destinatario', tamanho=50, valor='')
         self.logradouro = CampoUnicode('logradouro_destinatario',
                                        obrigatorio=True, tamanho=50)
         self.numero = CampoString('numero_end_destinatario', obrigatorio=True,
                                   tamanho=5)
-        self.complemento = CampoUnicode('complemento_destinatario', tamanho=30)
+        self.complemento = CampoUnicode('complemento_destinatario',
+                                        tamanho=30, valor='')
 
     def get_xml(self):
-        xml = '<destinatario>'
+
+        xml = u'<destinatario>'
         xml += self.nome.get_xml()
         xml += self.telefone.get_xml()
         xml += self.celular.get_xml()
@@ -190,13 +200,15 @@ class TagDestinatario(TagBase):
         xml += self.logradouro.get_xml()
         xml += self.complemento.get_xml()
         xml += self.numero.get_xml()
-        xml += '</destinatario>'
+        xml += u'</destinatario>'
 
         return xml
 
 
 class TagNacional(TagBase):
+
     def __init__(self, numero_servico):
+        super(TagNacional, self).__init__()
         obrigatorio = True if numero_servico == '41068' else False
 
         self.bairro = CampoUnicode('bairro_destinatario', obrigatorio=True,
@@ -220,11 +232,6 @@ class TagNacional(TagBase):
                                              tamanho=20)
         self.valor_a_cobrar = CampoDecimal('valor_a_cobrar', valor=0.00)
 
-    def set_numero_servico(self, numero_servico):
-        obrigatorio = True if numero_servico == '41068' else False
-        self.numero_nfe.obrigatorio = obrigatorio
-        self.serie_nfe.obrigatorio = obrigatorio
-
     def get_xml(self):
         xml = u'<nacional>'
         xml += self.bairro.get_xml()
@@ -244,19 +251,21 @@ class TagNacional(TagBase):
 
 
 class TagServicoAdicional(TagBase):
+
     def __init__(self):
         self.lista_codigo_servico_adicional = []
-        self.valor_declarado = CampoDecimal('valor_declarado')
+        self.valor_declarado = CampoDecimal('valor_declarado',
+                                            obrigatorio=True, valor=0.0)
 
     def add_codigo_servico_adicional(self, valor):
-        self.codigo_servico_adicional.append(CampoString(
+        self.lista_codigo_servico_adicional.append(CampoString(
             'codigo_servico_adicional', valor=valor, tamanho=3))
-        self.valor_declarado.obrigatorio = True if valor == '019' else False
 
     def get_xml(self):
         xml = '<servico_adicional>'
         xml += '<codigo_servico_adicional>025</codigo_servico_adicional>'
-        for serv_adicional in self._codigo_servico_adicional:
+
+        for serv_adicional in self.lista_codigo_servico_adicional:
             xml += serv_adicional.get_xml()
 
         xml += self.valor_declarado.get_xml()
@@ -305,6 +314,7 @@ class TagDimensionTipoObjeto(CampoString):
                  numerico=False):
 
         super(TagDimensionTipoObjeto, self).__init__(nome,
+                                                     valor=valor,
                                                      numerico=numerico,
                                                      obrigatorio=obrigatorio,
                                                      tamanho=tamanho)

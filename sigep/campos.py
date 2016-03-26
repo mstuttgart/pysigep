@@ -49,7 +49,8 @@ class CampoBase(object):
         return True
 
     def get_xml(self):
-        return '<{}>{}</{}>'.format(self.nome, self.valor, self.nome)
+        return '<{}>{}</{}>'.format(self.nome,
+        self.valor if self.valor is not None else '', self.nome)
 
 
 class CampoString(CampoBase):
@@ -96,8 +97,8 @@ class CampoString(CampoBase):
 class CampoUnicode(CampoString):
 
     def get_xml(self):
-        return '<{}><![CDATA[{}]]></{}>'.format(self.nome, self.valor,
-                                                self.nome)
+        return u'<{}><![CDATA[{}]]></{}>'.format(self.nome,
+        self.valor if self.valor is not None else '', self.nome)
 
 
 class CampoCEP(CampoString):
@@ -142,7 +143,6 @@ class CampoBooleano(CampoBase):
                                                      type(valor),
                                                      bool)
         return super(CampoBooleano, self).validar(valor)
-
 
 class CampoInteiro(CampoBase):
 

@@ -31,13 +31,13 @@ from sigep.frete.consulta_frete import ResponseCalcPrecoPrazo
 from sigep.webservices.webservice_frete import WebserviceFrete
 
 
-class TestWebserviceFrete(TestCase):
-
-    def test_request(self):
-        server = WebserviceFrete()
-        req = RequestCalcPrecoPrazo('40436,40215', '99200000', '37503130', '2',
-                                    RequestCalcPrecoPrazo.FORMATO_CAIXA_PACOTE,
-                                    100.0, 100.0, 100.0, 0.0, False, 0.00,
-                                    False)
-
-        self.assertIsInstance(server.request(req), ResponseCalcPrecoPrazo)
+# class TestWebserviceFrete(TestCase):
+#
+#     def test_request(self):
+#         server = WebserviceFrete()
+#         req = RequestCalcPrecoPrazo('40436,40215', '99200000', '37503130', '2',
+#                                     RequestCalcPrecoPrazo.FORMATO_CAIXA_PACOTE,
+#                                     100.0, 100.0, 100.0, 0.0, False, 0.00,
+#                                     False)
+#
+#         self.assertIsInstance(server.request(req), ResponseCalcPrecoPrazo)
