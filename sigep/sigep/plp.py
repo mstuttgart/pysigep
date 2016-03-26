@@ -91,21 +91,22 @@ class TagRemetente(TagBase):
                                        obrigatorio=True)
         self.numero = CampoString('numero_remetente', tamanho=5,
                                   obrigatorio=True)
-        self.complemento = CampoString('complemento_remetente', tamanho=20,
-                                       obrigatorio=False)
+        self.complemento = CampoUnicode('complemento_remetente', tamanho=20,
+                                        obrigatorio=False)
         self.bairro = CampoUnicode('bairro_remetente', obrigatorio=True,
                                    tamanho=20)
         self.cep = CampoCEP('cep_remetente', obrigatorio=True)
-        self.CampoUnicode = CampoString('cidade_remetente', tamanho=30,
-                                        obrigatorio=True)
+        self.cidade = CampoUnicode('cidade_remetente', tamanho=30,
+                                   obrigatorio=True)
         self.uf = CampoString('uf_remetente', obrigatorio=True, tamanho=2)
         self.telefone = CampoString('telefone_remetente',
                                     obrigatorio=False, tamanho=12)
         self.fax = CampoString('fax_remetente', obrigatorio=False, tamanho=12)
-        self.email = CampoString('email_remetente', tamanho=50,
-                                 obrigatorio=False)
+        self.email = CampoUnicode('email_remetente', tamanho=50,
+                                  obrigatorio=False)
 
     def get_xml(self):
+
         xml = '<remetente>'
         xml += self.numero_contrato.get_xml()
         xml += self.numero_diretoria.get_xml()
@@ -128,7 +129,7 @@ class TagRemetente(TagBase):
 
 class TagObjetoPostal(TagBase):
 
-    def __init__(self, numero_servico, tipo_objeto):
+    def __init__(self, numero_servico):
         self.numero_etiqueta = CampoString('numero_etiqueta', obrigatorio=True,
                                            tamanho=13)
         self.codigo_objeto_cliente = CampoString('codigo_objeto_cliente',

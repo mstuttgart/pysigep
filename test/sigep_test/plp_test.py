@@ -27,6 +27,8 @@
 
 from unittest import TestCase
 from sigep.sigep.plp import TagPLP
+from sigep.sigep.plp import TagRemetente
+from sigep.sigep.plp import TagObjetoPostal
 from sigep.sigep.plp import TagDestinatario
 from sigep.sigep.plp import TagNacional
 from sigep.sigep.plp import TagServicoAdicional
@@ -51,6 +53,49 @@ class TestTagPLP(TestCase):
 
         tag = TagPLP()
         tag.cartao_postagem.valor = '0123456789'
+
+        self.assertEqual(xml, tag.get_xml())
+
+
+class TestTagRemetente(TestCase):
+
+    def test_get_xml(self):
+
+        self.maxDiff = None
+        xml = u'<remetente>'
+        xml += u'<numero_contrato>0123456789</numero_contrato>'
+        xml += u'<numero_diretoria>36</numero_diretoria>'
+        xml += u'<codigo_administrativo>12345678</codigo_administrativo>'
+        xml += u'<nome_remetente><![CDATA[Empresa Ltda]]></nome_remetente>'
+        xml += u'<logradouro_remetente><![CDATA[Avenida Central]]>' \
+               u'</logradouro_remetente>'
+        xml += u'<numero_remetente>2370</numero_remetente>'
+        xml += u'<complemento_remetente><![CDATA[sala 1205,12° andar]]>' \
+               u'</complemento_remetente>'
+        xml += u'<bairro_remetente><![CDATA[Centro]]></bairro_remetente>'
+        xml += u'<cep_remetente>70002900</cep_remetente>'
+        xml += u'<cidade_remetente><![CDATA[Brasília]]></cidade_remetente>'
+        xml += u'<uf_remetente>PR</uf_remetente>'
+        xml += u'<telefone_remetente>6112345008</telefone_remetente>'
+        xml += u'<fax_remetente></fax_remetente>'
+        xml += u'<email_remetente><![CDATA[cli@mail.com.br]]>' \
+               u'</email_remetente>'
+        xml += u'</remetente>'
+
+        tag = TagRemetente()
+        tag.numero_contrato.valor = '0123456789'
+        tag.numero_diretoria.valor = 36
+        tag.codigo_administrativo.valor = '12345678'
+        tag.nome.valor = u'Empresa Ltda'
+        tag.logradouro.valor = u'Avenida Central'
+        tag.numero.valor = '2370'
+        tag.complemento.valor = u'sala 1205,12° andar'
+        tag.bairro.valor = 'Centro'
+        tag.cep.valor = '70002900'
+        tag.cidade.valor = u'Brasília'
+        tag.uf.valor = 'PR'
+        tag.telefone.valor = '6112345008'
+        tag.email.valor = 'cli@mail.com.br'
 
         self.assertEqual(xml, tag.get_xml())
 
