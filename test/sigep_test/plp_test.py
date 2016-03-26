@@ -100,6 +100,107 @@ class TestTagRemetente(TestCase):
         self.assertEqual(xml, tag.get_xml())
 
 
+class TestTagObjetoPostal(TestCase):
+
+    def test_get_xml(self):
+
+        self.maxDiff = None
+
+        tag = TagObjetoPostal('41068')
+        tag.numero_etiqueta.valor = 'PH185560916BR'
+        tag.codigo_servico_postagem.valor = '41068'
+        tag.cubagem.valor = 0.0000
+        tag.peso.valor = 200
+
+        tag.destinatario.nome.valor = 'Destino Ltda'
+        tag.destinatario.logradouro.valor = 'Avenida Central'
+        tag.destinatario.complemento.valor = 'Qd: 102 A Lt: 04'
+        tag.destinatario.numero.valor = '1065'
+        tag.destinatario.telefone.valor = '6212349644'
+
+        tag.nacional.bairro.valor = 'Setor Industrial'
+        tag.nacional.cep.valor = '74000100'
+        tag.nacional.cidade.valor = u'Goiânia'
+        tag.nacional.uf.valor = 'GO'
+        tag.nacional.numero_nfe.valor = '102030'
+        tag.nacional.valor_a_cobrar.valor = 0.0
+
+        tag.servico_adicional.add_codigo_servico_adicional('001')
+        tag.servico_adicional.add_codigo_servico_adicional('019')
+        tag.servico_adicional.valor_declarado.valor = 99.0
+
+        tag.dimensao_objeto.tipo_objeto.valor = TagDimesaoObjeto.TIPO_CAIXA
+        tag.dimensao_objeto.altura.valor = 20
+        tag.dimensao_objeto.largura.valor = 30
+        tag.dimensao_objeto.comprimento.valor = 38
+        tag.dimensao_objeto.diametro.valor = 0
+
+        tag.status_processamento.valor = '0'
+
+        xml = u'<objeto_postal>'
+
+        xml += u'<numero_etiqueta>PH185560916BR</numero_etiqueta>'
+        xml += u'<codigo_objeto_cliente></codigo_objeto_cliente>'
+        xml += u'<codigo_servico_postagem>41068</codigo_servico_postagem>'
+        xml += u'<cubagem>0.0</cubagem>'
+        xml += u'<peso>200</peso>'
+        xml += u'<rt1></rt1>'
+        xml += u'<rt2></rt2>'
+
+        xml += u'<destinatario>'
+        xml += u'<nome_destinatario><![CDATA[Destino Ltda]]>' \
+               u'</nome_destinatario>'
+        xml += u'<telefone_destinatario>6212349644</telefone_destinatario>'
+        xml += u'<celular_destinatario></celular_destinatario>'
+        xml += u'<email_destinatario></email_destinatario>'
+        xml += u'<logradouro_destinatario><![CDATA[Avenida Central]]>' \
+               u'</logradouro_destinatario>'
+        xml += u'<complemento_destinatario><![CDATA[Qd: 102 A Lt: 04]]>' \
+               u'</complemento_destinatario>'
+        xml += u'<numero_end_destinatario>1065</numero_end_destinatario>'
+        xml += u'</destinatario>'
+
+        xml += u'<nacional>'
+        xml += u'<bairro_destinatario><![CDATA[Setor Industrial]]>' \
+               u'</bairro_destinatario>'
+        xml += u'<cidade_destinatario><![CDATA[Goiânia]]></cidade_destinatario>'
+        xml += u'<uf_destinatario>GO</uf_destinatario>'
+        xml += u'<cep_destinatario>74000100</cep_destinatario>'
+        xml += u'<codigo_usuario_postal></codigo_usuario_postal>'
+        xml += u'<centro_custo_cliente></centro_custo_cliente>'
+        xml += u'<numero_nota_fiscal>102030</numero_nota_fiscal>'
+        xml += u'<serie_nota_fiscal></serie_nota_fiscal>'
+        xml += u'<valor_nota_fiscal></valor_nota_fiscal>'
+        xml += u'<natureza_nota_fiscal></natureza_nota_fiscal>'
+        xml += u'<descricao_objeto><![CDATA[]]></descricao_objeto>'
+        xml += u'<valor_a_cobrar>0.0</valor_a_cobrar>'
+        xml += u'</nacional>'
+
+        # O servico adicional 025 sempre deverá ser informado.
+        xml += u'<servico_adicional>'
+        xml += u'<codigo_servico_adicional>025</codigo_servico_adicional>'
+        xml += u'<codigo_servico_adicional>001</codigo_servico_adicional>'
+        xml += u'<codigo_servico_adicional>019</codigo_servico_adicional>'
+        xml += u'<valor_declarado>99.0</valor_declarado>'
+        xml += u'</servico_adicional>'
+
+        xml += u'<dimensao_objeto>'
+        xml += u'<tipo_objeto>002</tipo_objeto>'
+        xml += u'<dimensao_altura>20</dimensao_altura>'
+        xml += u'<dimensao_largura>30</dimensao_largura>'
+        xml += u'<dimensao_comprimento>38</dimensao_comprimento>'
+        xml += u'<dimensao_diametro>0</dimensao_diametro>'
+        xml += u'</dimensao_objeto>'
+
+        xml += u'<data_postagem_sara></data_postagem_sara>'
+        xml += u'<status_processamento>0</status_processamento>'
+        xml += u'<numero_comprovante_postagem></numero_comprovante_postagem>'
+        xml += u'<valor_cobrado></valor_cobrado>'
+        xml += u'</objeto_postal>'
+
+        self.assertEqual(xml, tag.get_xml())
+
+
 class TestTagDestinatario(TestCase):
 
     def test_get_xml(self):
