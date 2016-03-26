@@ -35,7 +35,7 @@ from sigep.campos import CampoDecimal
 
 class XmlPLP(TagBase):
     def __init__(self):
-        self.forma_pagamento = CampoString(valor='')
+        self.forma_pagamento = CampoString(nome='forma_pagamento', valor='')
         self.plp = TagPLP()
         self.remetente = TagRemetente()
         self.lista_objeto_postal = []
@@ -52,6 +52,8 @@ class XmlPLP(TagBase):
             xml += obj_post.get_xml()
 
         xml += '</correioslog>'
+
+        return xml
 
 
 class TagPLP(TagBase):
