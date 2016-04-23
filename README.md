@@ -30,6 +30,7 @@ Instalação do requests: `sudo pip install requests`
 ## Como usar
 
 <pre lang="python"><code>
+# -*- coding: utf-8 -*-
 from sigep.sigep.consulta_cep import RequestConsultaCEP
 from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
 from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
@@ -85,11 +86,19 @@ req = RequestCalcPrecoPrazo('40436,40215', CEP_ORIGEM, '37503130', '2',
                             RequestCalcPrecoPrazo.FORMATO_CAIXA_PACOTE,
                             100.0, 100.0, 100.0, 0.0, False, 0.00, False)
 
-try:
-    # Executando a requisição
-    resp = server.request(req)
-except ErroValidacaoXML as exc:
-    print exc.message
+# Executando a requisição
+response = server.request(req)
+print response.resposta['40436']['Valor']
+print response.resposta['40436']['PrazoEntrega']
+print response.resposta['40436']['ValorMaoPropria']
+print response.resposta['40436']['ValorAvisoRecebimento']
+print response.resposta['40436']['ValorValorDeclarado']
+print response.resposta['40436']['EntregaDomiciliar']
+print response.resposta['40436']['EntregaSabado']
+print response.resposta['40436']['Erro']
+print response.resposta['40436']['MsgErro']
+print response.resposta['40436']['ValorSemAdicionais']
+print response.resposta['40436']['obsFim']
 
 </code></pre>
 
