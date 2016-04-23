@@ -35,7 +35,7 @@ class TestWebserviceRastreamento(TestCase):
 
     def test_request(self):
         server = WebserviceRastreamento()
-        req = RequestRastreamento('ECT', 'Senha',
+        req = RequestRastreamento('ECT', 'SRO',
                                   RequestRastreamento.TIPO_LISTA_DE_OBJETOS,
                                   RequestRastreamento.ULTIMO_RESULTADO,
                                   ['PJ472895891BR', 'PJ382325976BR'])
