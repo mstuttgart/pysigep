@@ -26,13 +26,15 @@
 ###############################################################################
 
 from unittest import TestCase
+
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
 from sigep.sigep.disponibilidade_servico import ResponseDisponibilidadeServico
 
 
 class TestRequestDisponibilidadeServico(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
         LOGIN = 'sigep'
         SENHA = 'n5f9t8'
         COD_ADMIN = '08082650'
@@ -41,7 +43,7 @@ class TestRequestDisponibilidadeServico(TestCase):
                                                  '99200-000', '99200-000',
                                                  LOGIN, SENHA)
 
-        xml = res_disp.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:verificaDisponibilidadeServico>'
         xml += '<codAdministrativo>%s</codAdministrativo>' % \
                res_disp.cod_administrativo.valor
@@ -49,11 +51,11 @@ class TestRequestDisponibilidadeServico(TestCase):
                res_disp.numero_servico.valor
         xml += '<cepOrigem>%s</cepOrigem>' % res_disp.cep_origem.valor
         xml += '<cepDestino>%s</cepDestino>' % res_disp.cep_destino.valor
-        xml += super(RequestDisponibilidadeServico, res_disp).get_xml()
+        xml += super(RequestDisponibilidadeServico, res_disp).get_data()
         xml += '</cli:verificaDisponibilidadeServico>'
-        xml += res_disp.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
-        self.assertEqual(xml, res_disp.get_xml())
+        self.assertEqual(xml, res_disp.get_data())
 
 
 class TestResponseDisponibilidadeServico(TestCase):

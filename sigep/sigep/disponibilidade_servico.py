@@ -27,13 +27,13 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseSIGEPAutentic
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 from sigep.campos import CampoCEP
 
 
-class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
+class RequestDisponibilidadeServico(RequestBaseSIGEPAuthentication):
 
     def __init__(self, cod_administrativo, numero_servico, cep_origem,
                  cep_destino, usuario, senha):
@@ -54,17 +54,17 @@ class RequestDisponibilidadeServico(RequestBaseSIGEPAutentic):
         self.cep_destino = CampoCEP('cepDestino', valor=cep_destino,
                                     obrigatorio=True)
 
-    def get_xml(self):
+    def get_data(self):
 
-        xml = self.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:verificaDisponibilidadeServico>'
         xml += self.cod_administrativo.get_xml()
         xml += self.numero_servico.get_xml()
         xml += self.cep_origem.get_xml()
         xml += self.cep_destino.get_xml()
-        xml += super(RequestDisponibilidadeServico, self).get_xml()
+        xml += super(RequestDisponibilidadeServico, self).get_data()
         xml += '</cli:verificaDisponibilidadeServico>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
         return xml
 

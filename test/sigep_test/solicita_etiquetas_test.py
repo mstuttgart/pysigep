@@ -26,13 +26,15 @@
 ###############################################################################
 
 from unittest import TestCase
+
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.sigep.solicita_etiquetas import RequestSolicitaEtiquetaSIGEP
 from sigep.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
 
 
 class TestRequestSolicitaEtiqueta(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
 
         login = 'sigep'
         senha = 'n5f9t8'
@@ -41,7 +43,7 @@ class TestRequestSolicitaEtiqueta(TestCase):
 
         req = RequestSolicitaEtiquetaSIGEP(cnpj, id_servico, 1, login, senha)
 
-        xml = req.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:solicitaEtiquetas>'
         xml += '<tipoDestinatario>%s</tipoDestinatario>' % \
                req.tipo_destinatario.valor
@@ -51,9 +53,9 @@ class TestRequestSolicitaEtiqueta(TestCase):
         xml += '<usuario>%s</usuario>' % login
         xml += '<senha>%s</senha>' % senha
         xml += '</<cli:solicitaEtiquetas>'
-        xml += req.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
-        self.assertEqual(req.get_xml(), xml)
+        self.assertEqual(req.get_data(), xml)
 
 
 class TestResponseSolicitaEtiqueta(TestCase):

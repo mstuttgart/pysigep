@@ -26,6 +26,8 @@
 ###############################################################################
 
 from unittest import TestCase
+
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.sigep.fecha_plp import RequestFechaPLPVariosServicos
 from sigep.sigep.fecha_plp import ResponseFechaPLPVariosServicos
 from sigep.sigep.plp import XmlPLP, TagObjetoPostal, TagDimesaoObjeto
@@ -33,7 +35,7 @@ from sigep.sigep.plp import XmlPLP, TagObjetoPostal, TagDimesaoObjeto
 
 class TestRequestFechaPLPVariosServicos(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
 
         self.maxDiff = None
 
@@ -95,7 +97,7 @@ class TestRequestFechaPLPVariosServicos(TestCase):
         req = RequestFechaPLPVariosServicos(tag.get_xml(), 123, '0123456789',
                                             etiquetas, 'sigep', 'n5f9t8')
 
-        xml = req.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:fechaPlpVariosServicos>'
         xml += '<xml>%s</xml>' % tag.get_xml()
         xml += '<idPlpCliente>123</idPlpCliente>'
@@ -104,9 +106,9 @@ class TestRequestFechaPLPVariosServicos(TestCase):
         xml += '<usuario>sigep</usuario>'
         xml += '<senha>n5f9t8</senha>'
         xml += '</cli:fechaPlpVariosServicos>'
-        xml += req.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
-        self.assertEqual(xml, req.get_xml())
+        self.assertEqual(xml, req.get_data())
 
 
 class TestResponseFechaPLPVariosServicos(TestCase):

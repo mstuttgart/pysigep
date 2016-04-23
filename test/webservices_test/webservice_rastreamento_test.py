@@ -25,41 +25,19 @@
 #
 ###############################################################################
 
-import xml.etree.cElementTree as Et
-
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.base import ResponseBase
-from sigep.campos import CampoString
-
-
-class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAuthentication):
-
-    def __init__(self, etiquetas, usuario, senha):
-        super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
-            ResponseGeraDigitoVerificador, usuario, senha)
-
-        self.etiquetas = [
-            CampoString('etiquetas', valor=etq, obrigatorio=True)
-            for etq in etiquetas.split(',')]
-
-    def get_data(self):
-        xml = RequestBaseSIGEPAuthentication.HEADER
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        for etq in self.etiquetas:
-            xml += etq.get_xml()
-        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_data()
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        xml += RequestBaseSIGEPAuthentication.FOOTER
-        return xml
+from unittest import TestCase
+from sigep.rastreamento.consulta_rastreamento import RequestRastreamento
+from sigep.rastreamento.consulta_rastreamento import ResponseRastreamento
+from sigep.webservices.webservice_rastreamento import WebserviceRastreamento
 
 
-class ResponseGeraDigitoVerificador(ResponseBase):
+class TestWebserviceRastreamento(TestCase):
 
-    def __init__(self):
-        super(ResponseGeraDigitoVerificador, self).__init__()
+    def test_request(self):
+        server = WebserviceRastreamento()
+        req = RequestRastreamento('ECT', 'SRO',
+                                  RequestRastreamento.TIPO_LISTA_DE_OBJETOS,
+                                  RequestRastreamento.ULTIMO_RESULTADO,
+                                  ['PJ472895891BR', 'PJ382325976BR'])
 
-    def _parse_xml(self, xml):
-        self.resposta = {
-            'lista_digitos': [int(end.text) for end in Et.fromstring(
-                xml).findall('.//return')]
-        }
+        self.assertIsInstance(server.request(req), ResponseRastreamento)

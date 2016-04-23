@@ -76,9 +76,9 @@ class RequestCalcPrecoPrazo(RequestBaseFrete):
                                                valor='S' if sCdAvisoRecebimento
                                                else 'N')
 
-    def get_xml(self):
+    def get_data(self):
 
-        xml = self.header
+        xml = RequestBaseFrete.HEADER
         xml += '<CalcPrecoPrazo xmlns=\"http://tempuri.org/\">'
         xml += self.ncdempresa.get_xml()
         xml += self.sdssenha.get_xml()
@@ -95,7 +95,7 @@ class RequestCalcPrecoPrazo(RequestBaseFrete):
         xml += self.nVlValorDeclarado.get_xml()
         xml += self.sCdAvisoRecebimento.get_xml()
         xml += '</CalcPrecoPrazo>'
-        xml += self.footer
+        xml += RequestBaseFrete.FOOTER
 
         return xml
 

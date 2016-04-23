@@ -27,12 +27,12 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseSIGEPAutentic
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 
 
-class RequestStatusCartaoPostagem(RequestBaseSIGEPAutentic):
+class RequestStatusCartaoPostagem(RequestBaseSIGEPAuthentication):
 
     def __init__(self, num_cartao_postagem, usuario, senha):
         super(RequestStatusCartaoPostagem, self).__init__(
@@ -44,13 +44,13 @@ class RequestStatusCartaoPostagem(RequestBaseSIGEPAutentic):
                                                   tamanho=10,
                                                   numerico=True)
 
-    def get_xml(self):
-        xml = self.header
+    def get_data(self):
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:getStatusCartaoPostagem>'
         xml += self.numero_cartao_postagem.get_xml()
-        xml += super(RequestStatusCartaoPostagem, self).get_xml()
+        xml += super(RequestStatusCartaoPostagem, self).get_data()
         xml += '</cli:getStatusCartaoPostagem>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 

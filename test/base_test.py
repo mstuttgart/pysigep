@@ -26,11 +26,11 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.base import TagBase
+from sigep.base import TagBase, RequestBaseRastreamento
 from sigep.base import RequestBase
 from sigep.base import RequestBaseFrete
 from sigep.base import RequestBaseSIGEP
-from sigep.base import RequestBaseSIGEPAutentic
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.base import ResponseBase
 
 
@@ -44,43 +44,48 @@ class TestTagBase(TestCase):
 class TestRequestBase(TestCase):
 
     def test_response(self):
-        response_obj = ResponseBase()
-        req = RequestBase(response_obj)
-        self.assertEqual(req.response, response_obj)
+        req = RequestBase(ResponseBase)
+        self.assertEqual(req.response_class_ref, ResponseBase)
 
-    def test_get_xml(self):
-        req = RequestBase(ResponseBase())
-        self.assertRaises(NotImplementedError, req.get_xml)
+    def test_get_data(self):
+        req = RequestBase(ResponseBase)
+        self.assertRaises(NotImplementedError, req.get_data)
 
 
 class TestRequestBaseSIGEP(TestCase):
 
-    def test_get_xml(self):
-        req = RequestBaseSIGEP(ResponseBase())
-        self.assertRaises(NotImplementedError, req.get_xml)
+    def test_get_data(self):
+        req = RequestBaseSIGEP(ResponseBase)
+        self.assertRaises(NotImplementedError, req.get_data)
 
 
 class TestRequestBaseAutentic(TestCase):
 
     def test_response(self):
-        response_obj = ResponseBase()
-        req = RequestBaseSIGEPAutentic(response_obj, 'sigep', '12345')
-        self.assertEqual(req.response, response_obj)
+        req = RequestBaseSIGEPAuthentication(ResponseBase, 'sigep', '12345')
+        self.assertEqual(req.response_class_ref, ResponseBase)
 
-    def test_get_xml(self):
+    def test_get_data(self):
 
-        req = RequestBaseSIGEPAutentic(ResponseBase(), 'sigep', '12345')
+        req = RequestBaseSIGEPAuthentication(ResponseBase, 'sigep', '12345')
         xml = u'<usuario>%s</usuario>' % req.usuario.valor
         xml += u'<senha>%s</senha>' % req.senha.valor
 
-        self.assertEqual(req.get_xml(), xml)
+        self.assertEqual(req.get_data(), xml)
 
 
 class TestRequestBaseFrete(TestCase):
 
-    def test_get_xml(self):
-        req = RequestBaseFrete(ResponseBase())
-        self.assertRaises(NotImplementedError, req.get_xml)
+    def test_get_data(self):
+        req = RequestBaseFrete(ResponseBase)
+        self.assertRaises(NotImplementedError, req.get_data)
+
+
+class TestRequestBaseRastreamento(TestCase):
+
+    def test_get_data(self):
+        req = RequestBaseRastreamento(ResponseBase)
+        self.assertRaises(NotImplementedError, req.get_data)
 
 
 class TestResponseBase(TestCase):

@@ -36,48 +36,45 @@ class TagBase(object):
 
 class RequestBase(object):
 
-    def __init__(self, response_obj):
-        self.response = response_obj
-        self._header = None
-        self._footer = None
+    def __init__(self, response_class_ref):
+        self._response_class_ref = response_class_ref
 
     @property
-    def header(self):
-        return self._header
+    def response_class_ref(self):
+        return self._response_class_ref
 
-    @property
-    def footer(self):
-        return self._footer
-
-    def get_xml(self):
+    def get_data(self):
         raise NotImplementedError
 
 
 class RequestBaseSIGEP(RequestBase):
 
-    def __init__(self, response_obj):
-        super(RequestBaseSIGEP, self).__init__(response_obj)
-        self._header = \
-            '''<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"
-            xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-            <soap:Header/><soap:Body>'''
-        self._footer = '</soap:Body></soap:Envelope>'
+    HEADER = '<soap:Envelope ' \
+             'xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" ' \
+             'xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com' \
+             '.br/\"><soap:Header/><soap:Body>'
 
-    def get_xml(self):
+    FOOTER = '</soap:Body></soap:Envelope>'
+
+    def __init__(self, response_class_ref):
+        super(RequestBaseSIGEP, self).__init__(response_class_ref)
+
+    def get_data(self):
         raise NotImplementedError
 
 
-class RequestBaseSIGEPAutentic(RequestBaseSIGEP):
+class RequestBaseSIGEPAuthentication(RequestBaseSIGEP):
 
-    def __init__(self, response_obj, usuario, senha):
-        super(RequestBaseSIGEPAutentic, self).__init__(response_obj)
+    def __init__(self, response_class_ref, usuario, senha):
+        super(RequestBaseSIGEPAuthentication, self).__init__(
+            response_class_ref)
         self.usuario = CampoString('usuario', obrigatorio=True)
         self.senha = CampoString('senha', obrigatorio=True)
 
         self.usuario.valor = usuario
         self.senha.valor = senha
 
-    def get_xml(self):
+    def get_data(self):
         xml = self.usuario.get_xml()
         xml += self.senha.get_xml()
         return xml
@@ -85,15 +82,25 @@ class RequestBaseSIGEPAutentic(RequestBaseSIGEP):
 
 class RequestBaseFrete(RequestBase):
 
-    def __init__(self, response_obj):
-        super(RequestBaseFrete, self).__init__(response_obj)
-        self._header = '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/' \
+    HEADER = '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/' \
                        'XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/' \
                        '2001/XMLSchema\" xmlns:soap=\"http://' \
                        'schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'
-        self._footer = '</soap:Body></soap:Envelope>'
+    FOOTER = '</soap:Body></soap:Envelope>'
 
-    def get_xml(self):
+    def __init__(self, response_class_ref):
+        super(RequestBaseFrete, self).__init__(response_class_ref)
+
+    def get_data(self):
+        raise NotImplementedError
+
+
+class RequestBaseRastreamento(RequestBase):
+
+    def __init__(self, response_class_ref):
+        super(RequestBaseRastreamento, self).__init__(response_class_ref)
+
+    def get_data(self):
         raise NotImplementedError
 
 

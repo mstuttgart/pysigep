@@ -38,12 +38,12 @@ class RequestConsultaCEP(RequestBaseSIGEP):
         super(RequestConsultaCEP, self).__init__(ResponseBuscaCEP)
         self.cep = CampoCEP('cep', valor=cep, obrigatorio=True)
 
-    def get_xml(self):
-        xml = self.header
+    def get_data(self):
+        xml = RequestBaseSIGEP.HEADER
         xml += '<cli:consultaCEP>'
         xml += self.cep.get_xml()
         xml += '</cli:consultaCEP>'
-        xml += self.footer
+        xml += RequestBaseSIGEP.FOOTER
         return xml
 
 

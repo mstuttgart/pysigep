@@ -27,13 +27,13 @@
 
 import xml.etree.ElementTree as Et
 
-from sigep.base import RequestBaseSIGEPAutentic
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 from sigep.campos import CampoInteiro
 
 
-class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
+class RequestFechaPLPVariosServicos(RequestBaseSIGEPAuthentication):
 
     def __init__(self, xml_plp, id_plp_cliente, num_cartao_postagem,
                  etiquetas, usuario, senha):
@@ -57,8 +57,8 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
                                   tamanho=12)
             self.lista_etiquetas.append(obj_etq)
 
-    def get_xml(self):
-        xml = self.header
+    def get_data(self):
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:fechaPlpVariosServicos>'
         xml += self.xml_plp.get_xml()
         xml += self.id_plp_cliente.get_xml()
@@ -67,9 +67,9 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAutentic):
         for etq in self.lista_etiquetas:
             xml += etq.get_xml()
 
-        xml += super(RequestFechaPLPVariosServicos, self).get_xml()
+        xml += super(RequestFechaPLPVariosServicos, self).get_data()
         xml += '</cli:fechaPlpVariosServicos>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 

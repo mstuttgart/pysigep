@@ -11,12 +11,14 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 ## Recursos
 
 - [x] Consultar custo do frete e prazos para entrega dado um endereço.
-- [ ] Realizar o rastreamento de uma mercadoria através do seu número de rastreamento.
+- [x] Realizar o rastreamento de uma mercadoria através do seu número de 
+rastreamento.
 - [x] Verificar *status* de um Cartão de Postagem
 - [x] Obter dados do endereço a partir de seu respectivo CEP.
 - [x] Verificar disponibilidade de um dado serviço.  
 - [x] Gerar etiquetas para postagem de mercadoria e posterior rastreamento. 
-- [ ] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.   
+- [x] Criação da pré-lista de postagem (PLP) e envio de seu XML para o 
+webservice dos Correios.   
 - [ ] Imprimir etiqueta da PLP em formato PDF.   
 - [ ] Imprimir Chancela em formato PDF.
 
@@ -37,7 +39,8 @@ from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
 from sigep.frete.consulta_frete import RequestCalcPrecoPrazo
 from sigep.webservices.webservice_sigep import WebserviceSIGEP
 from sigep.webservices.webservice_frete import WebserviceFrete
-from sigep.sigep_exceptions import ErroValidacaoXML
+from sigep.webservices.webservice_rastreamento import WebserviceRastreamento
+from sigep.rastreamento.consulta_rastreamento import RequestRastreamento
 
 LOGIN = 'sigep'
 SENHA = 'n5f9t8'
@@ -100,6 +103,37 @@ print response.resposta['40436']['MsgErro']
 print response.resposta['40436']['ValorSemAdicionais']
 print response.resposta['40436']['obsFim']
 
+
+server = WebserviceRastreamento()
+
+req = RequestRastreamento('ECT', 'SRO',
+                          RequestRastreamento.TIPO_LISTA_DE_OBJETOS,
+                          RequestRastreamento.ULTIMO_RESULTADO,
+                          ['PJ472895891BR', 'PJ382325976BR'])
+
+response = server.request(req)
+
+print response.resposta['versao']
+print response.resposta['qtd']
+print response.resposta['tipo_pesquisa']
+print response.resposta['tipo_resultado']
+
+# Cada objeto representa uma etiqueta. Cada etiqueta possui um ou mais eventos
+obj = response.resposta['objetos']['PJ382325976BR'][0]
+
+print obj['tipo']
+print obj['status']
+print obj['data']
+print obj['hora']
+print obj['descricao']
+print obj['recebedor']
+print obj['documento']
+print obj['comentario']
+print obj['local']
+print obj['codigo']
+print obj['cidade']
+print obj['uf']
+
 </code></pre>
 
 ## Executando os testes
@@ -113,4 +147,4 @@ Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um 
 ## SigepWeb Docs
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
 * [Manual Calculo Preço e Prazo](http://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/calculador-remoto-de-precos-e-prazos/manual-de-implementacao-do-calculo-remoto-de-precos-e-prazos)
-* [Manual Rastreamento](http://blog.correios.com.br/comercioeletronico/wp-content/uploads/2011/10/Guia-Tecnico-Rastreamento-XML-Cliente-Vers%C3%A3o-e-commerce-v-1-5.pdf)
+* [Manual Rastreamento](http://www.correios.com.br/para-voce/correios-de-a-a-z/pdf/rastreamento-de-objetos/Manual_SROXML_28fev14.pdf)

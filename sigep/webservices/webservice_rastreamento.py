@@ -25,41 +25,11 @@
 #
 ###############################################################################
 
-import xml.etree.cElementTree as Et
-
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.base import ResponseBase
-from sigep.campos import CampoString
+from webservice_base import WebserviceBase
 
 
-class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAuthentication):
-
-    def __init__(self, etiquetas, usuario, senha):
-        super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
-            ResponseGeraDigitoVerificador, usuario, senha)
-
-        self.etiquetas = [
-            CampoString('etiquetas', valor=etq, obrigatorio=True)
-            for etq in etiquetas.split(',')]
-
-    def get_data(self):
-        xml = RequestBaseSIGEPAuthentication.HEADER
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        for etq in self.etiquetas:
-            xml += etq.get_xml()
-        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_data()
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        xml += RequestBaseSIGEPAuthentication.FOOTER
-        return xml
-
-
-class ResponseGeraDigitoVerificador(ResponseBase):
+class WebserviceRastreamento(WebserviceBase):
 
     def __init__(self):
-        super(ResponseGeraDigitoVerificador, self).__init__()
-
-    def _parse_xml(self, xml):
-        self.resposta = {
-            'lista_digitos': [int(end.text) for end in Et.fromstring(
-                xml).findall('.//return')]
-        }
+        super(WebserviceRastreamento, self).__init__(
+            'http://websro.correios.com.br/sro_bin/sroii_xml.eventos')

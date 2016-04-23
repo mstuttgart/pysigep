@@ -40,9 +40,9 @@ class WebserviceBase(object):
         return self._url
 
     def request(self, obj_param, ssl_verify=False):
-        try:
 
-            resposta = requests.post(self.url, data=obj_param.get_xml(),
+        try:
+            resposta = requests.post(self.url, data=obj_param.get_data(),
                                      headers={'Content-type': 'text/xml'},
                                      verify=ssl_verify)
 
@@ -51,7 +51,7 @@ class WebserviceBase(object):
                 raise sigep_exceptions.ErroValidacaoXML(msg)
 
             # Criamos um response dinamicamente para cada tipo de classe
-            response = obj_param.response()
+            response = obj_param.response_class_ref()
 
             response.status_code = resposta.status_code
             response.encoding = resposta.encoding

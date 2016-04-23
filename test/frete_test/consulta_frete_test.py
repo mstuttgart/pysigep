@@ -26,19 +26,20 @@
 ###############################################################################
 
 from unittest import TestCase
+from sigep.base import RequestBaseFrete
 from sigep.frete.consulta_frete import RequestCalcPrecoPrazo
 from sigep.frete.consulta_frete import ResponseCalcPrecoPrazo
 
 
 class TestRequestCalcPrecoPrazo(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
         req = RequestCalcPrecoPrazo('40436,40215', '99200000', '37503130', '2',
                                     RequestCalcPrecoPrazo.FORMATO_CAIXA_PACOTE,
                                     100.0, 100.0, 100.0, 0.0,
                                     False, 0.00, False)
 
-        xml = req.header
+        xml = RequestBaseFrete.HEADER
         xml += '<CalcPrecoPrazo xmlns=\"http://tempuri.org/\">'
         xml += '<nCdEmpresa></nCdEmpresa>'
         xml += '<sDsSenha></sDsSenha>'
@@ -55,9 +56,9 @@ class TestRequestCalcPrecoPrazo(TestCase):
         xml += '<nVlValorDeclarado>0.0</nVlValorDeclarado>'
         xml += '<sCdAvisoRecebimento>N</sCdAvisoRecebimento>'
         xml += '</CalcPrecoPrazo>'
-        xml += req.footer
+        xml += RequestBaseFrete.FOOTER
 
-        self.assertEqual(xml, req.get_xml())
+        self.assertEqual(xml, req.get_data())
 
 
 class TestResponseCalcPrecoPrazo(TestCase):
