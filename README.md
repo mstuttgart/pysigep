@@ -69,13 +69,13 @@ req = RequestDisponibilidadeServico(COD_ADMIN, NUMERO_SERVICO,
 
 # Executando a requisição
 response = server.request(req)
-print response.resposta
+print response.resposta['disponibilidade']
 
 # Requisição para servico ConsultaStatusCartaoPostagem
 req = RequestStatusCartaoPostagem(CARTAO_POSTAGEM, LOGIN, SENHA)
 
 response = server.request(req)
-print response.resposta
+print response.resposta['status']
 
 # Cliente para webservice de calculo de preço e prazo
 server = WebserviceFrete()
