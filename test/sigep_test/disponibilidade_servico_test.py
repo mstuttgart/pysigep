@@ -73,7 +73,7 @@ xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
         resp_disp = ResponseDisponibilidadeServico()
         resp_disp._parse_xml(xml)
 
-        self.assertEqual(resp_disp.resposta['disponivel'], True)
+        self.assertEqual(resp_disp.resposta['disponibilidade'], True)
 
         xml = '''<S:Envelope
         xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">
@@ -86,4 +86,4 @@ xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
 </S:Envelope>'''
 
         resp_disp._parse_xml(xml)
-        self.assertEqual(resp_disp.resposta['disponivel'], False)
+        self.assertEqual(resp_disp.resposta['disponibilidade'], False)
