@@ -36,8 +36,12 @@ class TagBase(object):
 
 class RequestBase(object):
 
-    def __init__(self, response_obj):
-        self.response = response_obj
+    def __init__(self, response_class_ref):
+        self._response_class_ref = response_class_ref
+
+    @property
+    def response_class_ref(self):
+        return self._response_class_ref
 
     def get_data(self):
         raise NotImplementedError
@@ -52,8 +56,8 @@ class RequestBaseSIGEP(RequestBase):
 
     FOOTER = '</soap:Body></soap:Envelope>'
 
-    def __init__(self, response_obj):
-        super(RequestBaseSIGEP, self).__init__(response_obj)
+    def __init__(self, response_class_ref):
+        super(RequestBaseSIGEP, self).__init__(response_class_ref)
 
     def get_data(self):
         raise NotImplementedError
@@ -61,8 +65,8 @@ class RequestBaseSIGEP(RequestBase):
 
 class RequestBaseSIGEPAuthentication(RequestBaseSIGEP):
 
-    def __init__(self, response_obj, usuario, senha):
-        super(RequestBaseSIGEPAuthentication, self).__init__(response_obj)
+    def __init__(self, response_class_ref, usuario, senha):
+        super(RequestBaseSIGEPAuthentication, self).__init__(response_class_ref)
         self.usuario = CampoString('usuario', obrigatorio=True)
         self.senha = CampoString('senha', obrigatorio=True)
 
@@ -83,8 +87,8 @@ class RequestBaseFrete(RequestBase):
                        'schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'
     FOOTER = '</soap:Body></soap:Envelope>'
 
-    def __init__(self, response_obj):
-        super(RequestBaseFrete, self).__init__(response_obj)
+    def __init__(self, response_class_ref):
+        super(RequestBaseFrete, self).__init__(response_class_ref)
 
     def get_data(self):
         raise NotImplementedError
@@ -92,8 +96,8 @@ class RequestBaseFrete(RequestBase):
 
 class RequestBaseRastreamento(RequestBase):
 
-    def __init__(self, response_obj):
-        super(RequestBaseRastreamento, self).__init__(response_obj)
+    def __init__(self, response_class_ref):
+        super(RequestBaseRastreamento, self).__init__(response_class_ref)
 
     def get_data(self):
         raise NotImplementedError

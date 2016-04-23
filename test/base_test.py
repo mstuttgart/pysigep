@@ -44,9 +44,8 @@ class TestTagBase(TestCase):
 class TestRequestBase(TestCase):
 
     def test_response(self):
-        # response_obj = ResponseBase()
         req = RequestBase(ResponseBase)
-        self.assertEqual(req.response, ResponseBase)
+        self.assertEqual(req.response_class_ref, ResponseBase)
 
     def test_get_data(self):
         req = RequestBase(ResponseBase)
@@ -63,9 +62,8 @@ class TestRequestBaseSIGEP(TestCase):
 class TestRequestBaseAutentic(TestCase):
 
     def test_response(self):
-        # response_obj = ResponseBase()
         req = RequestBaseSIGEPAuthentication(ResponseBase, 'sigep', '12345')
-        self.assertEqual(req.response, ResponseBase)
+        self.assertEqual(req.response_class_ref, ResponseBase)
 
     def test_get_data(self):
 

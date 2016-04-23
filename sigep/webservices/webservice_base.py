@@ -51,7 +51,7 @@ class WebserviceBase(object):
                 raise sigep_exceptions.ErroValidacaoXML(msg)
 
             # Criamos um response dinamicamente para cada tipo de classe
-            response = obj_param.response()
+            response = obj_param.response_class_ref()
 
             response.status_code = resposta.status_code
             response.encoding = resposta.encoding
