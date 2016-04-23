@@ -43,13 +43,13 @@ class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAuthentication):
             for etq in etiquetas.split(',')]
 
     def get_data(self):
-        xml = self.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         for etq in self.etiquetas:
             xml += etq.get_xml()
         xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_data()
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 

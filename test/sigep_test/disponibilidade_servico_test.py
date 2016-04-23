@@ -26,6 +26,8 @@
 ###############################################################################
 
 from unittest import TestCase
+
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
 from sigep.sigep.disponibilidade_servico import ResponseDisponibilidadeServico
 
@@ -41,7 +43,7 @@ class TestRequestDisponibilidadeServico(TestCase):
                                                  '99200-000', '99200-000',
                                                  LOGIN, SENHA)
 
-        xml = res_disp.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:verificaDisponibilidadeServico>'
         xml += '<codAdministrativo>%s</codAdministrativo>' % \
                res_disp.cod_administrativo.valor
@@ -51,7 +53,7 @@ class TestRequestDisponibilidadeServico(TestCase):
         xml += '<cepDestino>%s</cepDestino>' % res_disp.cep_destino.valor
         xml += super(RequestDisponibilidadeServico, res_disp).get_data()
         xml += '</cli:verificaDisponibilidadeServico>'
-        xml += res_disp.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
         self.assertEqual(xml, res_disp.get_data())
 

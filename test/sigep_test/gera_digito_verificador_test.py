@@ -26,6 +26,8 @@
 ###############################################################################
 
 from unittest import TestCase
+
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.sigep.gera_digito_verificador import \
     RequestGeraDigitoVerificadorSIGEP
 from sigep.sigep.gera_digito_verificador import ResponseGeraDigitoVerificador
@@ -48,14 +50,14 @@ class TestRequestGeraDigitoVerificador(TestCase):
         etiquetas = 'DL76023727 BR,DL76023728 BR'
         req = RequestGeraDigitoVerificadorSIGEP(etiquetas, 'sigep', 'n5f9t8')
 
-        xml = req.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         xml += '<etiquetas>%s</etiquetas>' % 'DL76023727 BR'
         xml += '<etiquetas>%s</etiquetas>' % 'DL76023728 BR'
         xml += '<usuario>%s</usuario>' % 'sigep'
         xml += '<senha>%s</senha>' % 'n5f9t8'
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        xml += req.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
         self.assertEqual(req.get_data(), xml)
 

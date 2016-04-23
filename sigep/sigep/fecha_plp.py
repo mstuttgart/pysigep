@@ -58,7 +58,7 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAuthentication):
             self.lista_etiquetas.append(obj_etq)
 
     def get_data(self):
-        xml = self.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:fechaPlpVariosServicos>'
         xml += self.xml_plp.get_xml()
         xml += self.id_plp_cliente.get_xml()
@@ -69,7 +69,7 @@ class RequestFechaPLPVariosServicos(RequestBaseSIGEPAuthentication):
 
         xml += super(RequestFechaPLPVariosServicos, self).get_data()
         xml += '</cli:fechaPlpVariosServicos>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 

@@ -26,6 +26,7 @@
 ###############################################################################
 
 from unittest import TestCase
+from sigep.base import RequestBaseSIGEP
 from sigep.sigep.consulta_cep import RequestConsultaCEP
 from sigep.sigep.consulta_cep import ResponseBuscaCEP
 
@@ -35,11 +36,11 @@ class TestRequestConsultaCEP(TestCase):
     def test_get_data(self):
         req_cep = RequestConsultaCEP('37.503-005')
 
-        xml = req_cep.header
+        xml = RequestBaseSIGEP.HEADER
         xml += '<cli:consultaCEP>'
         xml += '<cep>%s</cep>' % '37503005'
         xml += '</cli:consultaCEP>'
-        xml += req_cep.footer
+        xml += RequestBaseSIGEP.FOOTER
 
         self.assertEqual(xml, req_cep.get_data())
 

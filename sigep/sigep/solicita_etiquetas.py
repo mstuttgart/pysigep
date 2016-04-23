@@ -49,7 +49,7 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAuthentication):
                                           obrigatorio=True)
 
     def get_data(self):
-        xml = self.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:solicitaEtiquetas>'
         xml += self.tipo_destinatario.get_xml()
         xml += self.cnpj.get_xml()
@@ -57,7 +57,7 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAuthentication):
         xml += self.qtd_etiquetas.get_xml()
         xml += super(RequestSolicitaEtiquetaSIGEP, self).get_data()
         xml += '</<cli:solicitaEtiquetas>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 

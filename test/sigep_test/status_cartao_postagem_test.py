@@ -26,6 +26,8 @@
 ###############################################################################
 
 from unittest import TestCase
+
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
 from sigep.sigep.status_cartao_postagem import ResponseStatusCartaoPostagem
 
@@ -40,14 +42,14 @@ class TestRequestStatusCartaoPostagem(TestCase):
         req_status = RequestStatusCartaoPostagem(cartao_postagem, login,
                                                  senha)
 
-        xml = req_status.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:getStatusCartaoPostagem>'
         xml += '<numeroCartaoPostagem>%s</numeroCartaoPostagem>' % \
                cartao_postagem
         xml += '<usuario>%s</usuario>' % login
         xml += '<senha>%s</senha>' % senha
         xml += '</cli:getStatusCartaoPostagem>'
-        xml += req_status.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
         self.assertEqual(xml, req_status.get_data())
 

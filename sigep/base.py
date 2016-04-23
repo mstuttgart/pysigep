@@ -47,16 +47,6 @@ class RequestBaseSOAP(RequestBase):
 
     def __init__(self, response_obj):
         super(RequestBaseSOAP, self).__init__(response_obj)
-        self._header = None
-        self._footer = None
-
-    @property
-    def header(self):
-        return self._header
-
-    @property
-    def footer(self):
-        return self._footer
 
     def get_data(self):
         raise NotImplementedError
@@ -64,13 +54,15 @@ class RequestBaseSOAP(RequestBase):
 
 class RequestBaseSIGEP(RequestBaseSOAP):
 
+    HEADER = '<soap:Envelope ' \
+             'xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" ' \
+             'xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com' \
+             '.br/\"><soap:Header/><soap:Body>'
+
+    FOOTER = '</soap:Body></soap:Envelope>'
+
     def __init__(self, response_obj):
         super(RequestBaseSIGEP, self).__init__(response_obj)
-        self._header = \
-            '''<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"
-            xmlns:cli=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-            <soap:Header/><soap:Body>'''
-        self._footer = '</soap:Body></soap:Envelope>'
 
     def get_data(self):
         raise NotImplementedError
@@ -94,13 +86,14 @@ class RequestBaseSIGEPAuthentication(RequestBaseSIGEP):
 
 class RequestBaseFrete(RequestBaseSOAP):
 
-    def __init__(self, response_obj):
-        super(RequestBaseFrete, self).__init__(response_obj)
-        self._header = '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/' \
+    HEADER = '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/' \
                        'XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/' \
                        '2001/XMLSchema\" xmlns:soap=\"http://' \
                        'schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'
-        self._footer = '</soap:Body></soap:Envelope>'
+    FOOTER = '</soap:Body></soap:Envelope>'
+
+    def __init__(self, response_obj):
+        super(RequestBaseFrete, self).__init__(response_obj)
 
     def get_data(self):
         raise NotImplementedError

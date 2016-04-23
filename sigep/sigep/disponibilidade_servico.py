@@ -56,7 +56,7 @@ class RequestDisponibilidadeServico(RequestBaseSIGEPAuthentication):
 
     def get_data(self):
 
-        xml = self.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:verificaDisponibilidadeServico>'
         xml += self.cod_administrativo.get_xml()
         xml += self.numero_servico.get_xml()
@@ -64,7 +64,7 @@ class RequestDisponibilidadeServico(RequestBaseSIGEPAuthentication):
         xml += self.cep_destino.get_xml()
         xml += super(RequestDisponibilidadeServico, self).get_data()
         xml += '</cli:verificaDisponibilidadeServico>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
 
         return xml
 

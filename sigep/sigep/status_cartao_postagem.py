@@ -45,12 +45,12 @@ class RequestStatusCartaoPostagem(RequestBaseSIGEPAuthentication):
                                                   numerico=True)
 
     def get_data(self):
-        xml = self.header
+        xml = RequestBaseSIGEPAuthentication.HEADER
         xml += '<cli:getStatusCartaoPostagem>'
         xml += self.numero_cartao_postagem.get_xml()
         xml += super(RequestStatusCartaoPostagem, self).get_data()
         xml += '</cli:getStatusCartaoPostagem>'
-        xml += self.footer
+        xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 
