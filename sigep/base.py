@@ -66,7 +66,8 @@ class RequestBaseSIGEP(RequestBase):
 class RequestBaseSIGEPAuthentication(RequestBaseSIGEP):
 
     def __init__(self, response_class_ref, usuario, senha):
-        super(RequestBaseSIGEPAuthentication, self).__init__(response_class_ref)
+        super(RequestBaseSIGEPAuthentication, self).__init__(
+            response_class_ref)
         self.usuario = CampoString('usuario', obrigatorio=True)
         self.senha = CampoString('senha', obrigatorio=True)
 

@@ -107,5 +107,3 @@ class ResponseRastreamento(ResponseBase):
                     }
 
                     self.resposta['objetos'][obj.findtext('numero')].append(ev)
-
-
