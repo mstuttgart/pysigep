@@ -43,16 +43,7 @@ class RequestBase(object):
         raise NotImplementedError
 
 
-class RequestBaseSOAP(RequestBase):
-
-    def __init__(self, response_obj):
-        super(RequestBaseSOAP, self).__init__(response_obj)
-
-    def get_data(self):
-        raise NotImplementedError
-
-
-class RequestBaseSIGEP(RequestBaseSOAP):
+class RequestBaseSIGEP(RequestBase):
 
     HEADER = '<soap:Envelope ' \
              'xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" ' \
@@ -84,7 +75,7 @@ class RequestBaseSIGEPAuthentication(RequestBaseSIGEP):
         return xml
 
 
-class RequestBaseFrete(RequestBaseSOAP):
+class RequestBaseFrete(RequestBase):
 
     HEADER = '<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/' \
                        'XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/' \
