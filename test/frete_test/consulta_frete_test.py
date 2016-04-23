@@ -32,7 +32,7 @@ from sigep.frete.consulta_frete import ResponseCalcPrecoPrazo
 
 class TestRequestCalcPrecoPrazo(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
         req = RequestCalcPrecoPrazo('40436,40215', '99200000', '37503130', '2',
                                     RequestCalcPrecoPrazo.FORMATO_CAIXA_PACOTE,
                                     100.0, 100.0, 100.0, 0.0,
@@ -57,7 +57,7 @@ class TestRequestCalcPrecoPrazo(TestCase):
         xml += '</CalcPrecoPrazo>'
         xml += req.footer
 
-        self.assertEqual(xml, req.get_xml())
+        self.assertEqual(xml, req.get_data())
 
 
 class TestResponseCalcPrecoPrazo(TestCase):

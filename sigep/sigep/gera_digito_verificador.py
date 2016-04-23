@@ -27,12 +27,12 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseSIGEPAutentic
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.base import ResponseBase
 from sigep.campos import CampoString
 
 
-class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
+class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAuthentication):
 
     def __init__(self, etiquetas, usuario, senha):
         super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
@@ -42,12 +42,12 @@ class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAutentic):
             CampoString('etiquetas', valor=etq, obrigatorio=True)
             for etq in etiquetas.split(',')]
 
-    def get_xml(self):
+    def get_data(self):
         xml = self.header
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         for etq in self.etiquetas:
             xml += etq.get_xml()
-        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_xml()
+        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_data()
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         xml += self.footer
         return xml

@@ -40,9 +40,9 @@ class WebserviceBase(object):
         return self._url
 
     def request(self, obj_param, ssl_verify=False):
-        try:
 
-            resposta = requests.post(self.url, data=obj_param.get_xml(),
+        try:
+            resposta = requests.post(self.url, data=obj_param.get_data(),
                                      headers={'Content-type': 'text/xml'},
                                      verify=ssl_verify)
 

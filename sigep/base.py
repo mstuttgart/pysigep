@@ -38,6 +38,15 @@ class RequestBase(object):
 
     def __init__(self, response_obj):
         self.response = response_obj
+
+    def get_data(self):
+        raise NotImplementedError
+
+
+class RequestBaseSOAP(RequestBase):
+
+    def __init__(self, response_obj):
+        super(RequestBaseSOAP, self).__init__(response_obj)
         self._header = None
         self._footer = None
 
@@ -49,11 +58,11 @@ class RequestBase(object):
     def footer(self):
         return self._footer
 
-    def get_xml(self):
+    def get_data(self):
         raise NotImplementedError
 
 
-class RequestBaseSIGEP(RequestBase):
+class RequestBaseSIGEP(RequestBaseSOAP):
 
     def __init__(self, response_obj):
         super(RequestBaseSIGEP, self).__init__(response_obj)
@@ -63,27 +72,27 @@ class RequestBaseSIGEP(RequestBase):
             <soap:Header/><soap:Body>'''
         self._footer = '</soap:Body></soap:Envelope>'
 
-    def get_xml(self):
+    def get_data(self):
         raise NotImplementedError
 
 
-class RequestBaseSIGEPAutentic(RequestBaseSIGEP):
+class RequestBaseSIGEPAuthentication(RequestBaseSIGEP):
 
     def __init__(self, response_obj, usuario, senha):
-        super(RequestBaseSIGEPAutentic, self).__init__(response_obj)
+        super(RequestBaseSIGEPAuthentication, self).__init__(response_obj)
         self.usuario = CampoString('usuario', obrigatorio=True)
         self.senha = CampoString('senha', obrigatorio=True)
 
         self.usuario.valor = usuario
         self.senha.valor = senha
 
-    def get_xml(self):
+    def get_data(self):
         xml = self.usuario.get_xml()
         xml += self.senha.get_xml()
         return xml
 
 
-class RequestBaseFrete(RequestBase):
+class RequestBaseFrete(RequestBaseSOAP):
 
     def __init__(self, response_obj):
         super(RequestBaseFrete, self).__init__(response_obj)
@@ -93,7 +102,16 @@ class RequestBaseFrete(RequestBase):
                        'schemas.xmlsoap.org/soap/envelope/\"><soap:Body>'
         self._footer = '</soap:Body></soap:Envelope>'
 
-    def get_xml(self):
+    def get_data(self):
+        raise NotImplementedError
+
+
+class RequestBaseRastreamento(RequestBase):
+
+    def __init__(self, response_obj):
+        super(RequestBaseRastreamento, self).__init__(response_obj)
+
+    def get_data(self):
         raise NotImplementedError
 
 

@@ -32,7 +32,7 @@ from sigep.sigep.consulta_cep import ResponseBuscaCEP
 
 class TestRequestConsultaCEP(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
         req_cep = RequestConsultaCEP('37.503-005')
 
         xml = req_cep.header
@@ -41,7 +41,7 @@ class TestRequestConsultaCEP(TestCase):
         xml += '</cli:consultaCEP>'
         xml += req_cep.footer
 
-        self.assertEqual(xml, req_cep.get_xml())
+        self.assertEqual(xml, req_cep.get_data())
 
 
 class TestResponseBuscaCEP(TestCase):

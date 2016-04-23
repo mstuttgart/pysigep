@@ -76,7 +76,7 @@ class RequestCalcPrecoPrazo(RequestBaseFrete):
                                                valor='S' if sCdAvisoRecebimento
                                                else 'N')
 
-    def get_xml(self):
+    def get_data(self):
 
         xml = self.header
         xml += '<CalcPrecoPrazo xmlns=\"http://tempuri.org/\">'

@@ -32,7 +32,7 @@ from sigep.sigep.disponibilidade_servico import ResponseDisponibilidadeServico
 
 class TestRequestDisponibilidadeServico(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
         LOGIN = 'sigep'
         SENHA = 'n5f9t8'
         COD_ADMIN = '08082650'
@@ -49,11 +49,11 @@ class TestRequestDisponibilidadeServico(TestCase):
                res_disp.numero_servico.valor
         xml += '<cepOrigem>%s</cepOrigem>' % res_disp.cep_origem.valor
         xml += '<cepDestino>%s</cepDestino>' % res_disp.cep_destino.valor
-        xml += super(RequestDisponibilidadeServico, res_disp).get_xml()
+        xml += super(RequestDisponibilidadeServico, res_disp).get_data()
         xml += '</cli:verificaDisponibilidadeServico>'
         xml += res_disp.footer
 
-        self.assertEqual(xml, res_disp.get_xml())
+        self.assertEqual(xml, res_disp.get_data())
 
 
 class TestResponseDisponibilidadeServico(TestCase):

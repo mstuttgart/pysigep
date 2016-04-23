@@ -44,7 +44,7 @@ class TestRequestGeraDigitoVerificador(TestCase):
     def test_etiquetas(self):
         self.test__init__()
 
-    def test_get_xml(self):
+    def test_get_data(self):
         etiquetas = 'DL76023727 BR,DL76023728 BR'
         req = RequestGeraDigitoVerificadorSIGEP(etiquetas, 'sigep', 'n5f9t8')
 
@@ -57,7 +57,7 @@ class TestRequestGeraDigitoVerificador(TestCase):
         xml += '<cli:geraDigitoVerificadorEtiquetas>'
         xml += req.footer
 
-        self.assertEqual(req.get_xml(), xml)
+        self.assertEqual(req.get_data(), xml)
 
 
 class TestResponseGeraDigitoVerificador(TestCase):

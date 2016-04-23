@@ -32,7 +32,7 @@ from sigep.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
 
 class TestRequestSolicitaEtiqueta(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
 
         login = 'sigep'
         senha = 'n5f9t8'
@@ -53,7 +53,7 @@ class TestRequestSolicitaEtiqueta(TestCase):
         xml += '</<cli:solicitaEtiquetas>'
         xml += req.footer
 
-        self.assertEqual(req.get_xml(), xml)
+        self.assertEqual(req.get_data(), xml)
 
 
 class TestResponseSolicitaEtiqueta(TestCase):

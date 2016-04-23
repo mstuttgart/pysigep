@@ -33,7 +33,7 @@ from sigep.sigep.plp import XmlPLP, TagObjetoPostal, TagDimesaoObjeto
 
 class TestRequestFechaPLPVariosServicos(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
 
         self.maxDiff = None
 
@@ -106,7 +106,7 @@ class TestRequestFechaPLPVariosServicos(TestCase):
         xml += '</cli:fechaPlpVariosServicos>'
         xml += req.footer
 
-        self.assertEqual(xml, req.get_xml())
+        self.assertEqual(xml, req.get_data())
 
 
 class TestResponseFechaPLPVariosServicos(TestCase):

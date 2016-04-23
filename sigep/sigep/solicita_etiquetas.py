@@ -27,14 +27,14 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseSIGEPAutentic
+from sigep.base import RequestBaseSIGEPAuthentication
 from sigep.base import ResponseBase
 from sigep.campos import CampoCNPJ
 from sigep.campos import CampoString
 from sigep.campos import CampoInteiro
 
 
-class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
+class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAuthentication):
 
     def __init__(self, cnpj, id_servico, qtd_etiquetas, usuario, senha):
         super(RequestSolicitaEtiquetaSIGEP, self).__init__(
@@ -48,14 +48,14 @@ class RequestSolicitaEtiquetaSIGEP(RequestBaseSIGEPAutentic):
         self.qtd_etiquetas = CampoInteiro('qtdEtiquetas', valor=qtd_etiquetas,
                                           obrigatorio=True)
 
-    def get_xml(self):
+    def get_data(self):
         xml = self.header
         xml += '<cli:solicitaEtiquetas>'
         xml += self.tipo_destinatario.get_xml()
         xml += self.cnpj.get_xml()
         xml += self.id_servico.get_xml()
         xml += self.qtd_etiquetas.get_xml()
-        xml += super(RequestSolicitaEtiquetaSIGEP, self).get_xml()
+        xml += super(RequestSolicitaEtiquetaSIGEP, self).get_data()
         xml += '</<cli:solicitaEtiquetas>'
         xml += self.footer
         return xml

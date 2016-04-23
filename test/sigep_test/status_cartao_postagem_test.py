@@ -32,7 +32,7 @@ from sigep.sigep.status_cartao_postagem import ResponseStatusCartaoPostagem
 
 class TestRequestStatusCartaoPostagem(TestCase):
 
-    def test_get_xml(self):
+    def test_get_data(self):
         login = 'sigep'
         senha = 'n5f9t8'
         cartao_postagem = '0057018901'
@@ -49,7 +49,7 @@ class TestRequestStatusCartaoPostagem(TestCase):
         xml += '</cli:getStatusCartaoPostagem>'
         xml += req_status.footer
 
-        self.assertEqual(xml, req_status.get_xml())
+        self.assertEqual(xml, req_status.get_data())
 
 
 class TestResponseStatusCartaoPostagem(TestCase):
