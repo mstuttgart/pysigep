@@ -68,4 +68,6 @@ class ResponseSolicitaEtiqueta(ResponseBase):
 
     def _parse_xml(self, xml):
         for end in Et.fromstring(xml).findall('.//return'):
-            self.resposta = [etq for etq in end.text.split(',')]
+            self.resposta = {
+                'lista_etiquetas': [etq for etq in end.text.split(',')],
+            }

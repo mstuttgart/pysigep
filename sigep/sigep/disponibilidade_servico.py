@@ -76,4 +76,6 @@ class ResponseDisponibilidadeServico(ResponseBase):
 
     def _parse_xml(self, xml):
         for end in Et.fromstring(xml).findall('.//return'):
-            self.resposta = True if end.text == 'true' else False
+            self.resposta = {
+                'disponivel': True if end.text == 'true' else False,
+            }

@@ -59,5 +59,7 @@ class ResponseGeraDigitoVerificador(ResponseBase):
         super(ResponseGeraDigitoVerificador, self).__init__()
 
     def _parse_xml(self, xml):
-        self.resposta = [int(end.text) for end in Et.fromstring(
-            xml).findall('.//return')]
+        self.resposta = {
+            'lista_digitos': [int(end.text) for end in Et.fromstring(
+                xml).findall('.//return')]
+        }

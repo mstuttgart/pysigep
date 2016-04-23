@@ -68,4 +68,4 @@ xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
         resp_status = ResponseStatusCartaoPostagem()
         resp_status._parse_xml(xml)
 
-        self.assertEqual(resp_status.resposta, 'Normal')
+        self.assertEqual(resp_status.resposta['status'], 'Normal')

@@ -70,5 +70,5 @@ xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
 
         resp = ResponseSolicitaEtiqueta()
         resp._parse_xml(xml)
-        self.assertEqual(resp.resposta[0], 'DL76023726 BR')
-        self.assertEqual(resp.resposta[1], 'DL76023727 BR')
+        self.assertEqual(resp.resposta['lista_etiquetas'][0], 'DL76023726 BR')
+        self.assertEqual(resp.resposta['lista_etiquetas'][1], 'DL76023727 BR')

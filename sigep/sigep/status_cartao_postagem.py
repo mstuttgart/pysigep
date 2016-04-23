@@ -61,4 +61,6 @@ class ResponseStatusCartaoPostagem(ResponseBase):
 
     def _parse_xml(self, xml):
         for end in Et.fromstring(xml).findall('.//return'):
-            self.resposta = end.text
+            self.resposta = {
+                'status': end.text,
+            }

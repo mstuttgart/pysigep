@@ -125,4 +125,4 @@ class TestResponseFechaPLPVariosServicos(TestCase):
 
         resp = ResponseFechaPLPVariosServicos()
         resp._parse_xml(xml)
-        self.assertEqual(resp.resposta, '1545168')
+        self.assertEqual(resp.resposta['id_plp'], '1545168')
