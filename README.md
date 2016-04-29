@@ -118,7 +118,8 @@ print response.resposta['qtd']
 print response.resposta['tipo_pesquisa']
 print response.resposta['tipo_resultado']
 
-# Cada objeto representa uma etiqueta. Cada etiqueta possui um ou mais eventos
+# Cada objeto postal representa uma etiqueta. Cada etiqueta possui um ou mais eventos
+# Aqui pegamos salvamos em `obj` os dados do evento mais recente.
 obj = response.resposta['objetos']['PJ382325976BR'][0]
 
 print obj['tipo']
