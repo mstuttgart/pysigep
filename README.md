@@ -142,6 +142,10 @@ Caso você deseje executar os testes, basta usar o comando abaixo (necessário e
 
 ```python setup.py test```
 
+## To do
+
+Lista de funcionalidade a serem implementadas [aqui](https://github.com/mstuttgart/python-sigep/issues/7).
+
 ## Contribuindo
 Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um *fork* deste repositório e me envie um *Pull Request*. Contribuições sempre são bem vindas.
 
