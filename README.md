@@ -1,12 +1,12 @@
 SIGEP Web - Correios
 ====================
 
-[![Join the chat at https://gitter.im/mstuttgart/python-sigep](https://badges.gitter.im/mstuttgart/python-sigep.svg)](https://gitter.im/mstuttgart/python-sigep?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/mstuttgart/python-sigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/python-sigep)
 [![Coverage Status](https://coveralls.io/repos/github/mstuttgart/python-sigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/python-sigep?branch=develop)
 [![Code Health](https://landscape.io/github/mstuttgart/python-sigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/python-sigep/develop)
 [![Project Status](https://img.shields.io/badge/status-development-yellow.svg)](https://github.com/mstuttgart/python-sigep/tree/develop)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
+[![Join the chat at https://gitter.im/mstuttgart/python-sigep](https://badges.gitter.im/mstuttgart/python-sigep.svg)](https://gitter.im/mstuttgart/python-sigep?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Implementação do sistema SIGEP Web em Python permitindo integração com Web Service do Correios. O Módulo funciona como uma interface de consulta para os métodos fornecidos pelo webservice. Também permite rastreamento de encomendas a partir da etiqueta de identificação e cálculo de frete.
 
