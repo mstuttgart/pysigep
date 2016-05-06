@@ -1,5 +1,7 @@
 SIGEP Web - Correios
 ====================
+
+[![Join the chat at https://gitter.im/mstuttgart/python-sigep](https://badges.gitter.im/mstuttgart/python-sigep.svg)](https://gitter.im/mstuttgart/python-sigep?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/mstuttgart/python-sigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/python-sigep)
 [![Coverage Status](https://coveralls.io/repos/github/mstuttgart/python-sigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/python-sigep?branch=develop)
 [![Code Health](https://landscape.io/github/mstuttgart/python-sigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/python-sigep/develop)
