@@ -25,12 +25,12 @@
 #
 ###############################################################################
 
-from sigepweb.base import TagBase
-from sigepweb.campos import CampoCEP
-from sigepweb.campos import CampoString
-from sigepweb.campos import CampoUnicode
-from sigepweb.campos import CampoInteiro
-from sigepweb.campos import CampoDecimal
+from pysigep.base import TagBase
+from pysigep.campos import CampoCEP
+from pysigep.campos import CampoString
+from pysigep.campos import CampoUnicode
+from pysigep.campos import CampoInteiro
+from pysigep.campos import CampoDecimal
 
 
 class XmlPLP(TagBase):

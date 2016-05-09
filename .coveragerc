@@ -1,5 +1,5 @@
 [run]
 branch = True
-source = sigep
+source = pysigep
 omit =
-    sigep/sigep_exceptions.py
+    pysigep/sigep_exceptions.py

@@ -27,10 +27,10 @@
 
 import xml.etree.ElementTree as Et
 
-from sigepweb.base import RequestBaseSIGEPAuthentication
-from sigepweb.base import ResponseBase
-from sigepweb.campos import CampoString
-from sigepweb.campos import CampoInteiro
+from pysigep.base import RequestBaseSIGEPAuthentication
+from pysigep.base import ResponseBase
+from pysigep.campos import CampoString
+from pysigep.campos import CampoInteiro
 
 
 class RequestFechaPLPVariosServicos(RequestBaseSIGEPAuthentication):

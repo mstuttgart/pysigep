@@ -27,10 +27,10 @@
 
 import xml.etree.cElementTree as Et
 
-from sigepweb.base import RequestBaseSIGEPAuthentication
-from sigepweb.base import ResponseBase
-from sigepweb.campos import CampoString
-from sigepweb.campos import CampoCEP
+from pysigep.base import RequestBaseSIGEPAuthentication
+from pysigep.base import ResponseBase
+from pysigep.campos import CampoString
+from pysigep.campos import CampoCEP
 
 
 class RequestDisponibilidadeServico(RequestBaseSIGEPAuthentication):

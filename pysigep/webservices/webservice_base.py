@@ -27,7 +27,7 @@
 
 import xml.etree.cElementTree as Et
 import requests
-from sigepweb import sigep_exceptions
+from pysigep import sigep_exceptions
 
 
 class WebserviceBase(object):

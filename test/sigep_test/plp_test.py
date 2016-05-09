@@ -26,18 +26,18 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigepweb.sigep.plp import XmlPLP
-from sigepweb.sigep.plp import TagPLP
-from sigepweb.sigep.plp import TagRemetente
-from sigepweb.sigep.plp import TagObjetoPostal
-from sigepweb.sigep.plp import TagDestinatario
-from sigepweb.sigep.plp import TagNacional
-from sigepweb.sigep.plp import TagServicoAdicional
-from sigepweb.sigep.plp import TagDimesaoObjeto
-from sigepweb.sigep.plp import TagDimensionTipoObjeto
-from sigepweb.sigep.plp import TagDimensionAlturaLargura
-from sigepweb.sigep.plp import TagDimensionComprimento
-from sigepweb.sigep.plp import TagDimensionDiametro
+from pysigep.sigep.plp import XmlPLP
+from pysigep.sigep.plp import TagPLP
+from pysigep.sigep.plp import TagRemetente
+from pysigep.sigep.plp import TagObjetoPostal
+from pysigep.sigep.plp import TagDestinatario
+from pysigep.sigep.plp import TagNacional
+from pysigep.sigep.plp import TagServicoAdicional
+from pysigep.sigep.plp import TagDimesaoObjeto
+from pysigep.sigep.plp import TagDimensionTipoObjeto
+from pysigep.sigep.plp import TagDimensionAlturaLargura
+from pysigep.sigep.plp import TagDimensionComprimento
+from pysigep.sigep.plp import TagDimensionDiametro
 
 
 class TestXmlPLP(TestCase):

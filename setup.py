@@ -46,13 +46,13 @@ CLASSIFIERS = [
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Operating System :: OS Independent',
-    'Programming Language :: Python',
+    'Programming Language :: Python :: 2.7',
     'Topic :: Software Development :: Libraries :: Python Modules',
 ]
 
 setup(
-    name='sigepweb',
-    version=get_version('sigepweb'),
+    name='pysigep',
+    version=get_version('pysigep'),
     url='https://github.com/mstuttgart/python-sigep',
     license='MIT License',
     author='Michell Stuttgart',

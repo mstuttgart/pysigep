@@ -27,10 +27,10 @@
 
 from unittest import TestCase
 
-from sigepweb.base import RequestBaseSIGEPAuthentication
-from sigepweb.sigep.disponibilidade_servico import \
+from pysigep.base import RequestBaseSIGEPAuthentication
+from pysigep.sigep.disponibilidade_servico import \
     RequestDisponibilidadeServico
-from sigepweb.sigep.disponibilidade_servico import \
+from pysigep.sigep.disponibilidade_servico import \
     ResponseDisponibilidadeServico
 
 

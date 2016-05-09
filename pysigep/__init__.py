@@ -25,19 +25,12 @@
 #
 ###############################################################################
 
-from unittest import TestCase
-from pysigep.rastreamento.consulta_rastreamento import RequestRastreamento
-from pysigep.rastreamento.consulta_rastreamento import ResponseRastreamento
-from pysigep.webservices.webservice_rastreamento import WebserviceRastreamento
+__title__ = 'pysigep'
+__version__ = '0.0.4'
+__author__ = 'Michell Stuttgart Faria'
+__license__ = 'MIT License'
+__copyright__ = 'Copyright 2016 Michell Stuttgart Faria'
 
 
-class TestWebserviceRastreamento(TestCase):
-
-    def test_request(self):
-        server = WebserviceRastreamento()
-        req = RequestRastreamento('ECT', 'SRO',
-                                  RequestRastreamento.TIPO_LISTA_DE_OBJETOS,
-                                  RequestRastreamento.ULTIMO_RESULTADO,
-                                  ['PJ472895891BR', 'PJ382325976BR'])
-
-        self.assertIsInstance(server.request(req), ResponseRastreamento)
+# Version synonym
+VERSION = __version__

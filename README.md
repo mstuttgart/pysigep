@@ -24,6 +24,15 @@ webservice dos Correios.
 - [ ] Imprimir etiqueta da PLP em formato PDF.   
 - [ ] Imprimir Chancela em formato PDF.
 
+## Instalação
+
+A versão atual ainda esta em fase de desenvolvimento, portanto não pe 
+recomendável seu uso em ambiente de produção
+
+```
+pip install pysigep
+```
+
 ## Dependências
 
 * python 2.7
@@ -35,14 +44,14 @@ Instalação do requests: `sudo pip install requests`
 
 <pre lang="python"><code>
 # -*- coding: utf-8 -*-
-from sigepweb.sigep.consulta_cep import RequestConsultaCEP
-from sigepweb.sigep.disponibilidade_servico import RequestDisponibilidadeServico
-from sigepweb.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
-from sigepweb.frete.consulta_frete import RequestCalcPrecoPrazo
-from sigepweb.webservices.webservice_sigep import WebserviceSIGEP
-from sigepweb.webservices.webservice_frete import WebserviceFrete
-from sigepweb.webservices.webservice_rastreamento import WebserviceRastreamento
-from sigepweb.rastreamento.consulta_rastreamento import RequestRastreamento
+from pysigep.sigep.consulta_cep import RequestConsultaCEP
+from pysigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
+from pysigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
+from pysigep.frete.consulta_frete import RequestCalcPrecoPrazo
+from pysigep.webservices.webservice_sigep import WebserviceSIGEP
+from pysigep.webservices.webservice_frete import WebserviceFrete
+from pysigep.webservices.webservice_rastreamento import WebserviceRastreamento
+from pysigep.rastreamento.consulta_rastreamento import RequestRastreamento
 
 LOGIN = 'sigep'
 SENHA = 'n5f9t8'

@@ -27,9 +27,9 @@
 
 from unittest import TestCase
 
-from sigepweb.base import RequestBaseSIGEPAuthentication
-from sigepweb.sigep.solicita_etiquetas import RequestSolicitaEtiquetaSIGEP
-from sigepweb.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
+from pysigep.base import RequestBaseSIGEPAuthentication
+from pysigep.sigep.solicita_etiquetas import RequestSolicitaEtiquetaSIGEP
+from pysigep.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
 
 
 class TestRequestSolicitaEtiqueta(TestCase):

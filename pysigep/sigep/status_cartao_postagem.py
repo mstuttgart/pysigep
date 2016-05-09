@@ -27,39 +27,40 @@
 
 import xml.etree.cElementTree as Et
 
-from sigepweb.base import RequestBaseSIGEPAuthentication
-from sigepweb.base import ResponseBase
-from sigepweb.campos import CampoString
+from pysigep.base import RequestBaseSIGEPAuthentication
+from pysigep.base import ResponseBase
+from pysigep.campos import CampoString
 
 
-class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAuthentication):
+class RequestStatusCartaoPostagem(RequestBaseSIGEPAuthentication):
 
-    def __init__(self, etiquetas, usuario, senha):
-        super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
-            ResponseGeraDigitoVerificador, usuario, senha)
+    def __init__(self, num_cartao_postagem, usuario, senha):
+        super(RequestStatusCartaoPostagem, self).__init__(
+            ResponseStatusCartaoPostagem, usuario, senha)
 
-        self.etiquetas = [
-            CampoString('etiquetas', valor=etq, obrigatorio=True)
-            for etq in etiquetas.split(',')]
+        self.numero_cartao_postagem = CampoString('numeroCartaoPostagem',
+                                                  obrigatorio=True,
+                                                  valor=num_cartao_postagem,
+                                                  tamanho=10,
+                                                  numerico=True)
 
     def get_data(self):
         xml = RequestBaseSIGEPAuthentication.HEADER
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        for etq in self.etiquetas:
-            xml += etq.get_xml()
-        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_data()
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
+        xml += '<cli:getStatusCartaoPostagem>'
+        xml += self.numero_cartao_postagem.get_xml()
+        xml += super(RequestStatusCartaoPostagem, self).get_data()
+        xml += '</cli:getStatusCartaoPostagem>'
         xml += RequestBaseSIGEPAuthentication.FOOTER
         return xml
 
 
-class ResponseGeraDigitoVerificador(ResponseBase):
+class ResponseStatusCartaoPostagem(ResponseBase):
 
     def __init__(self):
-        super(ResponseGeraDigitoVerificador, self).__init__()
+        super(ResponseStatusCartaoPostagem, self).__init__()
 
     def _parse_xml(self, xml):
-        self.resposta = {
-            'lista_digitos': [int(end.text) for end in Et.fromstring(
-                xml).findall('.//return')]
-        }
+        for end in Et.fromstring(xml).findall('.//return'):
+            self.resposta = {
+                'status': end.text,
+            }
