@@ -25,41 +25,12 @@
 #
 ###############################################################################
 
-import xml.etree.cElementTree as Et
-
-from sigep.base import RequestBaseSIGEP
-from sigep.base import ResponseBase
-from sigep.campos import CampoCEP
-
-
-class RequestConsultaCEP(RequestBaseSIGEP):
-
-    def __init__(self, cep):
-        super(RequestConsultaCEP, self).__init__(ResponseBuscaCEP)
-        self.cep = CampoCEP('cep', valor=cep, obrigatorio=True)
-
-    def get_data(self):
-        xml = RequestBaseSIGEP.HEADER
-        xml += '<cli:consultaCEP>'
-        xml += self.cep.get_xml()
-        xml += '</cli:consultaCEP>'
-        xml += RequestBaseSIGEP.FOOTER
-        return xml
+__title__ = 'sigepweb'
+__version__ = '0.0.1'
+__author__ = 'Michell Stuttgart Faria'
+__license__ = 'MIT License'
+__copyright__ = 'Copyright 2015-2016 Michell Stuttgart Faria'
 
 
-class ResponseBuscaCEP(ResponseBase):
-
-    def __init__(self):
-        super(ResponseBuscaCEP, self).__init__()
-
-    def _parse_xml(self, xml):
-
-        end = Et.fromstring(xml).find('.//return')
-        self.resposta = {
-            'logradouro': end.findtext('end'),
-            'bairro': end.findtext('bairro'),
-            'cidade': end.findtext('cidade'),
-            'uf': end.findtext('uf'),
-            'complemento': end.findtext('complemento'),
-            'complemento_2': end.findtext('complemento2')
-        }
+# Version synonym
+VERSION = __version__

@@ -27,9 +27,9 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseRastreamento
-from sigep.base import ResponseBase
-from sigep.campos import CampoString
+from sigepweb.base import RequestBaseRastreamento
+from sigepweb.base import ResponseBase
+from sigepweb.campos import CampoString
 
 
 class RequestRastreamento(RequestBaseRastreamento):

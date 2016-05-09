@@ -25,8 +25,8 @@
 #
 ###############################################################################
 
-from sigep.rastreamento.consulta_rastreamento import RequestRastreamento
-from sigep.rastreamento.consulta_rastreamento import ResponseRastreamento
+from sigepweb.rastreamento.consulta_rastreamento import RequestRastreamento
+from sigepweb.rastreamento.consulta_rastreamento import ResponseRastreamento
 
 from unittest import TestCase
 

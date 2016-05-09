@@ -27,9 +27,9 @@
 
 from unittest import TestCase
 
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
-from sigep.sigep.status_cartao_postagem import ResponseStatusCartaoPostagem
+from sigepweb.base import RequestBaseSIGEPAuthentication
+from sigepweb.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
+from sigepweb.sigep.status_cartao_postagem import ResponseStatusCartaoPostagem
 
 
 class TestRequestStatusCartaoPostagem(TestCase):

@@ -26,12 +26,12 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.base import TagBase, RequestBaseRastreamento
-from sigep.base import RequestBase
-from sigep.base import RequestBaseFrete
-from sigep.base import RequestBaseSIGEP
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.base import ResponseBase
+from sigepweb.base import TagBase, RequestBaseRastreamento
+from sigepweb.base import RequestBase
+from sigepweb.base import RequestBaseFrete
+from sigepweb.base import RequestBaseSIGEP
+from sigepweb.base import RequestBaseSIGEPAuthentication
+from sigepweb.base import ResponseBase
 
 
 class TestTagBase(TestCase):

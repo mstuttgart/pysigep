@@ -27,12 +27,12 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseFrete
-from sigep.base import ResponseBase
-from sigep.campos import CampoCEP
-from sigep.campos import CampoString
-from sigep.campos import CampoInteiro
-from sigep.campos import CampoDecimal
+from sigepweb.base import RequestBaseFrete
+from sigepweb.base import ResponseBase
+from sigepweb.campos import CampoCEP
+from sigepweb.campos import CampoString
+from sigepweb.campos import CampoInteiro
+from sigepweb.campos import CampoDecimal
 
 
 class RequestCalcPrecoPrazo(RequestBaseFrete):

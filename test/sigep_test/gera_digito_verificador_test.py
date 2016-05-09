@@ -27,10 +27,10 @@
 
 from unittest import TestCase
 
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.sigep.gera_digito_verificador import \
+from sigepweb.base import RequestBaseSIGEPAuthentication
+from sigepweb.sigep.gera_digito_verificador import \
     RequestGeraDigitoVerificadorSIGEP
-from sigep.sigep.gera_digito_verificador import ResponseGeraDigitoVerificador
+from sigepweb.sigep.gera_digito_verificador import ResponseGeraDigitoVerificador
 
 
 class TestRequestGeraDigitoVerificador(TestCase):

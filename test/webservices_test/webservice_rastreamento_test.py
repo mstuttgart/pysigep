@@ -26,9 +26,9 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.rastreamento.consulta_rastreamento import RequestRastreamento
-from sigep.rastreamento.consulta_rastreamento import ResponseRastreamento
-from sigep.webservices.webservice_rastreamento import WebserviceRastreamento
+from sigepweb.rastreamento.consulta_rastreamento import RequestRastreamento
+from sigepweb.rastreamento.consulta_rastreamento import ResponseRastreamento
+from sigepweb.webservices.webservice_rastreamento import WebserviceRastreamento
 
 
 class TestWebserviceRastreamento(TestCase):

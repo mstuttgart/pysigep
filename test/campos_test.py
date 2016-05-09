@@ -26,18 +26,18 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.sigep_exceptions import ErroCampoObrigatorio
-from sigep.sigep_exceptions import ErroCampoTamanhoIncorreto
-from sigep.sigep_exceptions import ErroCampoNaoNumerico
-from sigep.sigep_exceptions import ErroTipoIncorreto
-from sigep.campos import CampoBase
-from sigep.campos import CampoString
-from sigep.campos import CampoUnicode
-from sigep.campos import CampoCEP
-from sigep.campos import CampoCNPJ
-from sigep.campos import CampoBooleano
-from sigep.campos import CampoInteiro
-from sigep.campos import CampoDecimal
+from sigepweb.sigep_exceptions import ErroCampoObrigatorio
+from sigepweb.sigep_exceptions import ErroCampoTamanhoIncorreto
+from sigepweb.sigep_exceptions import ErroCampoNaoNumerico
+from sigepweb.sigep_exceptions import ErroTipoIncorreto
+from sigepweb.campos import CampoBase
+from sigepweb.campos import CampoString
+from sigepweb.campos import CampoUnicode
+from sigepweb.campos import CampoCEP
+from sigepweb.campos import CampoCNPJ
+from sigepweb.campos import CampoBooleano
+from sigepweb.campos import CampoInteiro
+from sigepweb.campos import CampoDecimal
 
 
 class TestCampoBase(TestCase):

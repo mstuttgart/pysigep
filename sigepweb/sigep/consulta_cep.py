@@ -27,39 +27,39 @@
 
 import xml.etree.cElementTree as Et
 
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.base import ResponseBase
-from sigep.campos import CampoString
+from sigepweb.base import RequestBaseSIGEP
+from sigepweb.base import ResponseBase
+from sigepweb.campos import CampoCEP
 
 
-class RequestGeraDigitoVerificadorSIGEP(RequestBaseSIGEPAuthentication):
+class RequestConsultaCEP(RequestBaseSIGEP):
 
-    def __init__(self, etiquetas, usuario, senha):
-        super(RequestGeraDigitoVerificadorSIGEP, self).__init__(
-            ResponseGeraDigitoVerificador, usuario, senha)
-
-        self.etiquetas = [
-            CampoString('etiquetas', valor=etq, obrigatorio=True)
-            for etq in etiquetas.split(',')]
+    def __init__(self, cep):
+        super(RequestConsultaCEP, self).__init__(ResponseBuscaCEP)
+        self.cep = CampoCEP('cep', valor=cep, obrigatorio=True)
 
     def get_data(self):
-        xml = RequestBaseSIGEPAuthentication.HEADER
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        for etq in self.etiquetas:
-            xml += etq.get_xml()
-        xml += super(RequestGeraDigitoVerificadorSIGEP, self).get_data()
-        xml += '<cli:geraDigitoVerificadorEtiquetas>'
-        xml += RequestBaseSIGEPAuthentication.FOOTER
+        xml = RequestBaseSIGEP.HEADER
+        xml += '<cli:consultaCEP>'
+        xml += self.cep.get_xml()
+        xml += '</cli:consultaCEP>'
+        xml += RequestBaseSIGEP.FOOTER
         return xml
 
 
-class ResponseGeraDigitoVerificador(ResponseBase):
+class ResponseBuscaCEP(ResponseBase):
 
     def __init__(self):
-        super(ResponseGeraDigitoVerificador, self).__init__()
+        super(ResponseBuscaCEP, self).__init__()
 
     def _parse_xml(self, xml):
+
+        end = Et.fromstring(xml).find('.//return')
         self.resposta = {
-            'lista_digitos': [int(end.text) for end in Et.fromstring(
-                xml).findall('.//return')]
+            'logradouro': end.findtext('end'),
+            'bairro': end.findtext('bairro'),
+            'cidade': end.findtext('cidade'),
+            'uf': end.findtext('uf'),
+            'complemento': end.findtext('complemento'),
+            'complemento_2': end.findtext('complemento2')
         }

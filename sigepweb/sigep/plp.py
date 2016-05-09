@@ -25,12 +25,12 @@
 #
 ###############################################################################
 
-from sigep.base import TagBase
-from sigep.campos import CampoCEP
-from sigep.campos import CampoString
-from sigep.campos import CampoUnicode
-from sigep.campos import CampoInteiro
-from sigep.campos import CampoDecimal
+from sigepweb.base import TagBase
+from sigepweb.campos import CampoCEP
+from sigepweb.campos import CampoString
+from sigepweb.campos import CampoUnicode
+from sigepweb.campos import CampoInteiro
+from sigepweb.campos import CampoDecimal
 
 
 class XmlPLP(TagBase):

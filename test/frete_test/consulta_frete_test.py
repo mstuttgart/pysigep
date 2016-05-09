@@ -26,9 +26,9 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.base import RequestBaseFrete
-from sigep.frete.consulta_frete import RequestCalcPrecoPrazo
-from sigep.frete.consulta_frete import ResponseCalcPrecoPrazo
+from sigepweb.base import RequestBaseFrete
+from sigepweb.frete.consulta_frete import RequestCalcPrecoPrazo
+from sigepweb.frete.consulta_frete import ResponseCalcPrecoPrazo
 
 
 class TestRequestCalcPrecoPrazo(TestCase):

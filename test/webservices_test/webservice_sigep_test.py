@@ -26,13 +26,13 @@
 ###############################################################################
 
 from unittest import TestCase
-from sigep.sigep_exceptions import ErroValidacaoXML
-from sigep.sigep_exceptions import ErroConexaoComServidor
-from sigep.sigep_exceptions import ErroConexaoTimeOut
-from sigep.sigep_exceptions import ErroRequisicao
-from sigep.sigep.consulta_cep import RequestConsultaCEP
-from sigep.sigep.consulta_cep import ResponseBuscaCEP
-from sigep.webservices.webservice_sigep import WebserviceSIGEP
+from sigepweb.sigep_exceptions import ErroValidacaoXML
+from sigepweb.sigep_exceptions import ErroConexaoComServidor
+from sigepweb.sigep_exceptions import ErroConexaoTimeOut
+from sigepweb.sigep_exceptions import ErroRequisicao
+from sigepweb.sigep.consulta_cep import RequestConsultaCEP
+from sigepweb.sigep.consulta_cep import ResponseBuscaCEP
+from sigepweb.webservices.webservice_sigep import WebserviceSIGEP
 
 
 class TestWebserviceSIGEP(TestCase):

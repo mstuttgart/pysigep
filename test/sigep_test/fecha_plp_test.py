@@ -27,10 +27,10 @@
 
 from unittest import TestCase
 
-from sigep.base import RequestBaseSIGEPAuthentication
-from sigep.sigep.fecha_plp import RequestFechaPLPVariosServicos
-from sigep.sigep.fecha_plp import ResponseFechaPLPVariosServicos
-from sigep.sigep.plp import XmlPLP, TagObjetoPostal, TagDimesaoObjeto
+from sigepweb.base import RequestBaseSIGEPAuthentication
+from sigepweb.sigep.fecha_plp import RequestFechaPLPVariosServicos
+from sigepweb.sigep.fecha_plp import ResponseFechaPLPVariosServicos
+from sigepweb.sigep.plp import XmlPLP, TagObjetoPostal, TagDimesaoObjeto
 
 
 class TestRequestFechaPLPVariosServicos(TestCase):
