@@ -57,6 +57,7 @@ setup(
     license='MIT License',
     author='Michell Stuttgart',
     author_email='michellstut@gmail.com',
+    keywords='correios sigep sigepweb frete rastreamento development api cep',
     description=u'Interface python para uso dos serviços fornecidos pelo '
                 u'SIGEPWeb dos Correios ',
     packages=find_packages(),
