@@ -24,23 +24,47 @@
 # SOFTWARE.
 #
 ###############################################################################
-from setuptools import setup
+from setuptools import setup, find_packages
+import os
+import re
+
+
+def get_version(package):
+    """
+    Based in https://github.com/tomchristie/django-rest-framework/blob/
+    971578ca345c3d3bae7fd93b87c41d43483b6f05/setup.py
+    :param package Package name
+    Return package version as listed in `__version__` in `init.py`.
+    """
+    init_py = open(os.path.join(package, '__init__.py')).read()
+    return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
+
+LONG_DESCRIPTION = open('README.md').read()
+
+CLASSIFIERS = [
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+]
 
 setup(
-    name='python-sigep',
-    version='1.0.0',
-    packages=[
-        'test',
-        'sigep',
-    ],
+    name='sigepweb',
+    version=get_version('sigepweb'),
     url='https://github.com/mstuttgart/python-sigep',
     license='MIT License',
     author='Michell Stuttgart',
     author_email='michellstut@gmail.com',
     description=u'Interface python para uso dos serviços fornecidos pelo '
                 u'SIGEPWeb dos Correios ',
-    requires=[
+    packages=find_packages(),
+    include_package_data=True,
+    install_requires=[
         'requests',
     ],
+    platforms=['any'],
+    classifiers=CLASSIFIERS,
     test_suite='test',
 )
