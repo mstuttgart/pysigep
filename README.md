@@ -35,14 +35,14 @@ Instalação do requests: `sudo pip install requests`
 
 <pre lang="python"><code>
 # -*- coding: utf-8 -*-
-from sigep.sigep.consulta_cep import RequestConsultaCEP
-from sigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
-from sigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
-from sigep.frete.consulta_frete import RequestCalcPrecoPrazo
-from sigep.webservices.webservice_sigep import WebserviceSIGEP
-from sigep.webservices.webservice_frete import WebserviceFrete
-from sigep.webservices.webservice_rastreamento import WebserviceRastreamento
-from sigep.rastreamento.consulta_rastreamento import RequestRastreamento
+from sigepweb.sigep.consulta_cep import RequestConsultaCEP
+from sigepweb.sigep.disponibilidade_servico import RequestDisponibilidadeServico
+from sigepweb.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
+from sigepweb.frete.consulta_frete import RequestCalcPrecoPrazo
+from sigepweb.webservices.webservice_sigep import WebserviceSIGEP
+from sigepweb.webservices.webservice_frete import WebserviceFrete
+from sigepweb.webservices.webservice_rastreamento import WebserviceRastreamento
+from sigepweb.rastreamento.consulta_rastreamento import RequestRastreamento
 
 LOGIN = 'sigep'
 SENHA = 'n5f9t8'
