@@ -1,8 +1,8 @@
 SIGEP Web - Correios
 ====================
 
-[![Build Status](https://travis-ci.org/mstuttgart/pysigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/python-sigep)
-[![Coverage Status](https://coveralls.io/repos/github/mstuttgart/pysigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/python-sigep?branch=develop)
+[![Build Status](https://travis-ci.org/mstuttgart/pysigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/pysigep)
+[![Coverage Status](https://coveralls.io/repos/github/mstuttgart/pysigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/pysigep?branch=develop)
 [![Code Health](https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/pysigep/develop)
 [![PyPI](https://img.shields.io/pypi/status/pysigep.svg?maxAge=2592000)]()
 [![PyPI](https://img.shields.io/pypi/v/pysigep.svg?maxAge=2592000)](https://pypi.python.org/pypi/pysigep)
