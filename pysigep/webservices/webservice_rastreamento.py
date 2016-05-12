@@ -40,7 +40,7 @@ class WebserviceRastreamento(WebserviceBase):
         # Necessario pois o decode do rastreamento é diferente
         xml = xml.decode('utf8').encode('iso-8859-1')
         import logging
-        log= logging.getLogger("SomeTest.testSomething")
+        log = logging.getLogger("SomeTest.testSomething")
         log.debug("this= %s", xml)
         print xml
         ret = None
