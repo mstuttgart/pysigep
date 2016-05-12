@@ -26,9 +26,12 @@
 ###############################################################################
 
 from unittest import TestCase
+
 from pysigep.rastreamento.consulta_rastreamento import RequestRastreamento
 from pysigep.rastreamento.consulta_rastreamento import ResponseRastreamento
 from pysigep.webservices.webservice_rastreamento import WebserviceRastreamento
+from pysigep.sigep_exceptions import ErroValidacaoXML
+from pysigep.sigep_exceptions import ErroConexaoComServidor
 
 
 class TestWebserviceRastreamento(TestCase):
@@ -40,4 +43,9 @@ class TestWebserviceRastreamento(TestCase):
                                   RequestRastreamento.ULTIMO_RESULTADO,
                                   ['PJ472895891BR', 'PJ382325976BR'])
 
-        self.assertIsInstance(server.request(req), ResponseRastreamento)
+        try:
+            self.assertIsInstance(server.request(req), ResponseRastreamento)
+        except ErroValidacaoXML as exc:
+            print exc.message
+        except ErroConexaoComServidor as exc:
+            print exc.message

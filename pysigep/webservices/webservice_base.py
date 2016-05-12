@@ -47,7 +47,7 @@ class WebserviceBase(object):
                                      verify=ssl_verify)
 
             if not resposta.ok:
-                msg = WebserviceBase._parse_error(resposta.text.encode('utf8'))
+                msg = self.parse_error(resposta.text.encode('utf8'))
                 raise sigep_exceptions.ErroValidacaoXML(msg)
 
             # Criamos um response dinamicamente para cada tipo de classe
@@ -68,6 +68,5 @@ class WebserviceBase(object):
         except requests.exceptions.RequestException as exc:
             raise sigep_exceptions.ErroRequisicao(exc.message)
 
-    @staticmethod
-    def _parse_error(xml):
+    def parse_error(self, xml):
         return Et.fromstring(xml).findtext('.//faultstring')
