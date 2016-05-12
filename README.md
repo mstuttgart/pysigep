@@ -1,11 +1,13 @@
 SIGEP Web - Correios
 ====================
 
-[![Build Status](https://travis-ci.org/mstuttgart/python-sigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/python-sigep)
-[![Coverage Status](https://coveralls.io/repos/github/mstuttgart/python-sigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/python-sigep?branch=develop)
-[![Code Health](https://landscape.io/github/mstuttgart/python-sigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/python-sigep/develop)
-[![Project Status](https://img.shields.io/badge/status-development-yellow.svg)](https://github.com/mstuttgart/python-sigep/tree/develop)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
+[![Build Status](https://travis-ci.org/mstuttgart/pysigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/pysigep)
+[![Coverage Status](https://coveralls.io/repos/github/mstuttgart/pysigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/pysigep?branch=develop)
+[![Code Health](https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/pysigep/develop)
+[![PyPI](https://img.shields.io/pypi/status/pysigep.svg?maxAge=2592000)]()
+[![PyPI](https://img.shields.io/pypi/v/pysigep.svg?maxAge=2592000)](https://pypi.python.org/pypi/pysigep)
+[![PyPI](https://img.shields.io/pypi/pyversions/pysigep.svg?maxAge=2592000)]()
+[![PyPI](https://img.shields.io/pypi/l/pysigep.svg?maxAge=2592000)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
 [![Join the chat at https://gitter.im/mstuttgart/python-sigep](https://badges.gitter.im/mstuttgart/python-sigep.svg)](https://gitter.im/mstuttgart/python-sigep?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Implementação do sistema SIGEP Web em Python permitindo integração com Web Service do Correios. O Módulo funciona como uma interface de consulta para os métodos fornecidos pelo webservice. Também permite rastreamento de encomendas a partir da etiqueta de identificação e cálculo de frete.
