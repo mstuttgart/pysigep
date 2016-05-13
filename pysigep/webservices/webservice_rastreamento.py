@@ -38,12 +38,4 @@ class WebserviceRastreamento(WebserviceBase):
 
     def parse_error(self, xml):
         # Necessario pois o decode do rastreamento é diferente
-        xml = xml.decode('utf8').encode('iso-8859-1')
-        import logging
-        log = logging.getLogger("SomeTest.testSomething")
-        log.debug("this= %s", xml)
-        print xml
-        ret = None
-        for end in Et.fromstring(xml).findall('HTML'):
-            ret = end.findtext('BODY')
-        return ret
+        return xml.decode('utf8').encode('iso-8859-1')

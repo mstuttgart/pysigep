@@ -41,7 +41,7 @@ class TestWebserviceRastreamento(TestCase):
         req = RequestRastreamento('ECT', 'SRO',
                                   RequestRastreamento.TIPO_LISTA_DE_OBJETOS,
                                   RequestRastreamento.ULTIMO_RESULTADO,
-                                  ['PJ472895891BR', 'PJ382325976BR'])
+                                  ['PJ472895891BR', 'PJ382325976B'])
 
         try:
             self.assertIsInstance(server.request(req), ResponseRastreamento)
