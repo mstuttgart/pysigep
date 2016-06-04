@@ -28,7 +28,7 @@ webservice dos Correios.
 
 ## Instalação
 
-A versão atual ainda esta em fase de desenvolvimento, portanto não pe 
+A versão atual ainda esta em fase de desenvolvimento, portanto não é 
 recomendável seu uso em ambiente de produção
 
 ```
