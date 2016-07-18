@@ -24,6 +24,7 @@ rastreamento.
 webservice dos Correios.   
 - [ ] Imprimir etiqueta da PLP em formato PDF.   
 - [ ] Imprimir Chancela em formato PDF.
+- [ ] Rotinas de logística reversa.
 
 ## Instalação
 
@@ -36,14 +37,14 @@ pip install pysigep
 
 ## Dependências
 
-* python 2.7
+* python 2.7 (suporte para python 3 em breve)
 * requests 
 
 Instalação do requests: `sudo pip install requests`
 
 ## Como usar
 
-<pre lang="python"><code>
+```python
 # -*- coding: utf-8 -*-
 from pysigep.sigep.consulta_cep import RequestConsultaCEP
 from pysigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
@@ -147,19 +148,19 @@ print obj['codigo']
 print obj['cidade']
 print obj['uf']
 
-</code></pre>
-
-## Executando os testes
-Caso você deseje executar os testes, basta usar o comando abaixo (necessário estar conectado à internet):
-
-```python setup.py test```
-
-## To do
-
-Lista de funcionalidade a serem implementadas [aqui](https://github.com/mstuttgart/python-sigep/issues/7).
+```
 
 ## Contribuindo
 Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um *fork* deste repositório e me envie um *Pull Request*. Contribuições sempre são bem vindas.
+
+#### To do
+
+Lista de funcionalidade a serem implementadas [aqui](https://github.com/mstuttgart/python-sigep/issues/7).
+
+#### Executando os testes
+Caso você deseje executar os testes, basta usar o comando abaixo (necessário estar conectado à internet):
+
+```python setup.py test```
 
 ## SigepWeb Docs
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
