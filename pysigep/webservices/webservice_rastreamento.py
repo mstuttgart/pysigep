@@ -25,8 +25,6 @@
 #
 ###############################################################################
 
-import xml.etree.cElementTree as Et
-
 from webservice_base import WebserviceBase
 
 

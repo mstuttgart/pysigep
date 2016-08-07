@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-import sigep_exceptions
+from . import sigep_exceptions
 
 
 class CampoBase(object):
