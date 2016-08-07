@@ -9,7 +9,7 @@ SIGEPWeb - Correios
 [![PyPI](https://img.shields.io/pypi/pyversions/pysigep.svg?maxAge=2592000)]()
 [![PyPI](https://img.shields.io/pypi/l/pysigep.svg)](https://github.com/mstuttgart/pysigep/blob/develop/LICENSE)
 
-Implementação do sistema SIGEP Web em Python permitindo integração com Web Service do Correios. O Módulo funciona como uma interface de consulta para os métodos fornecidos pelo webservice. Também permite rastreamento de encomendas a partir da etiqueta de identificação e cálculo de frete.
+Implementação do sistema SIGEP Web em Python permitindo integração com Web Service do Correios. O Módulo funciona como uma interface de consulta para os métodos fornecidos pelo webservice.
 
 ## Recursos
 
