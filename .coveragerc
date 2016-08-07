@@ -1,5 +1,0 @@
-[run]
-branch = True
-source = pysigep
-omit =
-    pysigep/sigep_exceptions.py
