@@ -25,7 +25,7 @@ webservice dos Correios.
 
 ## Instalação
 
-A versão atual ainda esta em fase de desenvolvimento, sendo assim os recursos disponiveis podem ser removidos sem aviso prévio. Sendo assim, não é recomendável seu uso em ambiente de produção
+A versão atual ainda esta em fase de desenvolvimento, sendo que os recursos disponiveis podem ser removidos sem aviso prévio. Portanto, não é recomendável seu uso em ambiente de produção
 
 ```
 pip install pysigep
@@ -91,14 +91,14 @@ print response.resposta['status']
 ## Contribuindo
 Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um *fork* deste repositório e me envie um *Pull Request*. Contribuições sempre são bem vindas.
 
-#### To do
-
-Lista de funcionalidade a serem implementadas [aqui](https://github.com/mstuttgart/python-sigep/issues/7).
+Lista de funcionalidade a serem implementadas/corrigidas [aqui](https://github.com/mstuttgart/python-sigep/issues/7).
 
 #### Executando os testes
 Caso você deseje executar os testes, basta usar o comando abaixo (necessário estar conectado à internet):
 
-```python setup.py test```
+```python
+setup.py test
+```
 
 ## SigepWeb Docs
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
