@@ -96,8 +96,8 @@ Lista de funcionalidade a serem implementadas/corrigidas [aqui](https://github.c
 #### Executando os testes
 Caso você deseje executar os testes, basta usar o comando abaixo (necessário estar conectado à internet):
 
-```python
-setup.py test
+```bash
+python setup.py test
 ```
 
 ## SigepWeb Docs
