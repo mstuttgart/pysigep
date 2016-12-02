@@ -42,6 +42,21 @@ VERSION = __version__
 
 
 def send(xml_path, xml_method, api, soap_action=None, ambiente=1, **kwargs):
+    """
+    >>> xml_path = 'ConsultaCep.xml'
+    >>> xml_method = 'consultaCEPResponse'
+    >>> api = 'SIGEPWeb'
+    >>> kw = {'cep': '83010140', }
+    >>> send(xml_path, xml_method, api, **kw)  #doctest: +ELLIPSIS
+    <Element return at 0x...>
+    >>> send(xml_path, xml_method, api, **kw).bairro
+    'Cruzeiro'
+    >>> kw['cep'] = '123'
+    >>> send(xml_path, xml_method, api, **kw)
+    Traceback (most recent call last):
+        ...
+    AttributeError: no such child: consultaCEPResponse
+    """
 
     path = os.path.join(os.path.dirname(__file__), 'templates')
 #    xml_path = os.path.join(path, xml_path)

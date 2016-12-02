@@ -68,8 +68,8 @@ class TestWebserviceSIGEP(TestCase):
             self.assertRaises(ErroValidacaoXML, wb.request, req_cep)
 
         except ErroConexaoComServidor as exc:
-            print exc.message
+            print(exc.message)
         except ErroConexaoTimeOut as exc:
-            print exc.message
+            print(exc.message)
         except ErroRequisicao as exc:
-            print exc.message
+            print(exc.message)

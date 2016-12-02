@@ -98,6 +98,14 @@ def busca_cliente(**kwargs):
 
 
 def verifica_disponibilidade_servico(**kwargs):
+    """ Retorna a disponibilidade de servico
+    >>> usuario = {'codAdministrativo': '08082650',\
+                   'numeroServico': '40215',\
+                   'cepOrigem': '70002900', 'cepDestino': '81350120',\
+                   'usuario': 'sigep', 'senha': 'n5f9t8', }
+    >>> verifica_disponibilidade_servico(**usuario)
+    False
+    """
     path = 'VerificaDisponibilidadeServico.xml'
     return send(path, 'verificaDisponibilidadeServicoResponse',
                 'SIGEPWeb', **kwargs)
@@ -112,6 +120,11 @@ def consulta_cep(**kwargs):
     'Cruzeiro'
     >>> consulta_cep(**cep).cep
     83010140
+    >>> cep['cep'] = '123'
+    >>> consulta_cep(**cep).cep
+    Traceback (most recent call last):
+        ...
+    AttributeError: no such child: consultaCEPResponse
     """
     path = 'ConsultaCep.xml'
     return send(path, 'consultaCEPResponse', 'SIGEPWeb', **kwargs)

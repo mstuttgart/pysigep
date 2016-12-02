@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-from webservice_base import WebserviceBase
+from pysigep.webservices.webservice_base import WebserviceBase
 
 
 class WebserviceSIGEP(WebserviceBase):
@@ -47,7 +47,7 @@ class WebserviceSIGEP(WebserviceBase):
         try:
             super(WebserviceSIGEP, self).__init__(amb[ambiente])
         except KeyError as exp:
-            print exp.message
+            print(exp.message)
             super(WebserviceSIGEP, self).__init__(
                 amb[WebserviceSIGEP.AMBIENTE_HOMOLOGACAO])
             ambiente = WebserviceSIGEP.AMBIENTE_HOMOLOGACAO

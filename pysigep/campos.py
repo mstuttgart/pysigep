@@ -26,6 +26,7 @@
 ###############################################################################
 
 from . import sigep_exceptions
+from builtins import str
 
 
 class CampoBase(object):
@@ -75,10 +76,11 @@ class CampoString(CampoBase):
         self._valor = val
 
     def _formata_valor(self, valor):
-        if not isinstance(valor, basestring):
+
+        if not isinstance(valor, str):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
                                                      type(valor),
-                                                     basestring)
+                                                     str)
         return valor.rstrip()
 
     def validar(self, valor):

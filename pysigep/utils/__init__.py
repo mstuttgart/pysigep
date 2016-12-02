@@ -6,6 +6,7 @@ from jinja2 import Environment, FileSystemLoader
 import unicodedata
 from lxml import etree
 from lxml import objectify
+from builtins import str as text
 
 HOMOLOGACAO = 1
 PRODUCAO = 2
@@ -31,7 +32,7 @@ def render_xml(path, template_name, usuario):
 
 
 def sanitize_response(response):
-    response = unicode(response)
+    response = text(response)
     response = unicodedata.normalize('NFKD', response).encode('ascii',
                                                               'ignore')
     tree = etree.fromstring(response)
