@@ -35,7 +35,7 @@ def calcular_preco_prazo(**kwargs):
 def get_eventos(**kwargs):
     """
     >>> user = {'usuario': 'ECT', 'senha': 'SRO',\
-                'objetos': 'PL207893158BR'}
+                'objetos': ['PL207893158BR']}
     >>> get_eventos(**user) #doctest: +ELLIPSIS
     <Element return at 0x...>
     >>> get_eventos(**user).objeto.evento.destino.cidade

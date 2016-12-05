@@ -8,7 +8,9 @@
             <tipo>L</tipo>
             <resultado>T</resultado>
             <lingua>101</lingua>
-            <objetos>{{ objetos }}</objetos> 
+            {% for objeto in objetos %}
+            <objetos>{{ objeto }}</objetos> 
+            {% endfor %}
         </res:buscaEventosLista>
     </soapenv:Body>
 </soapenv:Envelope>
