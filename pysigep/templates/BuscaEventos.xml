@@ -1,0 +1,14 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:res="http://resource.webservice.correios.com.br/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <res:buscaEventosLista>
+            <usuario>{{ usuario }}</usuario>
+            <senha>{{ senha }}</senha>
+            <tipo>L</tipo>
+            <resultado>T</resultado>
+            <lingua>101</lingua>
+            <objetos>{{ objetos }}</objetos> 
+        </res:buscaEventosLista>
+    </soapenv:Body>
+</soapenv:Envelope>

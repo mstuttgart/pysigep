@@ -15,10 +15,12 @@ URLS = {
     HOMOLOGACAO: {
         'CalcularFretePrazo': 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL',
         'SIGEPWeb': 'https://apphom.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',
+        'BuscaEventos': 'http://webservice.correios.com.br/service/rastro'
     },
     PRODUCAO: {
         'CalcularFretePrazo': 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL',
         'SIGEPWeb': 'https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',
+        'BuscaEventos': 'http://webservice.correios.com.br/service/rastro'
     },
 }
 
@@ -29,7 +31,6 @@ def render_xml(path, template_name, usuario):
     template = env.get_template(template_name)
     xml = template.render(usuario)
     return xml
-
 
 def sanitize_response(response):
     response = text(response)

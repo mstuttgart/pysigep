@@ -59,17 +59,13 @@ def send(xml_path, xml_method, api, soap_action=None, ambiente=1, **kwargs):
     """
 
     path = os.path.join(os.path.dirname(__file__), 'templates')
-#    xml_path = os.path.join(path, xml_path)
     xml = render_xml(path, xml_path, kwargs)
     url = URLS[ambiente][api]
     header = {'Content-type': 'text/xml; charset=utf-8;'}
     if soap_action:
         header['SOAPAction'] = soap_action
-    resposta = requests.post(
-        url, data=xml,
-        headers=header,
-        verify=False)
+    resposta = requests.post(url, data=xml, headers=header, verify=False)
     text = sanitize_response(resposta.text)
-    if soap_action:
+    if soap_action == 'http://tempuri.org/CalcPrecoPrazo':
         return text[1].Body[xml_method]['CalcPrecoPrazoResult']['Servicos']
     return text[1].Body[xml_method]['return']
