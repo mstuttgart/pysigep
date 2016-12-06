@@ -93,7 +93,7 @@ def busca_cliente(**kwargs):
     >>> busca_cliente(**usuario).cnpj
     34028316000103
     """
-    return send('BuscaCliente.xml', 'buscaClienteResponse', 
+    return send('BuscaCliente.xml', 'buscaClienteResponse',
                 'SIGEPWeb', **kwargs)
 
 
@@ -128,6 +128,11 @@ def consulta_cep(**kwargs):
     """
     path = 'ConsultaCep.xml'
     return send(path, 'consultaCEPResponse', 'SIGEPWeb', **kwargs)
+
+
+def fecha_plp_servicos(**kwargs):
+    path = 'FechaPlpVariosServicos.xml'
+    return send(path, 'fechaPlpResponse', 'SIGEPWeb', **kwargs)
 
 if __name__ == "__main__":
     import doctest
