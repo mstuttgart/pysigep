@@ -60,6 +60,7 @@ class TestCorreios(TestCase):
         chancela_signed = open(path, 'r')
         chancela_right = chancela_signed.read()
         chancela_signed.close()
+
         self.assertEqual(chancela, chancela_right,
                          'A assinatura da chancela esta incorreta')
 
