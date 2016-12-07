@@ -54,9 +54,7 @@ def send(xml_path, xml_method, api, soap_action=None,
     'Cruzeiro'
     >>> kw['cep'] = '123'
     >>> send(xml_path, xml_method, api, **kw)
-    Traceback (most recent call last):
-        ...
-    AttributeError: no such child: consultaCEPResponse
+    {'mensagem_erro': 'BUSCA DEFINIDA COMO EXATA, 0 CEP DEVE TER 8 DIGITOS'}
     """
 
     path = os.path.join(os.path.dirname(__file__), 'templates')
