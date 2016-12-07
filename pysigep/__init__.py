@@ -41,7 +41,8 @@ __copyright__ = 'Copyright 2016 Michell Stuttgart Faria'
 VERSION = __version__
 
 
-def send(xml_path, xml_method, api, soap_action=None, ambiente=1, **kwargs):
+def send(xml_path, xml_method, api, soap_action=None,
+         ambiente=1, encoding="utf-8", **kwargs):
     """
     >>> xml_path = 'ConsultaCep.xml'
     >>> xml_method = 'consultaCEPResponse'
@@ -61,11 +62,15 @@ def send(xml_path, xml_method, api, soap_action=None, ambiente=1, **kwargs):
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xml = render_xml(path, xml_path, kwargs)
     url = URLS[ambiente][api]
-    header = {'Content-type': 'text/xml; charset=utf-8;'}
+    header = {'Content-type': 'text/xml; charset=;%s' % encoding}
     if soap_action:
         header['SOAPAction'] = soap_action
-    resposta = requests.post(url, data=xml, headers=header, verify=False)
-    text = sanitize_response(resposta.text)
+    resposta = requests.post(url, data=xml.encode(encoding),
+                             headers=header, verify=False)
+    xml_resp, obj_resp = sanitize_response(resposta.text)
     if soap_action == 'http://tempuri.org/CalcPrecoPrazo':
-        return text[1].Body[xml_method]['CalcPrecoPrazoResult']['Servicos']
-    return text[1].Body[xml_method]['return']
+        return obj_resp.Body[xml_method]['CalcPrecoPrazoResult']['Servicos']
+    if xml_method in dir(obj_resp.Body):
+        return obj_resp.Body[xml_method]['return']
+
+    return {"mensagem_erro": obj_resp.Body.Fault.faultstring}

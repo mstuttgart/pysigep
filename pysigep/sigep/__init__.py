@@ -25,7 +25,9 @@
 #
 ###############################################################################
 
+import os
 from pysigep import send
+from pysigep.utils import render_xml
 
 
 def digito_verificador_etiqueta(etiqueta):
@@ -132,7 +134,12 @@ def consulta_cep(**kwargs):
 
 def fecha_plp_servicos(**kwargs):
     path = 'FechaPlpVariosServicos.xml'
-    return send(path, 'fechaPlpResponse', 'SIGEPWeb', **kwargs)
+    path = os.path.dirname(os.path.dirname(__file__))
+    path = os.path.join(path, 'templates')
+    xml = render_xml(path, "PLP.xml", kwargs)
+    kwargs["xml"] = '<?xml version="1.0" encoding="ISO-8859-1" ?>' + xml
+    return send("FechaPlpVariosServicos.xml", 'fechaPlpVariosServicosResponse',
+                'SIGEPWeb', encoding="ISO-8859-1", **kwargs)
 
 if __name__ == "__main__":
     import doctest

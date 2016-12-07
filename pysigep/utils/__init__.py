@@ -13,13 +13,13 @@ PRODUCAO = 2
 
 URLS = {
     HOMOLOGACAO: {
-        'CalcularFretePrazo': 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL',
-        'SIGEPWeb': 'https://apphom.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',
+        'CalcularFretePrazo': 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL',  #noqa
+        'SIGEPWeb': 'https://apphom.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',  #noqa
         'BuscaEventos': 'http://webservice.correios.com.br/service/rastro'
     },
     PRODUCAO: {
-        'CalcularFretePrazo': 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL',
-        'SIGEPWeb': 'https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',
+        'CalcularFretePrazo': 'http://ws.correios.com.br/calculador/CalcPrecoPrazo.asmx?WSDL',  #noqa
+        'SIGEPWeb': 'https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',  #noqa
         'BuscaEventos': 'http://webservice.correios.com.br/service/rastro'
     },
 }
@@ -27,10 +27,14 @@ URLS = {
 
 def render_xml(path, template_name, usuario):
     env = Environment(
-        loader=FileSystemLoader(path), extensions=['jinja2.ext.with_']) 
+        loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
     template = env.get_template(template_name)
     xml = template.render(usuario)
-    return xml
+    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
+                             strip_cdata=False)
+    root = etree.fromstring(xml, parser=parser)
+    return etree.tostring(root)
+
 
 def sanitize_response(response):
     response = text(response)
