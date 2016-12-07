@@ -63,6 +63,3 @@ class TestCorreios(TestCase):
 
         self.assertEqual(chancela, chancela_right,
                          'A assinatura da chancela esta incorreta')
-
-    def test_doctest(self):
-        assert doctest.testmod(correios, raise_on_error=True)
