@@ -29,6 +29,7 @@ from unittest import TestCase
 import doctest
 from pysigep.correios import sign_chancela
 from pysigep import correios
+import os
 
 
 class TestCorreios(TestCase):
@@ -45,13 +46,18 @@ class TestCorreios(TestCase):
             'origem': 'SC', 'postagem': 'RS',
         }
 
-        chancela = open('chancela.txt', 'r')
+        path = os.path.dirname(os.path.realpath(__file__))
+        path = os.path.join(path, 'chancela.txt')
+
+        chancela = open(path, 'r')
         self.chancela = chancela.read()
         chancela.close()
 
     def test_sign_chancela(self):
+        path = os.path.dirname(os.path.realpath(__file__))
+        path = os.path.join(path, 'chancela_signed.txt')
         chancela = sign_chancela(self.chancela, self.usuario_correio)
-        chancela_signed = open('chancela_signed.txt', 'r')
+        chancela_signed = open(path, 'r')
         chancela_right = chancela_signed.read()
         chancela_signed.close()
         self.assertEqual(chancela, chancela_right,
