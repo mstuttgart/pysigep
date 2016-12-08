@@ -26,7 +26,8 @@
 ##############################################################################
 
 
-from pysigep import send
+from pysigep import send, _url
+from pysigep.utils import _valida
 import base64
 import io
 from PIL import Image, ImageDraw, ImageFont
@@ -62,7 +63,11 @@ def calcular_preco_prazo(**kwargs):
     #8
     """
     path = 'CalcularPrecoPrazo.xml'
-    return send(path, 'CalcPrecoPrazoResponse', 'CalcularFretePrazo',
+    api = 'CalcularFretePrazo'
+    _valida('calcular_preco_prazo', api, kwargs)
+    ambiente = kwargs['ambiente'] if 'ambiente' in kwargs else 1
+    url = _url(ambiente, api)
+    return send(path, 'CalcPrecoPrazoResponse', api, url,
                 soap_action='http://tempuri.org/CalcPrecoPrazo', **kwargs)
 
 
@@ -75,8 +80,12 @@ def get_eventos(**kwargs):
     # >>> get_eventos(**user).objeto.evento.destino.cidade
     # 'Rio De Janeiro'
     """
+    api = 'BuscaEventos'
+    _valida('get_eventos', api, kwargs)
+    ambiente = kwargs['ambiente'] if 'ambiente' in kwargs else 1
+    url = _url(ambiente, api)
     path = 'BuscaEventos.xml'
-    return send(path, 'buscaEventosListaResponse', 'BuscaEventos',
+    return send(path, 'buscaEventosListaResponse', api, url,
                 soap_action='eventos', **kwargs)
 
 

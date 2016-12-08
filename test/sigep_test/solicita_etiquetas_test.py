@@ -30,6 +30,7 @@ from unittest import TestCase
 from pysigep.base import RequestBaseSIGEPAuthentication
 from pysigep.sigep.solicita_etiquetas import RequestSolicitaEtiquetaSIGEP
 from pysigep.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
+from pysigep.sigep import solicita_etiquetas_com_dv, digito_verificador_etiqueta
 
 
 class TestRequestSolicitaEtiqueta(TestCase):
@@ -74,3 +75,25 @@ xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
         resp._parse_xml(xml)
         self.assertEqual(resp.resposta['lista_etiquetas'][0], 'DL76023726 BR')
         self.assertEqual(resp.resposta['lista_etiquetas'][1], 'DL76023727 BR')
+
+
+class TesteSolicitaEtiqueta(TestCase):
+    def test_solicita_etiquetas(self):
+        solicitacao = {
+            'usuario': 'sigep', 'senha': 'n5f9t8',
+            'identificador': '34028316000103',
+            'idServico': '104625', 'qtdEtiquetas': '10'}
+        with self.assertRaises(Exception):
+            solicita_etiquetas_com_dv(**solicitacao)
+        solicitacao['ambiente'] = 1
+        etiquetas = solicita_etiquetas_com_dv(**solicitacao)
+        self.assertEqual(len(etiquetas), 10,
+                         'Qtd. de etiquetas errada,\
+Expected: %s, Got: %d' % (solicitacao['qtdEtiquetas'], len(etiquetas)))
+
+    def test_digito_verificador_etiqueta(self):
+        etiqueta = 'DL76023727 BR'
+        etiqueta_c_dv = digito_verificador_etiqueta(etiqueta)
+        self.assertEqual(etiqueta_c_dv, 'DL760237272BR',
+                         'DV incorreto, expect.: 2, got: %s' % (
+                            etiqueta_c_dv[10]))

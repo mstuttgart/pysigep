@@ -41,8 +41,12 @@ __copyright__ = 'Copyright 2016 Michell Stuttgart Faria'
 VERSION = __version__
 
 
-def send(xml_path, xml_method, api, soap_action=None,
-         ambiente=1, encoding="utf-8", **kwargs):
+def _url(api, ambiente):
+    return URLS[api][ambiente]
+
+
+def send(xml_path, xml_method, api, url,
+         soap_action=None, encoding="utf-8", **kwargs):
     """
     >>> xml_path = 'ConsultaCep.xml'
     >>> xml_method = 'consultaCEPResponse'
@@ -56,10 +60,8 @@ def send(xml_path, xml_method, api, soap_action=None,
     >>> send(xml_path, xml_method, api, **kw)
     {'mensagem_erro': 'BUSCA DEFINIDA COMO EXATA, 0 CEP DEVE TER 8 DIGITOS'}
     """
-
     path = os.path.join(os.path.dirname(__file__), 'templates')
     xml = render_xml(path, xml_path, kwargs)
-    url = URLS[ambiente][api]
     header = {'Content-type': 'text/xml; charset=;%s' % encoding}
     if soap_action:
         header['SOAPAction'] = soap_action

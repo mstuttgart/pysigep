@@ -50,3 +50,11 @@ def sanitize_response(response):
             elem.tag = elem.tag[i+1:]
     objectify.deannotate(tree, cleanup_namespaces=True)
     return response, objectify.fromstring(etree.tostring(tree))
+
+
+def _valida(metodo, api, kwargs):
+    if api == 'SIGEPWeb':
+        ambiente_nao_obrigatorio = ['cep_consulta',
+                                    'digito_verificador_etiqueta']
+        if metodo not in ambiente_nao_obrigatorio and 'ambiente' not in kwargs:
+            raise Exception('O ambiente é obrigatório neste método')

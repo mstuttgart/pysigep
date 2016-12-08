@@ -60,6 +60,9 @@ class TestFechaPlpServicos(TestCase):
             }],
             'cartaoPostagem': '0123456789',
         }
+        with self.assertRaises(Exception):
+            fecha_plp_servicos(**data)
+        data['ambiente'] = 1
         retorno = fecha_plp_servicos(**data)
 
         self.assertTrue(retorno != u'')
