@@ -52,6 +52,7 @@ def send(xml_path, xml_method, api, url,
     >>> xml_method = 'consultaCEPResponse'
     >>> api = 'SIGEPWeb'
     >>> kw = {'cep': '83010140', }
+    >>> url = _url(api, 1)
     >>> send(xml_path, xml_method, api, **kw)  #doctest: +ELLIPSIS
     <Element return at 0x...>
     >>> send(xml_path, xml_method, api, **kw).bairro
