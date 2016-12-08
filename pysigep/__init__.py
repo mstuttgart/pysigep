@@ -53,12 +53,12 @@ def send(xml_path, xml_method, api, url,
     >>> api = 'SIGEPWeb'
     >>> kw = {'cep': '83010140', }
     >>> url = _url(api, 1)
-    >>> send(xml_path, xml_method, api, **kw)  #doctest: +ELLIPSIS
+    >>> send(xml_path, xml_method, api, url, **kw)  #doctest: +ELLIPSIS
     <Element return at 0x...>
-    >>> send(xml_path, xml_method, api, **kw).bairro
+    >>> send(xml_path, xml_method, api, url, **kw).bairro
     'Cruzeiro'
     >>> kw['cep'] = '123'
-    >>> send(xml_path, xml_method, api, **kw)
+    >>> send(xml_path, xml_method, api, url, **kw)
     {'mensagem_erro': 'BUSCA DEFINIDA COMO EXATA, 0 CEP DEVE TER 8 DIGITOS'}
     """
     path = os.path.join(os.path.dirname(__file__), 'templates')
