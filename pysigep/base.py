@@ -25,7 +25,7 @@
 #
 ###############################################################################
 
-from campos import CampoString
+from pysigep.campos import CampoString
 
 
 class TagBase(object):

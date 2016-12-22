@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<correioslog>
+    <tipo_arquivo>Postagem</tipo_arquivo>
+    <versao_arquivo>2.3</versao_arquivo>
+    <plp>
+        <id_plp />
+        <valor_global />
+        <mcu_unidade_postagem />
+        <nome_unidade_postagem />
+        <cartao_postagem>{{ cartaoPostagem }}</cartao_postagem>
+    </plp>
+    <remetente>
+        <numero_contrato>{{ numero_contrato }}</numero_contrato>
+        <numero_diretoria>{{ numero_diretoria }}</numero_diretoria>
+        <codigo_administrativo>{{ codigo_administrativo }}</codigo_administrativo>
+        <nome_remetente><![CDATA[{{ nome_remetente }}]]></nome_remetente>
+        <logradouro_remetente><![CDATA[{{ logradouro_remetente }}]]></logradouro_remetente>
+        <numero_remetente>{{ numero_remetente }}</numero_remetente>
+        <complemento_remetente><![CDATA[{{ complemento_remetente }}]]></complemento_remetente>
+        <bairro_remetente><![CDATA[{{ bairro_remetente }}]]></bairro_remetente>
+        <cep_remetente><![CDATA[{{ cep_remetente }}]]></cep_remetente>
+        <cidade_remetente><![CDATA[{{ cidade_remetente }}]]></cidade_remetente>
+        <uf_remetente>{{ uf_remetente }}</uf_remetente>
+        <telefone_remetente><![CDATA[{{ telefone_remetente }}]]></telefone_remetente>
+        <fax_remetente><![CDATA[{{ fax_remetente }}]]></fax_remetente>
+        <email_remetente><![CDATA[{{ email_remetente }}]]></email_remetente>
+    </remetente>
+    <forma_pagamento />
+    <!-- Se a lista contem mais de um objeto, a tag <objeto_postal> deverá ser repetida -->
+    {% for objeto in objetos %}
+    <objeto_postal>
+        <numero_etiqueta>{{ objeto.numero_etiqueta }}</numero_etiqueta>
+        <codigo_objeto_cliente />
+        <codigo_servico_postagem>{{ objeto.codigo_servico_postagem }}</codigo_servico_postagem>
+        <cubagem>{{ objeto.cubagem }}</cubagem>
+        <peso>{{ objeto.peso }}</peso>
+        <rt1 />
+        <rt2 />
+        <destinatario>
+            <nome_destinatario><![CDATA[{{ objeto.nome_destinatario }}]]></nome_destinatario>
+            <telefone_destinatario><![CDATA[{{ objeto.telefone_destinatario }}]]></telefone_destinatario>
+            <celular_destinatario><![CDATA[{{ objeto.celular_destinatario }}]]></celular_destinatario>
+            <email_destinatario><![CDATA[{{ objeto.email_destinatario }}]]></email_destinatario>
+            <logradouro_destinatario><![CDATA[{{ objeto.logradouro_destinatario }}]]></logradouro_destinatario>
+            <complemento_destinatario><![CDATA[{{ objeto.complemento_destinatario }}]]></complemento_destinatario>
+            <numero_end_destinatario>{{ objeto.numero_end_destinatario }}</numero_end_destinatario>
+        </destinatario>
+        <nacional>
+            <bairro_destinatario><![CDATA[{{ objeto.bairro_destinatario }}]]></bairro_destinatario>
+            <cidade_destinatario><![CDATA[{{ objeto.cidade_destinatario }}]]></cidade_destinatario>
+            <uf_destinatario>{{ objeto.uf_destinatario }}</uf_destinatario>
+            <cep_destinatario><![CDATA[{{ objeto.cep_destinatario }}]]></cep_destinatario>
+            <codigo_usuario_postal />
+            <centro_custo_cliente />
+            <numero_nota_fiscal />
+            <serie_nota_fiscal />
+            <valor_nota_fiscal />
+            <natureza_nota_fiscal />
+            <descricao_objeto><![CDATA[{{ objeto.descricao_objeto }}]]></descricao_objeto>
+            <valor_a_cobrar>{{ objeto.valor_a_cobrar }}</valor_a_cobrar>
+        </nacional>
+        <servico_adicional>
+            <!-- O serviço adicional 025 sempre deverá ser informado.-->
+            <codigo_servico_adicional>025</codigo_servico_adicional>
+            {% for adicional in objeto.servicos_adicionais %}
+            <codigo_servico_adicional>{{ adicional }}</codigo_servico_adicional>
+            {% endfor %}
+            <valor_declarado>{{ objeto.valor_declarado }}</valor_declarado>
+        </servico_adicional>
+        <dimensao_objeto>
+            <tipo_objeto>{{ objeto.tipo_objeto }}</tipo_objeto>
+            <dimensao_altura>{{ objeto.dimensao_altura }}</dimensao_altura>
+            <dimensao_largura>{{ objeto.dimensao_largura }}</dimensao_largura>
+            <dimensao_comprimento>{{ objeto.dimensao_comprimento }}</dimensao_comprimento>
+            <dimensao_diametro>{{ objeto.dimensao_diametro }}</dimensao_diametro>
+        </dimensao_objeto>
+        <data_postagem_sara />
+        <status_processamento>0</status_processamento>
+        <numero_comprovante_postagem />
+        <valor_cobrado />
+    </objeto_postal>
+    {% endfor %}
+</correioslog>

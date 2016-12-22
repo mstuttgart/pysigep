@@ -1,0 +1,20 @@
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <CalcPrecoPrazo xmlns="http://tempuri.org/">
+        <nCdEmpresa>{{ nCdEmpresa }}</nCdEmpresa>
+        <sDsSenha>{{ sDsSenha }}</sDsSenha>
+        <nCdServico>{{ nCdServico }}</nCdServico>
+        <sCepOrigem>{{ sCepOrigem }}</sCepOrigem>
+        <sCepDestino>{{ sCepDestino }}</sCepDestino>
+        <nVlPeso>{{ nVlPeso }}</nVlPeso>
+        <nCdFormato>{{ nCdFormato }}</nCdFormato>
+        <nVlComprimento>{{ nVlComprimento }}</nVlComprimento>
+        <nVlAltura>{{ nVlAltura }}</nVlAltura>
+        <nVlLargura>{{ nVlLargura }}</nVlLargura>
+        <nVlDiametro>{{ nVlDiametro }}</nVlDiametro>
+        <sCdMaoPropria>{{ sCdMaoPropria }}</sCdMaoPropria>
+        <nVlValorDeclarado>{{ nVlValorDeclarado }}</nVlValorDeclarado>
+        <sCdAvisoRecebimento>{{ sCdAvisoRecebimento }}</sCdAvisoRecebimento>
+    </CalcPrecoPrazo>
+  </soap:Body>
+</soap:Envelope>

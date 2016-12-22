@@ -75,6 +75,7 @@ class CampoString(CampoBase):
         self._valor = val
 
     def _formata_valor(self, valor):
+
         if not isinstance(valor, basestring):
             raise sigep_exceptions.ErroTipoIncorreto(self.nome,
                                                      type(valor),
