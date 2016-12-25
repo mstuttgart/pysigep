@@ -26,68 +26,18 @@
 ###############################################################################
 
 from unittest import TestCase
-from pysigep.base import RequestBaseSIGEP
-from pysigep.sigep.consulta_cep import RequestConsultaCEP
-from pysigep.sigep.consulta_cep import ResponseBuscaCEP
+
 from pysigep.sigep import cep_consulta
 
 
-class TestRequestConsultaCEP(TestCase):
-
-    def test_get_data(self):
-        req_cep = RequestConsultaCEP('37.503-005')
-
-        xml = RequestBaseSIGEP.HEADER
-        xml += '<cli:consultaCEP>'
-        xml += '<cep>%s</cep>' % '37503005'
-        xml += '</cli:consultaCEP>'
-        xml += RequestBaseSIGEP.FOOTER
-
-        self.assertEqual(xml, req_cep.get_data())
-
-
-class TestResponseBuscaCEP(TestCase):
-
-    def test_parse_xml(self):
-
-        xml = '''<S:Envelope
-        xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">
-        <S:Body>
-        <ns2:consultaCEPResponse
-        xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-            <return>
-                <bairro>Asa Norte</bairro>
-                <cep>70002900</cep>
-                <cidade>Brasília</cidade>
-                <complemento/>
-                <complemento2/>
-                <end>SBN Quadra 1 Bloco A</end>
-                <id>0</id>
-                <uf>DF</uf>
-            </return>
-        </ns2:consultaCEPResponse>
-        </S:Body>
-        </S:Envelope>'''.replace('\n', '')
-
-        resp_cep = ResponseBuscaCEP()
-        resp_cep._parse_xml(xml)
-
-        self.assertEqual(resp_cep.resposta['logradouro'], u'SBN Quadra 1 '
-                                                          u'Bloco A')
-        self.assertEqual(resp_cep.resposta['bairro'], u'Asa Norte')
-        self.assertEqual(resp_cep.resposta['cidade'], u'Brasília')
-        self.assertEqual(resp_cep.resposta['uf'], u'DF')
-        self.assertEqual(resp_cep.resposta['complemento'], u'')
-        self.assertEqual(resp_cep.resposta['complemento_2'], u'')
-
-
 class TestBuscaCep(TestCase):
+
     def test_consulta_cep(self):
-        cep = {}
-        cep['cep'] = '83010140'
+        cep = {
+            'cep': '83010140',
+        }
         consulta = cep_consulta(**cep)
-        self.assertEqual(
-            str(consulta.cep), cep['cep'],
-            'CEP incorreto, expected: %s, got: %s' % (cep['cep'],
-                                                      consulta.cep))
+        self.assertEqual(str(consulta.cep), cep['cep'],
+                         'CEP incorreto, expected: %s, '
+                         'got: %s' % (cep['cep'], consulta.cep))
         self.assertEqual(consulta.bairro, 'Cruzeiro', 'Bairro incorreto')

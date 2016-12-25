@@ -27,83 +27,25 @@
 
 from unittest import TestCase
 
-from pysigep.base import RequestBaseSIGEPAuthentication
-from pysigep.sigep.disponibilidade_servico import \
-    RequestDisponibilidadeServico
-from pysigep.sigep.disponibilidade_servico import \
-    ResponseDisponibilidadeServico
 from pysigep.sigep import verifica_disponibilidade_servico
 
 
-class TestRequestDisponibilidadeServico(TestCase):
-
-    def test_get_data(self):
-        LOGIN = 'sigep'
-        SENHA = 'n5f9t8'
-        COD_ADMIN = '08082650'
-
-        res_disp = RequestDisponibilidadeServico(COD_ADMIN, '40436',
-                                                 '99200-000', '99200-000',
-                                                 LOGIN, SENHA)
-
-        xml = RequestBaseSIGEPAuthentication.HEADER
-        xml += '<cli:verificaDisponibilidadeServico>'
-        xml += '<codAdministrativo>%s</codAdministrativo>' % \
-               res_disp.cod_administrativo.valor
-        xml += '<numeroServico>%s</numeroServico>' % \
-               res_disp.numero_servico.valor
-        xml += '<cepOrigem>%s</cepOrigem>' % res_disp.cep_origem.valor
-        xml += '<cepDestino>%s</cepDestino>' % res_disp.cep_destino.valor
-        xml += super(RequestDisponibilidadeServico, res_disp).get_data()
-        xml += '</cli:verificaDisponibilidadeServico>'
-        xml += RequestBaseSIGEPAuthentication.FOOTER
-
-        self.assertEqual(xml, res_disp.get_data())
-
-
-class TestResponseDisponibilidadeServico(TestCase):
-
-    def test_parse_xml(self):
-
-        xml = '''<S:Envelope
-        xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">
-<S:Body>
-<ns2:verificaDisponibilidadeServicoResponse
-xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-<return>true</return>
-</ns2:verificaDisponibilidadeServicoResponse>
-</S:Body>
-</S:Envelope>'''
-
-        resp_disp = ResponseDisponibilidadeServico()
-        resp_disp._parse_xml(xml)
-
-        self.assertEqual(resp_disp.resposta['disponibilidade'], True)
-
-        xml = '''<S:Envelope
-        xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">
-<S:Body>
-<ns2:verificaDisponibilidadeServicoResponse
-xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-<return>false</return>
-</ns2:verificaDisponibilidadeServicoResponse>
-</S:Body>
-</S:Envelope>'''
-
-        resp_disp._parse_xml(xml)
-        self.assertEqual(resp_disp.resposta['disponibilidade'], False)
-
-
 class TestVerificaDisponibilidadeServico(TestCase):
+
     def test_verifica_disponibilidade_servico(self):
+
         usuario = {
             'codAdministrativo': '08082650',
             'numeroServico': '40215',
-            'cepOrigem': '70002900', 'cepDestino': '81350120',
-            'usuario': 'sigep', 'senha': 'n5f9t8',
-            }
+            'cepOrigem': '70002900',
+            'cepDestino': '81350120',
+            'usuario': 'sigep',
+            'senha': 'n5f9t8',
+        }
+
         with self.assertRaises(Exception):
             verifica_disponibilidade_servico(**usuario)
+
         usuario['ambiente'] = 1
         disponibilidade = verifica_disponibilidade_servico(**usuario)
         self.assertNotIn('mensagem_erro', disponibilidade)

@@ -1,6 +1,10 @@
-requests==2.10.0
+coverage==4.2
 coveralls==1.1
-Jinja2
-lxml
-future
-Pillow
+docopt==0.6.2
+future==0.16.0
+Jinja2==2.8
+lxml==3.7.1
+MarkupSafe==0.23
+Pillow==3.4.2
+requests==2.10.0
+wheel==0.24.0

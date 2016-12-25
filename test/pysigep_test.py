@@ -2,7 +2,7 @@ from unittest import TestCase
 from pysigep import send, _url
 
 
-class TestPysigep(TestCase):
+class TestPySIGEP(TestCase):
 
     def test_send(self):
         xml_path = 'ConsultaCep.xml'

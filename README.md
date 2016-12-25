@@ -17,15 +17,15 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 - [x] Obter dados do endereço a partir de seu respectivo CEP.
 - [x] Verificar disponibilidade de um dado serviço.  
 - [x] Gerar etiquetas para postagem de mercadoria.
-- [x] Criação da pré-lista de postagem (PLP) e envio de seu XML para o 
-webservice dos Correios.   
-- [ ] Imprimir etiqueta da PLP em formato PDF.   
-- [ ] Imprimir Chancela em formato PDF.
+- [x] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.
+- [ ] Imprimir etiqueta da PLP.
+- [x] Imprimir Chancela.
 - [ ] Rotinas de logística reversa.
+- [ ] Calcula frete e prazo de entrega.
 
 ## Instalação
 
-A versão atual **ainda esta em fase de desenvolvimento**, sendo que os recursos disponiveis podem ser removidos sem aviso prévio. Portanto, não é recomendável seu uso em ambiente de produção
+A versão atual **ainda esta em fase de desenvolvimento**, sendo que os recursos disponiveis podem ser removidos sem aviso prévio. Portanto, não é recomendável seu uso em ambiente de produção.
 
 ```
 pip install pysigep
@@ -33,65 +33,64 @@ pip install pysigep
 
 ## Dependências
 
-* python 2.7 (suporte para python 3 em breve)
-* requests 
+As dependências do projeto estão listadas no arquivo `requeriments.txt`.
 
-Instalação do requests: `sudo pip install requests`
+```bash
+pip install -r requeriments.txt
+```
 
 ## Como usar
 
 ```python
 # -*- coding: utf-8 -*-
-from pysigep.sigep.consulta_cep import RequestConsultaCEP
-from pysigep.sigep.disponibilidade_servico import RequestDisponibilidadeServico
-from pysigep.sigep.status_cartao_postagem import RequestStatusCartaoPostagem
-from pysigep.webservices.webservice_sigep import WebserviceSIGEP
+from pysigep.sigep import cep_consulta
+from pysigep.sigep import verifica_disponibilidade_servico
 
-LOGIN = 'sigep'
-SENHA = 'n5f9t8'
-COD_ADMIN = '08082650'
-NUMERO_SERVICO = '40436'
-CEP_ORIGEM = '99200-000'
-CEP_DESTINO = '99200-000'
-CARTAO_POSTAGEM = '0057018901'
+# Executando a consulta de CEP
 
-# Cliente do webservice do sistema sigep Correios
-server = WebserviceSIGEP(WebserviceSIGEP.AMBIENTE_HOMOLOGACAO)
+cep = {'cep': '83010140'}
+consulta = cep_consulta(**cep)
 
-# Requisição para serviço ConsultaCEP
-req = RequestConsultaCEP('37503-000')
+print consulta.bairro
+print consulta.cep
+print consulta.cidade
+print consulta.complemento
+print consulta.complemento2
+print consulta.end
+print consulta.id
+print consulta.uf
 
-# Executando a requisição
-response = server.request(req)
+# Verificando disponibilidade de serviço
 
-print response.resposta['logradouro']
-print response.resposta['bairro']
-print response.resposta['cidade']
-print response.resposta['uf']
-print response.resposta['complemento']
-print response.resposta['complemento_2']
+usuario = {
+    'codAdministrativo': '08082650',
+    'numeroServico': '40215',
+    'cepOrigem': '70002900',
+    'cepDestino': '81350120',
+    'usuario': 'sigep',
+    'senha': 'n5f9t8',
+}
 
-# Requisição para serviço ConsultaDisponibilidadeServico
-req = RequestDisponibilidadeServico(COD_ADMIN, NUMERO_SERVICO,
-                                    CEP_ORIGEM, CEP_DESTINO,
-                                    LOGIN, SENHA)
+with self.assertRaises(Exception):
+    print verifica_disponibilidade_servico(**usuario)
 
-# Executando a requisição
-response = server.request(req)
-print response.resposta['disponibilidade']
 
-# Requisição para servico ConsultaStatusCartaoPostagem
-req = RequestStatusCartaoPostagem(CARTAO_POSTAGEM, LOGIN, SENHA)
+# Solicitando etiquetas
 
-response = server.request(req)
-print response.resposta['status']
+solicitacao = {
+    'usuario': 'sigep',
+    'senha': 'n5f9t8',
+    'identificador': '34028316000103',
+    'idServico': '104625',
+    'qtdEtiquetas': '10',
+}
+with self.assertRaises(Exception):
+    print solicita_etiquetas_com_dv(**solicitacao)
 
 ```
 
 ## Contribuindo
 Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um *fork* deste repositório e me envie um *Pull Request*. Contribuições sempre são bem vindas.
-
-Lista de funcionalidade a serem implementadas/corrigidas [aqui](https://github.com/mstuttgart/python-sigep/issues/7).
 
 #### Executando os testes
 Caso você deseje executar os testes, basta usar o comando abaixo (necessário estar conectado à internet):
