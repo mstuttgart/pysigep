@@ -27,57 +27,11 @@
 
 from unittest import TestCase
 
-from pysigep.base import RequestBaseSIGEPAuthentication
-from pysigep.sigep.solicita_etiquetas import RequestSolicitaEtiquetaSIGEP
-from pysigep.sigep.solicita_etiquetas import ResponseSolicitaEtiqueta
 from pysigep.sigep import solicita_etiquetas_com_dv, digito_verificador_etiqueta
 
 
-class TestRequestSolicitaEtiqueta(TestCase):
-
-    def test_get_data(self):
-
-        login = 'sigep'
-        senha = 'n5f9t8'
-        cnpj = '12345678000196'
-        id_servico = 104625
-
-        req = RequestSolicitaEtiquetaSIGEP(cnpj, id_servico, 1, login, senha)
-
-        xml = RequestBaseSIGEPAuthentication.HEADER
-        xml += '<cli:solicitaEtiquetas>'
-        xml += '<tipoDestinatario>%s</tipoDestinatario>' % \
-               req.tipo_destinatario.valor
-        xml += '<identificador>%s</identificador>' % req.cnpj.valor
-        xml += '<idServico>%d</idServico>' % req.id_servico.valor
-        xml += '<qtdEtiquetas>%d</qtdEtiquetas>' % req.qtd_etiquetas.valor
-        xml += '<usuario>%s</usuario>' % login
-        xml += '<senha>%s</senha>' % senha
-        xml += '</<cli:solicitaEtiquetas>'
-        xml += RequestBaseSIGEPAuthentication.FOOTER
-
-        self.assertEqual(req.get_data(), xml)
-
-
-class TestResponseSolicitaEtiqueta(TestCase):
-
-    def test__parse_xml(self):
-        xml = '''<S:Envelope xmlns:S=\"http://schemas.xmlsoap.org/soap/envelope/\">
-<S:Body>
-<ns2:solicitaEtiquetasResponse
-xmlns:ns2=\"http://cliente.bean.master.sigep.bsb.correios.com.br/\">
-<return>DL76023726 BR,DL76023727 BR</return>
-</ns2:solicitaEtiquetasResponse>
-</S:Body>
-</S:Envelope>'''
-
-        resp = ResponseSolicitaEtiqueta()
-        resp._parse_xml(xml)
-        self.assertEqual(resp.resposta['lista_etiquetas'][0], 'DL76023726 BR')
-        self.assertEqual(resp.resposta['lista_etiquetas'][1], 'DL76023727 BR')
-
-
 class TesteSolicitaEtiqueta(TestCase):
+
     def test_solicita_etiquetas(self):
         solicitacao = {
             'usuario': 'sigep', 'senha': 'n5f9t8',
