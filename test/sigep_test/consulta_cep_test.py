@@ -33,11 +33,11 @@ from pysigep.sigep import cep_consulta
 class TestBuscaCep(TestCase):
 
     def test_consulta_cep(self):
-        cep = {}
-        cep['cep'] = '83010140'
+        cep = {
+            'cep': '83010140',
+        }
         consulta = cep_consulta(**cep)
-        self.assertEqual(
-            str(consulta.cep), cep['cep'],
-            'CEP incorreto, expected: %s, got: %s' % (cep['cep'],
-                                                      consulta.cep))
+        self.assertEqual(str(consulta.cep), cep['cep'],
+                         'CEP incorreto, expected: %s, '
+                         'got: %s' % (cep['cep'], consulta.cep))
         self.assertEqual(consulta.bairro, 'Cruzeiro', 'Bairro incorreto')

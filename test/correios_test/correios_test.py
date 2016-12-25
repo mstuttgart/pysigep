@@ -26,15 +26,16 @@
 ###############################################################################
 
 from unittest import TestCase
-import doctest
-from pysigep.correios import sign_chancela, calcular_preco_prazo, get_eventos
-from pysigep import correios
 import os
+
+from pysigep.correios import calcular_preco_prazo
+from pysigep.correios import sign_chancela
 
 
 class TestCorreios(TestCase):
 
     def setUp(self):
+
         self.usuario_correio = {
             'usuario': 'sigep', 'senha': 'n5f9t8',
             'codAdministrativo': '08082650',
@@ -55,17 +56,16 @@ class TestCorreios(TestCase):
         path = os.path.dirname(os.path.realpath(__file__))
         path = os.path.join(path, 'chancela.txt')
 
-        chancela = open(path, 'r')
-        self.chancela = chancela.read()
-        chancela.close()
+        with open(path, 'r') as chancela:
+            self.chancela = chancela.read()
 
     def test_sign_chancela(self):
         path = os.path.dirname(os.path.realpath(__file__))
         path = os.path.join(path, 'chancela_signed.txt')
         chancela = sign_chancela(self.chancela, self.usuario_correio)
-        chancela_signed = open(path, 'r')
-        chancela_right = chancela_signed.read()
-        chancela_signed.close()
+
+        with open(path, 'r') as chancela_signed:
+            chancela_right = chancela_signed.read()
 
         self.assertEqual(chancela, chancela_right,
                          'A assinatura da chancela esta incorreta')

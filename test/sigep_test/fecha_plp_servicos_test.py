@@ -62,6 +62,7 @@ class TestFechaPlpServicos(TestCase):
         }
         with self.assertRaises(Exception):
             fecha_plp_servicos(**data)
+
         data['ambiente'] = 1
         retorno = fecha_plp_servicos(**data)
 

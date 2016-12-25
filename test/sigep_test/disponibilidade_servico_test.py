@@ -33,14 +33,19 @@ from pysigep.sigep import verifica_disponibilidade_servico
 class TestVerificaDisponibilidadeServico(TestCase):
 
     def test_verifica_disponibilidade_servico(self):
+
         usuario = {
             'codAdministrativo': '08082650',
             'numeroServico': '40215',
-            'cepOrigem': '70002900', 'cepDestino': '81350120',
-            'usuario': 'sigep', 'senha': 'n5f9t8',
-            }
+            'cepOrigem': '70002900',
+            'cepDestino': '81350120',
+            'usuario': 'sigep',
+            'senha': 'n5f9t8',
+        }
+
         with self.assertRaises(Exception):
             verifica_disponibilidade_servico(**usuario)
+
         usuario['ambiente'] = 1
         disponibilidade = verifica_disponibilidade_servico(**usuario)
         self.assertNotIn('mensagem_erro', disponibilidade)
