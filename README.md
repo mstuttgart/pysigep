@@ -89,19 +89,19 @@ with self.assertRaises(Exception):
 
 ```
 
-## Contribuindo
-Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um *fork* deste repositório e me envie um *Pull Request*. Contribuições sempre são bem vindas.
-
-### Contribuidores
-* [Alessandro Martini](https://github.com/martini97)
-* [Danimar Ribeiro](https://github.com/danimaribeiro)
-
 #### Executando os testes
 Caso você deseje executar os testes, basta usar o comando abaixo (necessário estar conectado à internet):
 
 ```bash
 python setup.py test
 ```
+
+## Contribuindo
+Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um *fork* deste repositório e me envie um *Pull Request*. Contribuições sempre são bem vindas.
+
+### Contribuidores
+* [Alessandro Martini](https://github.com/martini97)
+* [Danimar Ribeiro](https://github.com/danimaribeiro)
 
 ## SigepWeb Docs
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
