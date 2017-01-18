@@ -27,7 +27,10 @@
 
 from unittest import TestCase
 
-import mock
+try:
+    from unittest import mock  # Try py3 mock
+except ImportError:
+    import mock  # Or fallback in the py2 alternative
 from pysigep.exceptions import AmbienteObrigatorioError
 from pysigep.sigep import verifica_disponibilidade_servico
 from pysigep.utils import PRODUCAO, HOMOLOGACAO
