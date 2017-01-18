@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+    xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <cli:solicitaXmlPlp>
+            <idPlpMaster>{{ idPlpMaster }}</idPlpMaster>
+            <usuario>{{ usuario }}</usuario>
+            <senha>{{ senha }}</senha>
+        </cli:solicitaXmlPlp>
+    </soapenv:Body>
+</soapenv:Envelope>
