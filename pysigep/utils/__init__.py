@@ -7,6 +7,7 @@ import unicodedata
 from lxml import etree
 from lxml import objectify
 from builtins import str as text
+from ..exceptions import AmbienteObrigatorioError
 
 HOMOLOGACAO = 1
 PRODUCAO = 2
@@ -50,10 +51,6 @@ def sanitize_response(response):
             elem.tag = elem.tag[i+1:]
     objectify.deannotate(tree, cleanup_namespaces=True)
     return response, objectify.fromstring(etree.tostring(tree))
-
-
-class AmbienteObrigatorioError(Exception):
-    pass
 
 
 def _valida(metodo, api, kwargs):

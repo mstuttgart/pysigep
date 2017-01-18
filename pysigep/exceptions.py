@@ -1,0 +1,2 @@
+class AmbienteObrigatorioError(Exception):
+    pass
