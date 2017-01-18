@@ -105,7 +105,6 @@ def sign_chancela(chancela, usuario_correios):
     img = Image.open(StringIO(t)).convert("RGB")
     draw = ImageDraw.ImageDraw(img)
     font = ImageFont.truetype(_TTF_ARIAL, int(img.size[0]*0.07))
-    draw.setfont(font)
     texto = usuario_correios['contrato'] + '/' + usuario_correios['ano_assinatura']
     texto += ' - DR/' + usuario_correios['origem']
     if usuario_correios['postagem'] != usuario_correios['origem']:
@@ -113,16 +112,15 @@ def sign_chancela(chancela, usuario_correios):
     tamanho_texto = draw.textsize(texto)
     h_position = (img.size[0] - tamanho_texto[0]) / 2
     v_position = img.size[1] / 2
-    draw.text((h_position, v_position), texto, fill=(0, 0, 0))
+    draw.text((h_position, v_position), texto, fill=(0, 0, 0), font=font)
     list_name = textwrap.wrap(usuario_correios['nome'], width=20)
     font = ImageFont.truetype(_TTF_ARIAL_N, int(img.size[0]*0.07))
-    draw.setfont(font)
     v_position = img.size[1] / 2 + int(img.size[0]*0.07)
     y_text = v_position
     for line in list_name:
         width, height = font.getsize(line)
         h_position = (img.size[0] - width) / 2
-        draw.text((h_position, y_text), line, fill=(0, 0, 0))
+        draw.text((h_position, y_text), line, fill=(0, 0, 0), font=font)
         y_text += height + 5
     size = max(img.size[0], img.size[1])
     bg = Image.new("RGBA", (size, size), (255, 255, 255))
