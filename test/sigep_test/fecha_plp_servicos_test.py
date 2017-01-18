@@ -46,6 +46,8 @@ class TestFechaPlpServicos(TestCase):
                 'cidade_destinatario': '',
                 'uf_destinatario': '',
                 'cep_destinatario': '',
+                'numero_nota_fiscal': '',
+                'serie_nota_fiscal': '',
                 'descricao_objeto': '',
                 'valor_a_cobrar': '',
                 'valor_declarado': '',
