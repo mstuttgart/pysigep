@@ -52,8 +52,8 @@
             <cep_destinatario><![CDATA[{{ objeto.cep_destinatario }}]]></cep_destinatario>
             <codigo_usuario_postal />
             <centro_custo_cliente />
-            <numero_nota_fiscal />
-            <serie_nota_fiscal />
+            <numero_nota_fiscal>{{ objeto.numero_nota_fiscal }}</numero_nota_fiscal>
+            <serie_nota_fiscal>{{ objeto.serie_nota_fiscal }}</serie_nota_fiscal>
             <valor_nota_fiscal />
             <natureza_nota_fiscal />
             <descricao_objeto><![CDATA[{{ objeto.descricao_objeto }}]]></descricao_objeto>
