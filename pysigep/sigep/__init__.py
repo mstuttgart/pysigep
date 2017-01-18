@@ -137,3 +137,11 @@ def fecha_plp_servicos(**kwargs):
     kwargs["xml"] = '<?xml version="1.0" encoding="ISO-8859-1" ?>' + xml
     return send("FechaPlpVariosServicos.xml", 'fechaPlpVariosServicosResponse',
                 API, url, encoding="ISO-8859-1", **kwargs)
+
+
+def solicita_xml_plp(**kwargs):
+    _valida('solicita_xml_plp', API, kwargs)
+    url = _url(kwargs['ambiente'], API)
+    path = 'SolicitaXmlPlp.xml'
+    return send(path, 'solicitaXmlPlpResponse',
+                API, url, **kwargs)
