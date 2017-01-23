@@ -25,13 +25,17 @@ URLS = {
 }
 
 
-def render_xml(path, template_name, usuario):
-    env = Environment(
-        loader=FileSystemLoader(path), extensions=['jinja2.ext.with_'])
+def render_xml(path, template_name, usuario, validation_schema=None):
+    env = Environment(loader=FileSystemLoader(path),
+                      extensions=['jinja2.ext.with_'])
     template = env.get_template(template_name)
     xml = template.render(usuario)
-    parser = etree.XMLParser(remove_blank_text=True, remove_comments=True,
-                             strip_cdata=False)
+    parser = etree.XMLParser(
+        remove_blank_text=True,
+        remove_comments=True,
+        strip_cdata=False,
+        schema=validation_schema
+    )
     root = etree.fromstring(xml, parser=parser)
     return etree.tostring(root)
 
