@@ -1,13 +1,13 @@
 SIGEPWeb - Correios
 ===================
 
-[![Build Status](https://travis-ci.org/mstuttgart/pysigep.svg?branch=develop)](https://travis-ci.org/mstuttgart/pysigep)
-[![Coverage Status](https://coveralls.io/repos/github/mstuttgart/pysigep/badge.svg?branch=develop)](https://coveralls.io/github/mstuttgart/pysigep?branch=develop)
-[![Code Health](https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat)](https://landscape.io/github/mstuttgart/pysigep/develop)
-[![PyPI](https://img.shields.io/pypi/status/pysigep.svg?maxAge=2592000)]()
-[![PyPI](https://img.shields.io/pypi/v/pysigep.svg?maxAge=2592000)](https://pypi.python.org/pypi/pysigep)
-[![PyPI](https://img.shields.io/pypi/pyversions/pysigep.svg?maxAge=2592000)]()
-[![PyPI](https://img.shields.io/pypi/l/pysigep.svg)](https://github.com/mstuttgart/pysigep/blob/develop/LICENSE)
+[![Travis branch](https://img.shields.io/travis/mstuttgart/pysigep/develop.svg?style=flat-square)](https://travis-ci.org/mstuttgart/pysigep)
+[![Coveralls branch](https://img.shields.io/coveralls/mstuttgart/pysigep/develop.svg?style=flat-square)](https://coveralls.io/github/mstuttgart/pysigep?branch=develop)
+[![Code Health](https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat-square)](https://landscape.io/github/mstuttgart/pysigep/develop)
+[![PyPI](https://img.shields.io/pypi/status/pysigep.svg?style=flat-square)]()
+[![PyPI](https://img.shields.io/pypi/v/pysigep.svg?style=flat-square)](https://pypi.python.org/pypi/pysigep)
+[![PyPI](https://img.shields.io/pypi/pyversions/pysigep.svg?style=flat-square)]()
+[![PyPI](https://img.shields.io/pypi/l/pysigep.svg?style=flat-square)](https://github.com/mstuttgart/pysigep/blob/develop/LICENSE)
 
 Implementação do sistema SIGEP Web em Python permitindo integração com Web Service do Correios. O Módulo funciona como uma interface de consulta para os métodos fornecidos pelo webservice.
 
