@@ -27,6 +27,7 @@
 
 import os
 
+from lxml import etree
 from pysigep import send, _url
 from pysigep.utils import render_xml, _valida
 
@@ -127,13 +128,23 @@ def cep_consulta(**kwargs):
     return send(path, 'consultaCEPResponse', API, url, **kwargs)
 
 
+def fecha_plp_servicos_validation_schema():
+    BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    validation_file = open(os.path.join(BASE_DIR, 'correios/data/layout.xsd'))
+    schema_root = etree.XML(validation_file.read())
+    return etree.XMLSchema(schema_root)
+
+
 def fecha_plp_servicos(**kwargs):
     _valida('fecha_plp_servicos', API, kwargs)
     url = _url(kwargs['ambiente'], API)
     path = 'FechaPlpVariosServicos.xml'
     path = os.path.dirname(os.path.dirname(__file__))
     path = os.path.join(path, 'templates')
-    xml = render_xml(path, "PLP.xml", kwargs)
+    xml = render_xml(
+        path, "PLP.xml", kwargs,
+        validation_schema=fecha_plp_servicos_validation_schema()
+    )
     kwargs["xml"] = '<?xml version="1.0" encoding="ISO-8859-1" ?>' + xml
     return send("FechaPlpVariosServicos.xml", 'fechaPlpVariosServicosResponse',
                 API, url, encoding="ISO-8859-1", **kwargs)
@@ -143,5 +154,4 @@ def solicita_xml_plp(**kwargs):
     _valida('solicita_xml_plp', API, kwargs)
     url = _url(kwargs['ambiente'], API)
     path = 'SolicitaXmlPlp.xml'
-    return send(path, 'solicitaXmlPlpResponse',
-                API, url, **kwargs)
+    return send(path, 'solicitaXmlPlpResponse', API, url, **kwargs)
