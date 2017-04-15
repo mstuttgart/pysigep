@@ -7,6 +7,7 @@ import unicodedata
 from lxml import etree
 from lxml import objectify
 from builtins import str as text
+from ..exceptions import AmbienteObrigatorioError
 
 HOMOLOGACAO = 1
 PRODUCAO = 2
@@ -57,8 +58,22 @@ def sanitize_response(response):
 
 
 def _valida(metodo, api, kwargs):
+    """
+    Valida que determinados métodos exigem a especificação do ambiente.
+
+    Alguns método precisa especificar se o ambiente é produção ou homologação:
+
+    >>> _valida('cep_consulta', 'SIGEPWeb', kwargs={})
+    >>> _valida('busca_cliente', 'SIGEPWeb', kwargs={'ambiente': 1})
+
+    Quando requirido, a falta do ambiente causará exceção:
+
+    >>> _valida('busca_cliente', 'SIGEPWeb', kwargs={})
+    Traceback (most recent call last):
+    AmbienteObrigatorioError: O ambiente é obrigatório neste método
+    """
     if api == 'SIGEPWeb':
         ambiente_nao_obrigatorio = ['cep_consulta',
                                     'digito_verificador_etiqueta']
         if metodo not in ambiente_nao_obrigatorio and 'ambiente' not in kwargs:
-            raise Exception('O ambiente é obrigatório neste método')
+            raise AmbienteObrigatorioError('O ambiente é obrigatório neste método')

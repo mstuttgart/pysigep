@@ -46,4 +46,4 @@ class TestVerificaDisponibilidadeServico(TestCase):
     def test_solicita_xml_plp_retorna_xml(self):
         self.kwargs['ambiente'] = 1
         resposta = solicita_xml_plp(**self.kwargs)
-        print resposta
+        assert resposta
