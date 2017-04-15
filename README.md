@@ -27,10 +27,6 @@ Implementação do sistema SIGEP Web em Python permitindo integração com Web S
 
 A versão atual **ainda esta em fase de desenvolvimento**, sendo que os recursos disponiveis podem ser removidos sem aviso prévio. Portanto, não é recomendável seu uso em ambiente de produção.
 
-```
-pip install pysigep
-```
-
 ## Dependências
 
 As dependências do projeto estão listadas no arquivo `requeriments.txt`.
