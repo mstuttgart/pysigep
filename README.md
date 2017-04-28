@@ -98,6 +98,7 @@ Encontrou algum erro? Quer adicionar alguma *feature* nova ao projeto? Faça um 
 ### Contribuidores
 * [Alessandro Martini](https://github.com/martini97)
 * [Danimar Ribeiro](https://github.com/danimaribeiro)
+* [Michel Sabchuk](https://github.com/michelts)
 
 ## SigepWeb Docs
 * [Manual SigepWeb](http://www.corporativo.correios.com.br/encomendas/sigepweb/doc/Manual_de_Implementacao_do_Web_Service_SIGEPWEB_Logistica_Reversa.pdf)
