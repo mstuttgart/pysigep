@@ -3,3 +3,4 @@ include LICENSE
 include README.md
 include pysigep/templates/*.xml
 include pysigep/correios/data/layout.xsd
+include pysigep/correios/data/fonts/*.ttf
