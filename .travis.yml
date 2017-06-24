@@ -1,12 +1,36 @@
 language: python
-python:
-  - "2.7"
 
-install: pip install -r requirements.txt
+matrix:
+    include:
+      - python: 3.3
+        env: TOX_ENV=py33
+      - python: 3.4
+        env: TOX_ENV=py34
+      - python: 3.5
+        env: TOX_ENV=py35
+      - python: 3.6
+        env: TOX_ENV=py36
+      - python: 3.5
+        env: TOX_ENV=flake8
+      - python: 3.5
+        env: TOX_ENV=pypi
+
+install:
+  - pip install -U tox
 
 script:
-  - coverage run --source=pysigep setup.py test
-  - nosetests --with-doctest --doctest-extension=py
+  - tox -e ${TOX_ENV}
 
 after_success:
   - coveralls
+
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: mstuttgart
+  password:
+    secure: fzxQG14NKhbxtPPfwdXnCz0nW/OrTg27wIAqY3Luv2pbkmjOCosRz7tmT7SiYuVtVZMWOb7pTRies6Nosoq2QsAD81JlTZihfQFKomXfgOwT41bkgg8jdaMgj/AlQIlnIKW9CHriWK0yn37BqCPvGat1VxBwmPv+dfv9j1MHU4Yu6crFYurK9eDc12EiF/+1+kqgmvRAWNZACoITUYis/fY8OjyRTI4dFRY7qz1cemNLuDPmKG+0IDraj3zZA5mS93W4RQX3A0GzYX3fpLVgYui8s8BwPqXfDO2iBoaFKbYc/l5IrxNYQx+GdCvADnRyhnmabTOxyXqLy6gjlSiZZiCkItU2kB9lKZMf5uv4UzfhnRqPMYOytGnOJTYhGPEZhjbPRg9JmiSBuSd+9KacL8T1V1OwKcOVtvUTtpwkQ2ydpjeNtDwcm9Z/ieM6tiabbvM7hY9b8ojyJlclQVKVj8j3xSXx5Xyv09a/wrMu3o/fGky25EoCPLm2hcjVa3NsioP1nK+PvrGq3IsNf7odPxK5kLWlisATMN4A5VdjJceZimLJTnmWv2APd3pcAz9ycRWbaky1Halj7JHsAoeDeR2aN/Wi4TjkagOGTcyFnRUNbXeh5w91+oIpVxfNN6GDq/jok6KLU+9f3EVIo0483i4kiWzKkJPWI8KPVBdTV3g=
+  on:
+    tags: true
+    repo: mstuttgart/pysigep
+    condition: ${TOX_ENV} == pypi
