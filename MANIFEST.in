@@ -1,6 +1,16 @@
-include MANIFEST.in
+include AUTHORS.rst
+include CONTRIBUTING.rst
+include HISTORY.rst
 include LICENSE
-include README.md
+include README.rst
+include MANIFEST.in
+
 include pysigep/templates/*.xml
 include pysigep/correios/data/layout.xsd
 include pysigep/correios/data/fonts/*.ttf
+
+recursive-include tests *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include docs *.rst conf.py Makefile make.bat *.jpg *.png *.gif

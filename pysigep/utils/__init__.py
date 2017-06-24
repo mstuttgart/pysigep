@@ -76,4 +76,5 @@ def _valida(metodo, api, kwargs):
         ambiente_nao_obrigatorio = ['cep_consulta',
                                     'digito_verificador_etiqueta']
         if metodo not in ambiente_nao_obrigatorio and 'ambiente' not in kwargs:
-            raise AmbienteObrigatorioError('O ambiente é obrigatório neste método')
+            raise AmbienteObrigatorioError('O ambiente é obrigatório neste '
+                                           'método')
