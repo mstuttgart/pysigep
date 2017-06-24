@@ -30,16 +30,17 @@ import requests
 
 from pysigep.utils import render_xml, sanitize_response, URLS
 
-
-__title__ = 'pysigep'
-__version__ = '0.0.4'
-__author__ = 'Michell Stuttgart Faria'
-__license__ = 'MIT License'
-__copyright__ = 'Copyright 2016 Michell Stuttgart Faria'
-
-
-# Version synonym
-VERSION = __version__
+from .__version__ import (__title__,
+                          __description__,
+                          __version__,
+                          __author__,
+                          __author_email__,
+                          __maintainer__,
+                          __maintainer_email__,
+                          __url__,
+                          __download_url__,
+                          __copyright__,
+                          __license__)
 
 
 def _url(api, ambiente):
