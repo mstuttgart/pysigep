@@ -1,74 +1,70 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# #############################################################################
-#
-# The MIT License (MIT)
-#
-# Copyright (c) 2016 Michell Stuttgart
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-#
-###############################################################################
-from setuptools import setup, find_packages
+
 import os
-import re
+from codecs import open
+from setuptools import setup, find_packages
 
+version_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
+                            'pysigep',
+                            '__version__.py')
 
-def get_version(package):
-    """
-    Based in https://github.com/tomchristie/django-rest-framework/blob/
-    971578ca345c3d3bae7fd93b87c41d43483b6f05/setup.py
-    :param package Package name
-    Return package version as listed in `__version__` in `init.py`.
-    """
-    init_py = open(os.path.join(package, '__init__.py')).read()
-    return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
+about = {}
+with open(version_path, 'r') as f:
+    exec (f.read(), about)
 
-LONG_DESCRIPTION = open('README.md').read()
+with open('README.rst', 'r') as readme_file:
+    readme = readme_file.read()
 
-CLASSIFIERS = [
+with open('HISTORY.rst', 'r') as history_file:
+    history = history_file.read()
+
+requirements = [
+    'lxml==3.7.3',
+    'requests==2.13.0',
+    'Pillow==4.1.0',
+    'Jinja2==2.9.6',
+]
+
+test_requirements = [
+    'coveralls',
+    'flake8',
+]
+
+classifiers = [
     'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
+    'Natural Language :: Portuguese',
     'License :: OSI Approved :: MIT License',
-    'Operating System :: OS Independent',
+    "Programming Language :: Python :: 2",
+    'Programming Language :: Python :: 2.6',
     'Programming Language :: Python :: 2.7',
-    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Programming Language :: Python :: 3.3',
+    'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
 ]
 
 setup(
-    name='pysigep',
-    version=get_version('pysigep'),
-    url='https://github.com/mstuttgart/python-sigep',
-    license='MIT License',
-    author='Michell Stuttgart',
-    author_email='michellstut@gmail.com',
-    keywords='correios sigep sigepweb frete rastreamento development api cep',
-    description=u'Interface python para uso dos serviços fornecidos pelo '
-                u'SIGEPWeb dos Correios ',
-    packages=find_packages(),
+    name=about['__title__'],
+    version=about['__version__'],
+    description=about['__description__'],
+    long_description=readme + '\n\n' + history,
+    author=about['__author__'],
+    author_email=about['__author_email__'],
+    maintainer=about['__maintainer__'],
+    maintainer_email=about['__maintainer_email__'],
+    url=about['__url__'],
+    download_url=about['__download_url__'],
+    packages=find_packages(include=['pysigep']),
+    package_dir={'pysigep': 'pysigep'},
     include_package_data=True,
-    install_requires=[
-        'lxml==3.7.3',
-        'requests==2.13.0',
-        'Pillow==4.1.0',
-        'Jinja2==2.9.6',
-    ],
+    install_requires=requirements,
+    license=about['__license__'],
+    zip_safe=False,
+    keywords='correios sigep sigepweb frete rastreamento development api',
+    classifiers=classifiers,
     platforms=['any'],
-    classifiers=CLASSIFIERS,
-    test_suite='test',
+    test_suite='tests',
+    tests_require=test_requirements,
 )
