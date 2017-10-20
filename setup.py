@@ -24,6 +24,7 @@ requirements = [
     'requests==2.13.0',
     'Pillow==4.1.0',
     'Jinja2==2.9.6',
+    'zeep',
 ]
 
 test_requirements = [
