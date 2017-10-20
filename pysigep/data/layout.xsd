@@ -206,7 +206,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="numero_remetente">
+    <xs:element name="numero_remetente">suds request
         <xs:simpleType>
             <xs:restriction base="xs:string">
                 <xs:maxLength value="18"/>
