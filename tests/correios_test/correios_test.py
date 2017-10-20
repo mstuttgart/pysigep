@@ -25,10 +25,9 @@
 #
 ###############################################################################
 
-from unittest import TestCase
 import os
+from unittest import TestCase
 
-from pysigep.correios import calcular_preco_prazo
 from pysigep.correios import sign_chancela
 
 
@@ -70,9 +69,3 @@ class TestCorreios(TestCase):
         self.assertEqual(chancela, chancela_right,
                          'A assinatura da chancela esta incorreta')
 
-    def test_calcular_preco_prazo(self):
-        codigo = calcular_preco_prazo(**self.usuario_correio).cServico.Codigo
-        self.assertEqual(40215, codigo)
-        self.usuario_correio['sCepDestino'] = '12345678'
-        erro = calcular_preco_prazo(**self.usuario_correio).cServico.Erro
-        self.assertEqual(8, erro)
