@@ -2,11 +2,24 @@
 PySIGEP
 =======
 
-.. image:: https://img.shields.io/travis/mstuttgart/pysigep.svg
+.. image:: https://img.shields.io/travis/mstuttgart/pysigep/develop.svg?style=flat-square
         :target: https://travis-ci.org/mstuttgart/pysigep
 
-.. image:: https://img.shields.io/pypi/l/pysigep.svg
-        :target: https://pypi.python.org/pypi/pysigep
+.. image:: https://img.shields.io/coveralls/mstuttgart/pysigep/develop.svg?style=flat-square
+        :target: https://coveralls.io/github/mstuttgart/pysigep?branch=develop
+
+.. image:: https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat-square
+   :target: https://landscape.io/github/mstuttgart/pysigep/develop
+   :alt: Code Health
+
+.. image:: https://img.shields.io/pypi/v/pysigep.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/pysigep
+
+.. image:: https://img.shields.io/pypi/pyversions/pysigep.svg?style=flat-square
+    :target: https://pypi.python.org/pypi/pysigep
+
+.. image:: https://img.shields.io/pypi/l/pysigep.svg?style=flat-square
+    :target: https://github.com/mstuttgart/pysigep/blob/develop/LICENSE
 
 .. image:: https://readthedocs.org/projects/pysigep/badge/?version=latest
         :target: https://pysigep.readthedocs.io/en/latest/?badge=latest
