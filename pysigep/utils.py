@@ -7,7 +7,7 @@ import unicodedata
 from lxml import etree
 from lxml import objectify
 from builtins import str as text
-from exceptions import AmbienteObrigatorioError
+from .exceptions import AmbienteObrigatorioError
 
 HOMOLOGACAO = 1
 PRODUCAO = 2
@@ -15,11 +15,9 @@ PRODUCAO = 2
 URLS = {
     HOMOLOGACAO: {
         'SIGEPWeb': 'https://apphom.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',  #noqa
-        'BuscaEventos': 'http://webservice.correios.com.br/service/rastro'
     },
     PRODUCAO: {
         'SIGEPWeb': 'https://apps.correios.com.br/SigepMasterJPA/AtendeClienteService/AtendeCliente?wsdl',  #noqa
-        'BuscaEventos': 'http://webservice.correios.com.br/service/rastro'
     },
 }
 

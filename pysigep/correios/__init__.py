@@ -26,8 +26,6 @@
 ##############################################################################
 
 
-from pysigep import send, _url
-from pysigep.utils import _valida
 import base64
 import io
 from PIL import Image, ImageDraw, ImageFont
@@ -38,24 +36,6 @@ import os
 BASE_DIR = os.path.dirname(__file__)
 _TTF_ARIAL = os.path.join(BASE_DIR, 'data/fonts/arial.ttf')
 _TTF_ARIAL_N = os.path.join(BASE_DIR, 'data/fonts/arial_negrito.ttf')
-
-
-def get_eventos(**kwargs):
-    """
-    # >>> user = {'usuario': 'ECT', 'senha': 'SRO',\
-    #             'objetos': ['PL207893158BR']}
-    # >>> get_eventos(**user) #doctest: +ELLIPSIS
-    # <Element return at 0x...>
-    # >>> get_eventos(**user).objeto.evento.destino.cidade
-    # 'Rio De Janeiro'
-    """
-    api = 'BuscaEventos'
-    _valida('get_eventos', api, kwargs)
-    ambiente = kwargs['ambiente'] if 'ambiente' in kwargs else 1
-    url = _url(ambiente, api)
-    path = 'BuscaEventos.xml'
-    return send(path, 'buscaEventosListaResponse', api, url,
-                soap_action='eventos', **kwargs)
 
 
 def sign_chancela(chancela, usuario_correios):
