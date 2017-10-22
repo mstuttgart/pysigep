@@ -43,11 +43,13 @@ class TestClient(TestCase):
             self.assertEqual(endereco['unidadesPostagem'], [])
 
     def test_set_ambiente(self):
-        self.cliente.set_ambiente(PRODUCAO)
-        self.assertEqual(self.cliente.url_ambiente, URLS[PRODUCAO])
+        self.cliente.ambiente = PRODUCAO
+        self.assertEqual(self.cliente.ambiente, PRODUCAO)
+        self.assertEqual(self.cliente.url, URLS[PRODUCAO])
 
-        self.cliente.set_ambiente(HOMOLOGACAO)
-        self.assertEqual(self.cliente.url_ambiente, URLS[HOMOLOGACAO])
+        self.cliente.ambiente = HOMOLOGACAO
+        self.assertEqual(self.cliente.ambiente, HOMOLOGACAO)
+        self.assertEqual(self.cliente.url, URLS[HOMOLOGACAO])
 
         with self.assertRaises(KeyError):
-            self.cliente.set_ambiente(3)
+            self.cliente.ambiente = 3

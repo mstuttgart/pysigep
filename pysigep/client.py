@@ -9,24 +9,40 @@ class Client:
     def __init__(self, usuario, senha, ambiente):
         self.usuario = usuario
         self.senha = senha
+        self._ambiente = None
+        self._url = None
+        self.ambiente = ambiente
+        self.cliente = zeep.Client(self.url)
+
+    @property
+    def ambiente(self):
+        return self._ambiente
+
+    @ambiente.setter
+    def ambiente(self, value):
+        """ Define o ambiente e a url de consultaa ser utilizado conforma o
+        ambiente escolhido.
+
+        :param: ambiente a ser utilizado durante as consultas
+        :type: Int
+        """
+        self._ambiente = value
 
         try:
-            self._url_ambiente = URLS[ambiente]
+            self._url = URLS[self._ambiente]
         except KeyError:
             raise KeyError(
                 'Ambiente inválido! Valor deve ser 1 para PRODUCAO e 2 '
                 'para HOMOLOGACAO')
 
-        self.zeep_client = zeep.Client(self.url_ambiente)
-
     @property
-    def url_ambiente(self):
+    def url(self):
         """ Retorna a URL do ambiente utilizado.
 
         :return: URL do ambiente utilizado
         :rtype: Str
         """
-        return self._url_ambiente
+        return self._url
 
     def consulta_cep(self, cep):
         """ Retorna o endereço correspondente ao número de CEP informado.
@@ -36,19 +52,4 @@ class Client:
         :return: Dados do endereço do CEP consultado.
         :rtype: dict
         """
-        return self.zeep_client.service.consultaCEP(cep)
-
-    def set_ambiente(self, ambiente):
-        """ Define o ambiente a ser utilizado nas consultas.
-
-        :param ambiente: Flag fo ambiente a ser utilizado, i.e:
-        utils.HOMOLOGACAO ou utils.PRODUCAO
-        :type ambiente: integer
-        """
-
-        try:
-            self._url_ambiente = URLS[ambiente]
-        except KeyError:
-            raise KeyError(
-                'Ambiente inválido! Valor deve ser 1 para PRODUCAO e 2 para '
-                'HOMOLOGACAO')
+        return self.cliente.service.consultaCEP(cep)
