@@ -7,8 +7,9 @@ PySIGEP é uma API para consumo dos serviços fornecido pelo SIGEPWeb dos
 Correios.
 
    >>> from pysigep.client import Client
-   >>> from pysigep import HOMOLOGACAO
-   >>> cliente = Client(usuario='teste', senha='123', ambiente=HOMOLOGACAO)
+   >>> from pysigep.utils import HOMOLOGACAO, HOMOG_USUARIO, HOMOG_SENHA
+   >>> cliente = Client(usuario=HOMOG_USUARIO, senha=HOMOG_SENHA,
+        ...ambiente=HOMOLOGACAO)
    >>> endereco = cliente.consultar_cep('37503130')
    >>> endereco
    {

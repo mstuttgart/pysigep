@@ -3,6 +3,7 @@ from unittest import TestCase, mock
 
 from pysigep.client import Client
 from pysigep.utils import URLS, HOMOLOGACAO, PRODUCAO
+from pysigep.utils import HOMOG_USUARIO, HOMOG_SENHA
 
 
 class TestClient(TestCase):
@@ -11,8 +12,8 @@ class TestClient(TestCase):
         super(TestClient, self).setUp()
 
         self.cliente = Client(ambiente=HOMOLOGACAO,
-                              senha='123',
-                              usuario='admin')
+                              senha=HOMOG_SENHA,
+                              usuario=HOMOG_USUARIO)
 
     def test_consulta_cep(self):
 
