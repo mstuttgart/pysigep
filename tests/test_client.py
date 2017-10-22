@@ -18,7 +18,7 @@ class TestClient(TestCase):
 
         with mock.patch('zeep.client.Client')as mk:
 
-            mk().service.consultaCEP.return_value = {
+            mk(URLS[HOMOLOGACAO]).service.consultaCEP.return_value = {
                 'bairro': 'Santo Antônio',
                 'cep': '37503130',
                 'cidade': 'Itajubá',
