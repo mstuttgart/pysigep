@@ -21,6 +21,11 @@ class Client:
 
     @property
     def url_ambiente(self):
+        """ Retorna a URL do ambiente utilizado.
+
+        :return: URL do ambiente utilizado
+        :rtype: Str
+        """
         return self._url_ambiente
 
     def consulta_cep(self, cep):
