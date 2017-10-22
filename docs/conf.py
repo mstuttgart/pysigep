@@ -120,14 +120,14 @@ html_theme_options = {
     'logo': 'logo.jpg',
     'logo_text_align': 'center',
     'github_user': 'mstuttgart',
-    'github_repo': 'pycep-correios',
+    'github_repo': 'pysigep',
     'github_button': True,
     'github_type': 'star',
     'github_banner': True,
     'travis_button': True,
     'sidebar_collapse': False,
     'logo_name': True,
-    'description': 'Consulta de CEP nos Correios',
+    'description': 'Interface para os serviços do SIGEPWeb dos Correios',
     'sidebar_includehidden': True,
 }
 
