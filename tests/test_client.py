@@ -18,7 +18,7 @@ class TestClient(TestCase):
 
         with mock.patch('zeep.client.Client')as mk:
 
-            mk(URLS[HOMOLOGACAO]).service.consultaCEP.return_value = {
+            end_esperado = {
                 'bairro': 'Santo Antônio',
                 'cep': '37503130',
                 'cidade': 'Itajubá',
@@ -30,17 +30,20 @@ class TestClient(TestCase):
                 'unidadesPostagem': []
             }
 
+            mk(URLS[HOMOLOGACAO]).service.consultaCEP.return_value = \
+                mock.MagicMock(**end_esperado)
+
             endereco = self.cliente.consulta_cep('37503-130')
 
-            self.assertEqual(endereco['bairro'], 'Santo Antônio')
-            self.assertEqual(endereco['cep'], '37503130')
-            self.assertEqual(endereco['cidade'], 'Itajubá')
-            self.assertEqual(endereco['complemento'], None)
-            self.assertEqual(endereco['complemento2'], '- até 214/215')
-            self.assertEqual(endereco['end'], 'Rua Geraldino Campista')
-            self.assertEqual(endereco['id'], 0)
-            self.assertEqual(endereco['uf'], 'MG')
-            self.assertEqual(endereco['unidadesPostagem'], [])
+            self.assertEqual(endereco.bairro, 'Santo Antônio')
+            self.assertEqual(endereco.cep, '37503130')
+            self.assertEqual(endereco.cidade, 'Itajubá')
+            self.assertEqual(endereco.complemento, None)
+            self.assertEqual(endereco.complemento2, '- até 214/215')
+            self.assertEqual(endereco.end, 'Rua Geraldino Campista')
+            self.assertEqual(endereco.id, 0)
+            self.assertEqual(endereco.uf, 'MG')
+            self.assertEqual(endereco.unidadesPostagem, [])
 
     def test_set_ambiente(self):
         self.cliente.ambiente = PRODUCAO
