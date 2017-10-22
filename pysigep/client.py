@@ -50,6 +50,6 @@ class Client:
         :param cep: CEP a ser consultado.
         :type cep: str
         :return: Dados do endereço do CEP consultado.
-        :rtype: dict
+        :rtype: enderecoERP
         """
         return self.cliente.service.consultaCEP(cep)
