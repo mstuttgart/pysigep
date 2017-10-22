@@ -30,6 +30,7 @@ class Client:
 
         try:
             self._url = URLS[self._ambiente]
+            self.cliente = zeep.Client(self.url)
         except KeyError:
             raise KeyError(
                 'Ambiente inválido! Valor deve ser 1 para PRODUCAO e 2 '
@@ -52,4 +53,30 @@ class Client:
         :return: Dados do endereço do CEP consultado.
         :rtype: enderecoERP
         """
-        return self.cliente.service.consultaCEP(cep)
+        param = {
+            'cep': cep
+        }
+        return self.cliente.service.consultaCEP(**param)
+
+    def verifica_disponibilidade_servico(self, cod_administrativo,
+                                         numero_servico, cep_origem,
+                                         cep_destino):
+        """Por meio desse método, pode ser verificado se um serviço que não
+        possui abrangência nacional está disponível entre um CEP de Origem e
+        de Destino
+
+        :param cod_administrativo: Código Administrativo do contrato do Cliente com os Correios.  # noqa
+        :param numero_servico: Códigos dos serviços contratados. Ex: 40215, 81019  # noqa
+        :param cep_origem: CEP de Origem sem hífen
+        :param cep_destino: CEP de Destino sem hífen
+        :return: True para serviço disponível, False caso contrário.
+        """
+        params = {
+            'codAdministrativo': cod_administrativo,
+            'numeroServico': numero_servico,
+            'cepOrigem': cep_origem,
+            'cepDestino': cep_destino,
+            'usuario': self.usuario,
+            'senha': self.senha,
+        }
+        return self.cliente.service.verificaDisponibilidadeServico(**params)
