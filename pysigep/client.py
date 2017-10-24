@@ -20,7 +20,7 @@ class Client:
 
     @ambiente.setter
     def ambiente(self, value):
-        """ Define o ambiente e a url de consultaa ser utilizado conforma o
+        """ Define o ambiente e a url de consulta a ser utilizado conforma o
         ambiente escolhido.
 
         :param: ambiente a ser utilizado durante as consultas
@@ -46,9 +46,10 @@ class Client:
         return self._url
 
     def consulta_cep(self, cep):
-        """ Retorna o endereço correspondente ao número de CEP informado.
+        """ Este método retorna o endereço correspondente ao número de CEP
+        informado.
 
-        :param cep: CEP a ser consultado.
+        :param cep: Número do CEP sem hífen.
         :type cep: str
         :return: Dados do endereço do CEP consultado.
         :rtype: enderecoERP
