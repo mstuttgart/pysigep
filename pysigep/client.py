@@ -20,7 +20,7 @@ class Client:
 
     @ambiente.setter
     def ambiente(self, value):
-        """ Define o ambiente e a url de consulta a ser utilizado conforma o
+        """Define o ambiente e a url de consulta a ser utilizado conforma o
         ambiente escolhido.
 
         :param: ambiente a ser utilizado durante as consultas
@@ -38,7 +38,7 @@ class Client:
 
     @property
     def url(self):
-        """ Retorna a URL do ambiente utilizado.
+        """Retorna a URL do ambiente utilizado.
 
         :return: URL do ambiente utilizado
         :rtype: Str
@@ -64,7 +64,7 @@ class Client:
                                          cep_destino):
         """Por meio desse método, pode ser verificado se um serviço que não
         possui abrangência nacional está disponível entre um CEP de Origem e
-        de Destino
+        de Destino.
 
         :param cod_administrativo: Código Administrativo do contrato do Cliente com os Correios.  # noqa
         :param numero_servico: Códigos dos serviços contratados. Ex: 40215, 81019  # noqa
@@ -81,3 +81,19 @@ class Client:
             'senha': self.senha,
         }
         return self.cliente.service.verificaDisponibilidadeServico(**params)
+
+    def get_status_cartao_postagem(self, numero_cartao_postagem):
+        """Este método retorna o situação do cartão de postagem. É recomendada
+        a pesquisa periódica para evitar tentativa de postagens com cartão
+        suspenso, ocasionando a não aceitação dos objetos nos Correios.
+
+        :param numero_cartao_postagem: Número do Cartão de Postagem vinculado ao contrato.  # noqa
+        :return: 'Normal' para cartão de postagem disponível, 'Cancelado' caso contrário.
+        """
+
+        params = {
+            'numeroCartaoPostagem': numero_cartao_postagem,
+            'usuario': self.usuario,
+            'senha': self.senha,
+        }
+        return self.cliente.service.getStatusCartaoPostagem(**params)

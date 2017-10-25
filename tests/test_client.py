@@ -3,7 +3,10 @@ from unittest import TestCase, mock
 
 from pysigep.client import Client
 from pysigep.utils import URLS, HOMOLOGACAO, PRODUCAO
-from pysigep.utils import HOMOG_USUARIO, HOMOG_SENHA, HOMOG_CODIGO_ADMIN
+from pysigep.utils import (HOMOG_USUARIO,
+                           HOMOG_SENHA,
+                           HOMOG_CODIGO_ADMIN,
+                           HOMOG_CARTAO)
 
 
 class MockClass:
@@ -85,10 +88,34 @@ class TestClient(TestCase):
                                   senha=HOMOG_SENHA,
                                   usuario=HOMOG_USUARIO)
 
-            mk.return_value.service.verificaDisponibilidadeServico.return_value = True
+            service = mk.return_value.service
+
+            service.verificaDisponibilidadeServico.return_value = True
             ret = self.cliente.verifica_disponibilidade_servico(**params)
             self.assertTrue(ret)
 
-            mk.return_value.service.verificaDisponibilidadeServico.return_value = False
+            service.verificaDisponibilidadeServico.return_value = False
             ret = self.cliente.verifica_disponibilidade_servico(**params)
             self.assertFalse(ret)
+
+    def test_get_status_cartao_postagem(self):
+
+        with mock.patch('zeep.Client') as mk:
+
+            params = {
+                'numero_cartao_postagem': HOMOG_CARTAO,
+            }
+
+            self.cliente = Client(ambiente=HOMOLOGACAO,
+                                  senha=HOMOG_SENHA,
+                                  usuario=HOMOG_USUARIO)
+
+            service = mk.return_value.service
+
+            service.getStatusCartaoPostagem.return_value = 'Normal'
+            ret = self.cliente.get_status_cartao_postagem(**params)
+            self.assertEqual(ret, 'Normal')
+
+            service.getStatusCartaoPostagem.return_value = 'Cancelado'
+            ret = self.cliente.get_status_cartao_postagem(**params)
+            self.assertEqual(ret, 'Cancelado')
