@@ -37,9 +37,9 @@ facilidade e rapidez na preparação das postagens e gestão das informações s
 Features
 --------
 
-- [ ] Verificar *status* de um Cartão de Postagem
+- [x] Verificar *status* de um Cartão de Postagem
 - [x] Obter dados do endereço a partir de seu respectivo CEP.
-- [ ] Verificar disponibilidade de um dado serviço.
+- [x] Verificar disponibilidade de um dado serviço.
 - [ ] Gerar etiquetas para postagem de mercadoria.
 - [ ] Criação da pré-lista de postagem (PLP) e envio de seu XML para o webservice dos Correios.
 - [ ] Imprimir etiqueta da PLP.
