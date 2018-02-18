@@ -1,17 +1,26 @@
 # -*- coding: utf-8 -*-
 import zeep
 
-from .utils import URLS
+from .utils import URLS, validar, trim
 
 
-class Client:
+class SOAPClient:
 
     def __init__(self, usuario, senha, ambiente):
-        self.usuario = usuario
-        self.senha = senha
+        """Inicializa atributos da classe SOAPClient
+
+        Arguments:
+            usuario {str} -- login de acesso do SIGEPWeb
+            senha {str} -- senha de acesso do SIGEPWeb
+            ambiente {int} -- Constante indicando ambiente a ser 
+            utilizado para as consultas (Homologacao/Producao)
+        """
+        self.usuario = str(usuario)
+        self.senha = str(senha)
         self._ambiente = None
         self._url = None
         self.ambiente = ambiente
+
         self.cliente = zeep.Client(self.url)
 
     @property
