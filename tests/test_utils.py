@@ -10,9 +10,7 @@ class TestUtils(TestCase):
     def setUp(self):
         super(TestUtils, self).setUp()
 
-    def test_validar(self):
-        """Testa o funcionamento da funcao 'validar'
-        """
+    def test_validar_cep(self):
 
         # Testando com CEP corretos
         validar('cep', '37503130')
@@ -21,6 +19,8 @@ class TestUtils(TestCase):
         self.assertRaises(ValueError, validar, 'cep', '3750313A')
         self.assertRaises(ValueError, validar, 'cep', '3750313')
         self.assertRaises(TypeError, validar, 'cep', 37503130)
+
+    def test_validar_cod_administrativo(self):
 
         # Validamos Codigo Administrativo
         validar('codAdministrativo', '12345678')

@@ -24,8 +24,6 @@ class TestClient(TestCase):
         super(TestClient, self).setUp()
 
     def test_set_ambiente(self):
-        """Teste para o metodo 'set_ambiente'
-        """
 
         self.cliente = SOAPClient(ambiente=HOMOLOGACAO,
                                   senha=HOMOG_SENHA,
@@ -44,9 +42,7 @@ class TestClient(TestCase):
 
     @mock.patch('zeep.Client')
     def test_consulta_cep(self, mk):
-        """Teste para o serviço 'consulta_cep'
-        """
-
+  
         end_esperado = {
             'bairro': 'Santo Antônio',
             'cep': '37503130',
@@ -89,8 +85,6 @@ class TestClient(TestCase):
 
     @mock.patch('zeep.Client')
     def test_verifica_disponibilidade_servico(self, mk):
-        """Testa serviço 'verifica_disponibilidade_servico'
-        """
 
         params = {
             'cod_administrativo': HOMOG_CODIGO_ADMIN,
@@ -116,8 +110,6 @@ class TestClient(TestCase):
 
     @mock.patch('zeep.Client')
     def test_get_status_cartao_postagem(self, mk):
-        """Testa serviço 'get_status_cartao_postagem'
-        """
 
         params = {
             'numero_cartao_postagem': HOMOG_CARTAO,

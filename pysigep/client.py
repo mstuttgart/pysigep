@@ -29,10 +29,13 @@ class SOAPClient:
     @ambiente.setter
     def ambiente(self, value):
         """Define o ambiente e a url de consulta a ser utilizado conforma o
-        ambiente escolhido.
+        ambiente escolhido (Homologação/Produção).
 
-        :param: ambiente a ser utilizado durante as consultas
-        :type: Int
+        Arguments:
+            value {int} -- ambiente a ser utilizado durante as consultas
+
+        Raises:
+            KeyError -- Quando o ambiente fornecido não existe.
         """
         self._ambiente = value
 
@@ -48,19 +51,20 @@ class SOAPClient:
     def url(self):
         """Retorna a URL do ambiente utilizado.
 
-        :return: URL do ambiente utilizado
-        :rtype: Str
+        Returns:
+            str -- string com a url do ambiente
         """
         return self._url
 
     def consulta_cep(self, cep):
-        """ Este método retorna o endereço correspondente ao número de CEP
+        """Este método retorna o endereço correspondente ao número de CEP
         informado.
 
-        :param cep: Número do CEP sem hífen.
-        :type cep: str
-        :return: Dados do endereço do CEP consultado.
-        :rtype: enderecoERP
+        Arguments:
+            cep {str} -- Número do CEP sem ponto e/ou hífen.
+
+        Returns:
+            enderecoERP -- objeto contendo os dados do endereco
         """
 
         # Validamos cada ums dos parametros segundo a documentacao
@@ -76,15 +80,17 @@ class SOAPClient:
                                          numero_servico,
                                          cep_origem,
                                          cep_destino):
-        """Por meio desse método, pode ser verificado se um serviço que não
-        possui abrangência nacional está disponível entre um CEP de Origem e
-        de Destino.
+        """Verifica se um serviço que não possui abrangência
+        nacional está disponível entre um CEP de Origem e de Destino.
 
-        :param cod_administrativo: Código Administrativo do contrato do Cliente com os Correios.  # noqa
-        :param numero_servico: Códigos dos serviços contratados. Ex: 40215, 81019
-        :param cep_origem: CEP de Origem sem hífen
-        :param cep_destino: CEP de Destino sem hífen
-        :return: True para serviço disponível, False caso contrário.
+        Arguments:
+            cod_administrativo {str} -- Código Administrativo do contrato do Cliente com os Correios.  # noqa
+            numero_servico {str} -- Códigos dos serviços contratados.
+            cep_origem {str} -- Número do CEP sem ponto e/ou hífen.
+            cep_destino {str} -- Número do CEP sem ponto e/ou hífen.
+
+        Returns:
+            {Boolean} -- True para serviço disponível, False caso contrário.
         """
 
         # Validamos cada ums dos parametros segundo a documentacao
@@ -109,9 +115,12 @@ class SOAPClient:
         a pesquisa periódica para evitar tentativa de postagens com cartão
         suspenso, ocasionando a não aceitação dos objetos nos Correios.
 
-        :param numero_cartao_postagem: Número do Cartão de Postagem vinculado
+        Arguments:
+            numero_cartao_postagem {str} -- Número do Cartão de Postagem vinculado
         ao contrato.
-        :return: 'Normal' para cartão de postagem disponível, 'Cancelado'
+
+        Returns:
+            str -- 'Normal' para cartão de postagem disponível, 'Cancelado'
         caso contrário.
         """
 
