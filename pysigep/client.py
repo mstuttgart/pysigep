@@ -63,24 +63,37 @@ class SOAPClient:
         :return: Dados do endereço do CEP consultado.
         :rtype: enderecoERP
         """
+
+        # Validamos cada ums dos parametros segundo a documentacao
+        validar('cep', trim(cep))
+
         param = {
             'cep': cep
         }
         return self.cliente.service.consultaCEP(**param)
 
-    def verifica_disponibilidade_servico(self, cod_administrativo,
-                                         numero_servico, cep_origem,
+    def verifica_disponibilidade_servico(self,
+                                         cod_administrativo,
+                                         numero_servico,
+                                         cep_origem,
                                          cep_destino):
         """Por meio desse método, pode ser verificado se um serviço que não
         possui abrangência nacional está disponível entre um CEP de Origem e
         de Destino.
 
         :param cod_administrativo: Código Administrativo do contrato do Cliente com os Correios.  # noqa
-        :param numero_servico: Códigos dos serviços contratados. Ex: 40215, 81019  # noqa
+        :param numero_servico: Códigos dos serviços contratados. Ex: 40215, 81019
         :param cep_origem: CEP de Origem sem hífen
         :param cep_destino: CEP de Destino sem hífen
         :return: True para serviço disponível, False caso contrário.
         """
+
+        # Validamos cada ums dos parametros segundo a documentacao
+        validar('codAdministrativo', cod_administrativo)
+        validar('numeroServico', numero_servico)
+        validar('cep', trim(cep_origem))
+        validar('cep', trim(cep_destino))
+
         params = {
             'codAdministrativo': cod_administrativo,
             'numeroServico': numero_servico,
@@ -96,9 +109,11 @@ class SOAPClient:
         a pesquisa periódica para evitar tentativa de postagens com cartão
         suspenso, ocasionando a não aceitação dos objetos nos Correios.
 
-        :param numero_cartao_postagem: Número do Cartão de Postagem vinculado ao contrato.  # noqa
+        :param numero_cartao_postagem: Número do Cartão de Postagem vinculado ao contrato.
         :return: 'Normal' para cartão de postagem disponível, 'Cancelado' caso contrário.
         """
+
+        validar('numeroCartaoPostagem', numero_cartao_postagem)
 
         params = {
             'numeroCartaoPostagem': numero_cartao_postagem,
