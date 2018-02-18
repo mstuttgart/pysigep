@@ -42,7 +42,7 @@ class TestClient(TestCase):
 
     @mock.patch('zeep.Client')
     def test_consulta_cep(self, mk):
-  
+
         end_esperado = {
             'bairro': 'Santo Antônio',
             'cep': '37503130',

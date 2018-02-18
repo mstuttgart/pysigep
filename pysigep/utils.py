@@ -20,21 +20,19 @@ CARACTERES_NUMERICOS = re.compile(r'[^0-9]')
 regex_map = {
     'codAdministrativo': {
         'regex': r'^\d{8}$',
-        'msg_erro': """Código Adminsitrativo deve ser formado apenas por números
-         e conter 8 digitos.""",
+        'msg_erro': 'Código Adminsitrativo deve ser formado apenas por números e conter 8 digitos.',  # noqa
     },
     'numeroServico': {
         'regex': r'^\d{5}$',
-        'msg_erro': """Código do Serviço deve ser formado apenas por números
-        e conter 5 digitos.""",
+        'msg_erro': 'Código do Serviço deve ser formado apenas por números e conter 5 digitos.',  # noqa
     },
     'cep': {
         'regex': r'^\d{8}$',
-        'msg_erro': """CEP mal formatado. CEP deve conter 8 digitos.""",
+        'msg_erro': 'CEP mal formatado. CEP deve conter 8 digitos.',
     },
     'numeroCartaoPostagem': {
         'regex': r'^\d{10}$',
-        'msg_erro': """Numero do cartão de postagem deve conter 10 digitos.""",
+        'msg_erro': 'Numero do cartão de postagem deve conter 10 digitos.',
     },
 }
 

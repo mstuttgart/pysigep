@@ -84,14 +84,14 @@ class SOAPClient:
         nacional está disponível entre um CEP de Origem e de Destino.
 
         Arguments:
-            cod_administrativo {str} -- Código Administrativo do contrato do Cliente com os Correios.  # noqa
+            cod_administrativo {str} -- Código Administrativo do contrato do Cliente com os Correios.
             numero_servico {str} -- Códigos dos serviços contratados.
             cep_origem {str} -- Número do CEP sem ponto e/ou hífen.
             cep_destino {str} -- Número do CEP sem ponto e/ou hífen.
 
         Returns:
             {Boolean} -- True para serviço disponível, False caso contrário.
-        """
+        """  # noqa
 
         # Validamos cada ums dos parametros segundo a documentacao
         validar('codAdministrativo', cod_administrativo)
@@ -116,13 +116,12 @@ class SOAPClient:
         suspenso, ocasionando a não aceitação dos objetos nos Correios.
 
         Arguments:
-            numero_cartao_postagem {str} -- Número do Cartão de Postagem vinculado
-        ao contrato.
+            numero_cartao_postagem {str} -- Número do Cartão de Postagem vinculado ao contrato.
 
         Returns:
             str -- 'Normal' para cartão de postagem disponível, 'Cancelado'
         caso contrário.
-        """
+        """  # noqa
 
         validar('numeroCartaoPostagem', numero_cartao_postagem)
 

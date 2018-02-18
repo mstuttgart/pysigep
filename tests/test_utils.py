@@ -32,6 +32,4 @@ class TestUtils(TestCase):
         self.assertRaises(TypeError, validar, 'codAdministrativo', 12345678)
 
     def test_trim(self):
-        """Testa funcionamento da funcao 'trim'
-        """
         self.assertEqual(trim('37.503-130'), '37503130')
