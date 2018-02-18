@@ -1,14 +1,6 @@
-from unittest import TestCase, mock
+from unittest import TestCase
 
-from pysigep.utils import (URLS,
-                           HOMOLOGACAO,
-                           PRODUCAO,
-                           HOMOG_USUARIO,
-                           HOMOG_SENHA,
-                           HOMOG_CODIGO_ADMIN,
-                           HOMOG_CARTAO)
-
-from pysigep.utils import regex_map, validar, trim
+from pysigep.utils import validar, trim
 
 
 class TestUtils(TestCase):

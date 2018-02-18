@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 __title__ = 'pysigep'
 __description__ = 'API python para uso dos serviços fornecidos pelo ' \
                   'SIGEPWeb dos Correios '

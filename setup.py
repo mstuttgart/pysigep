@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 import os
 from codecs import open
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 version_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
                             'pysigep',
@@ -11,7 +11,7 @@ version_path = os.path.join(os.path.abspath(os.path.dirname(__file__)),
 
 about = {}
 with open(version_path, 'r') as f:
-    exec (f.read(), about)
+    exec(f.read(), about)
 
 with open('README.rst', 'r') as readme_file:
     readme = readme_file.read()
@@ -63,7 +63,7 @@ setup(
     install_requires=requirements,
     license=about['__license__'],
     zip_safe=False,
-    keywords='correios sigep sigepweb frete rastreamento development api',
+    keywords='correios sigep sigepweb development api',
     classifiers=classifiers,
     platforms=['any'],
     test_suite='tests',

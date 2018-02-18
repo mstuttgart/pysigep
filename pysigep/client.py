@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import zeep
 
 from .utils import URLS, validar, trim
@@ -12,8 +11,8 @@ class SOAPClient:
         Arguments:
             usuario {str} -- login de acesso do SIGEPWeb
             senha {str} -- senha de acesso do SIGEPWeb
-            ambiente {int} -- Constante indicando ambiente a ser 
-            utilizado para as consultas (Homologacao/Producao)
+            ambiente {int} -- Constante indicando ambiente a ser utilizado para
+            as consultas (Homologacao/Producao)
         """
         self.usuario = str(usuario)
         self.senha = str(senha)
@@ -105,12 +104,15 @@ class SOAPClient:
         return self.cliente.service.verificaDisponibilidadeServico(**params)
 
     def get_status_cartao_postagem(self, numero_cartao_postagem):
-        """Este método retorna o situação do cartão de postagem. É recomendada
+        """Este método retorna o situação do cartão de postagem, ou seja,
+        se o mesmo está 'Normal' ou 'Cancelado'. É recomendada
         a pesquisa periódica para evitar tentativa de postagens com cartão
         suspenso, ocasionando a não aceitação dos objetos nos Correios.
 
-        :param numero_cartao_postagem: Número do Cartão de Postagem vinculado ao contrato.
-        :return: 'Normal' para cartão de postagem disponível, 'Cancelado' caso contrário.
+        :param numero_cartao_postagem: Número do Cartão de Postagem vinculado
+        ao contrato.
+        :return: 'Normal' para cartão de postagem disponível, 'Cancelado'
+        caso contrário.
         """
 
         validar('numeroCartaoPostagem', numero_cartao_postagem)
