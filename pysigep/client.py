@@ -11,8 +11,7 @@ class SOAPClient:
         Arguments:
             usuario {str} -- login de acesso do SIGEPWeb
             senha {str} -- senha de acesso do SIGEPWeb
-            ambiente {int} -- Constante indicando ambiente a ser utilizado para
-            as consultas (Homologacao/Producao)
+            ambiente {int} -- ambiente a ser utilizado para as consultas (Homologacao/Producao)
         """
         self.usuario = str(usuario)
         self.senha = str(senha)
@@ -67,12 +66,12 @@ class SOAPClient:
             enderecoERP -- objeto contendo os dados do endereco
         """
 
-        # Validamos cada ums dos parametros segundo a documentacao
-        validar('cep', trim(cep))
-
         param = {
-            'cep': cep
+            'cep': trim(cep),
         }
+
+        validar('cep', param['cep'])
+
         return self.cliente.service.consultaCEP(**param)
 
     def verifica_disponibilidade_servico(self,
@@ -91,22 +90,23 @@ class SOAPClient:
 
         Returns:
             {Boolean} -- True para serviço disponível, False caso contrário.
-        """  # noqa
-
-        # Validamos cada ums dos parametros segundo a documentacao
-        validar('codAdministrativo', cod_administrativo)
-        validar('numeroServico', numero_servico)
-        validar('cep', trim(cep_origem))
-        validar('cep', trim(cep_destino))
+        """
 
         params = {
             'codAdministrativo': cod_administrativo,
             'numeroServico': numero_servico,
-            'cepOrigem': cep_origem,
-            'cepDestino': cep_destino,
+            'cepOrigem': trim(cep_origem),
+            'cepDestino': trim(cep_destino),
             'usuario': self.usuario,
             'senha': self.senha,
         }
+
+        # Validamos cada ums dos parametros segundo a documentacao
+        validar('codAdministrativo', params['codAdministrativo'])
+        validar('numeroServico', params['numeroServico'])
+        validar('cep', params['cepOrigem'])
+        validar('cep', params['cepDestino'])
+
         return self.cliente.service.verificaDisponibilidadeServico(**params)
 
     def get_status_cartao_postagem(self, numero_cartao_postagem):
@@ -119,15 +119,46 @@ class SOAPClient:
             numero_cartao_postagem {str} -- Número do Cartão de Postagem vinculado ao contrato.
 
         Returns:
-            str -- 'Normal' para cartão de postagem disponível, 'Cancelado'
-        caso contrário.
-        """  # noqa
-
-        validar('numeroCartaoPostagem', numero_cartao_postagem)
+            str -- 'Normal' para cartão de postagem disponível, 'Cancelado' caso contrário.
+        """
 
         params = {
             'numeroCartaoPostagem': numero_cartao_postagem,
             'usuario': self.usuario,
             'senha': self.senha,
         }
+
+        validar('numeroCartaoPostagem', params['numeroCartaoPostagem'])
+
         return self.cliente.service.getStatusCartaoPostagem(**params)
+
+    def solicita_etiquetas(self, tipo_destinatario, cnpj, id_servico, qtd_etiquetas):
+        """Retorna uma dada quantidade de etiquetas sem o digito verificador.
+        
+        Arguments:
+            tipo_destinatario {str} -- Identificação com a letra “C”, de cliente
+            cnpj {str} -- CNPJ da empresa.
+            id_servico {int} -- Id do serviço, porderá ser obtido no método buscaCliente().
+            qtd_etiquetas {int} -- Quantidade de etiquetas a serem solicitadas.
+        
+        Returns:
+            list -- Lista de etiquetas
+        """
+
+
+        params = {
+            'tipoDestinatario': tipo_destinatario,
+            'identificador': trim(cnpj),
+            'idServico': id_servico,
+            'qtdEtiquetas': qtd_etiquetas,
+            'usuario': self.usuario,
+            'senha': self.senha,
+        }
+
+        validar('tipoDestinatario', params['tipoDestinatario'])
+        validar('cnpj', params['identificador'])
+
+        etiquetas_str = self.cliente.service.solicitaEtiquetas(**params)
+        etiquetas_lista = etiquetas_str.split(',')
+
+        return etiquetas_lista
