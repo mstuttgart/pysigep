@@ -14,17 +14,18 @@ HOMOG_SENHA = 'n5f9t8'
 HOMOG_CARTAO = '0067599079'
 HOMOG_CODIGO_ADMIN = '17000190'
 HOMOG_CONTRATO = '9992157880'
+HOMOG_CNPJ = '38.875.380/0001-80'
 
 CARACTERES_NUMERICOS = re.compile(r'[^0-9]')
 
 regex_map = {
     'codAdministrativo': {
         'regex': r'^\d{8}$',
-        'msg_erro': 'Código Adminsitrativo deve ser formado apenas por números e conter 8 digitos.',  # noqa
+        'msg_erro': 'Código Adminsitrativo deve ser formado apenas por números e conter 8 digitos.',
     },
     'numeroServico': {
         'regex': r'^\d{5}$',
-        'msg_erro': 'Código do Serviço deve ser formado apenas por números e conter 5 digitos.',  # noqa
+        'msg_erro': 'Código do Serviço deve ser formado apenas por números e conter 5 digitos.',
     },
     'cep': {
         'regex': r'^\d{8}$',
@@ -34,6 +35,14 @@ regex_map = {
         'regex': r'^\d{10}$',
         'msg_erro': 'Numero do cartão de postagem deve conter 10 digitos.',
     },
+    'tipoDestinatario': {
+        'regex': r'^\w{1}$',
+        'msg_erro': 'Tipo de destinatario incorreto.',
+    },    
+    'cnpj': {
+        'regex': r'^\d{14}$',
+        'msg_erro': 'CNPJ inválido.',
+    },    
 }
 
 
