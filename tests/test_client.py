@@ -5,23 +5,14 @@ from pysigep.utils import URLS, HOMOLOGACAO, PRODUCAO
 from pysigep.utils import (HOMOG_USUARIO,
                            HOMOG_SENHA,
                            HOMOG_CODIGO_ADMIN,
-                           HOMOG_CARTAO)
+                           HOMOG_CARTAO,
+                           HOMOG_CNPJ)
 
 
-class MockClass:
-    """Mock Class criada para simular o objeto retornado pela
-    zeepe
-    """
-
-    def __init__(self, dictionary):
-        for k, v in dictionary.items():
-            setattr(self, k, v)
-
-
-class TestClient(TestCase):
+class TestSOAPClient(TestCase):
 
     def setUp(self):
-        super(TestClient, self).setUp()
+        super(TestSOAPClient, self).setUp()
 
     def test_set_ambiente(self):
 
@@ -43,6 +34,11 @@ class TestClient(TestCase):
     @mock.patch('zeep.Client')
     def test_consulta_cep(self, mk):
 
+        class MockClass:
+            def __init__(self, dictionary):
+                for k, v in dictionary.items():
+                    setattr(self, k, v)
+
         end_esperado = {
             'bairro': 'Santo Antônio',
             'cep': '37503130',
@@ -55,19 +51,18 @@ class TestClient(TestCase):
             'unidadesPostagem': [],
         }
 
-        # Sobrescrevemos o client para que o mock funcione
-        self.cliente = SOAPClient(ambiente=HOMOLOGACAO,
-                                  senha=HOMOG_SENHA,
-                                  usuario=HOMOG_USUARIO)
+        # Criamos o cliente SOAP
+        cliente = SOAPClient(ambiente=HOMOLOGACAO,
+                             senha=HOMOG_SENHA,
+                             usuario=HOMOG_USUARIO)
 
-        consulta_cep = self.cliente.consulta_cep
+        service_mk = mk.return_value.service
 
         # Criamos o mock para o valor de retorno
-        mk.return_value.service.consultaCEP.return_value = MockClass(
-            end_esperado)
+        service_mk.consultaCEP.return_value = MockClass(end_esperado)
 
         # Realizamos a consulta de CEP
-        endereco = consulta_cep('37503-130')
+        endereco = cliente.consulta_cep('37.503-130')
 
         self.assertEqual(endereco.bairro, 'Santo Antônio')
         self.assertEqual(endereco.cep, '37503130')
@@ -79,9 +74,30 @@ class TestClient(TestCase):
         self.assertEqual(endereco.uf, 'MG')
         self.assertEqual(endereco.unidadesPostagem, [])
 
-        self.assertRaises(ValueError, consulta_cep, '375031300')
-        self.assertRaises(ValueError, consulta_cep, '3750313')
-        self.assertRaises(TypeError, consulta_cep, 37503130)
+        # Verifica se o metodo consultaCEP foi chamado com os parametros corretos
+        service_mk.consultaCEP.assert_called_with(cep='37503130')
+
+    @mock.patch('zeep.Client')
+    def test_get_status_cartao_postagem(self, mk):
+
+        params = {
+            'numero_cartao_postagem': HOMOG_CARTAO,
+        }
+
+        # Sobrescrevemos o client para que o mock funcione
+        cliente = SOAPClient(ambiente=HOMOLOGACAO,
+                             senha=HOMOG_SENHA,
+                             usuario=HOMOG_USUARIO)
+
+        service = mk.return_value.service
+
+        service.getStatusCartaoPostagem.return_value = 'Normal'
+        ret = cliente.get_status_cartao_postagem(**params)
+        self.assertEqual(ret, 'Normal')
+
+        service.getStatusCartaoPostagem.return_value = 'Cancelado'
+        ret = cliente.get_status_cartao_postagem(**params)
+        self.assertEqual(ret, 'Cancelado')
 
     @mock.patch('zeep.Client')
     def test_verifica_disponibilidade_servico(self, mk):
@@ -94,25 +110,40 @@ class TestClient(TestCase):
         }
 
         # Sobrescrevemos o client para que o mock funcione
-        self.cliente = SOAPClient(ambiente=HOMOLOGACAO,
-                                  senha=HOMOG_SENHA,
-                                  usuario=HOMOG_USUARIO)
+        cliente = SOAPClient(ambiente=HOMOLOGACAO,
+                             senha=HOMOG_SENHA,
+                             usuario=HOMOG_USUARIO)
 
-        service = mk.return_value.service
+        service_mk = mk.return_value.service
 
-        service.verificaDisponibilidadeServico.return_value = True
-        ret = self.cliente.verifica_disponibilidade_servico(**params)
+        service_mk.verificaDisponibilidadeServico.return_value = True
+        ret = cliente.verifica_disponibilidade_servico(**params)
         self.assertTrue(ret)
 
-        service.verificaDisponibilidadeServico.return_value = False
-        ret = self.cliente.verifica_disponibilidade_servico(**params)
+        service_mk.verificaDisponibilidadeServico.return_value = False
+        ret = cliente.verifica_disponibilidade_servico(**params)
         self.assertFalse(ret)
 
+        params = {
+            'codAdministrativo': HOMOG_CODIGO_ADMIN,
+            'numeroServico': '04162',
+            'cepOrigem': '70002900',
+            'cepDestino': '70002900',
+            'usuario': HOMOG_USUARIO,
+            'senha': HOMOG_SENHA,
+        }
+
+        service_mk.verificaDisponibilidadeServico.assert_called_with(**params)
+
+
     @mock.patch('zeep.Client')
-    def test_get_status_cartao_postagem(self, mk):
+    def test_solicita_etiquetas(self, mk):
 
         params = {
-            'numero_cartao_postagem': HOMOG_CARTAO,
+            'tipo_destinatario': 'C',
+            'cnpj': HOMOG_CNPJ,
+            'id_servico': 124849,
+            'qtd_etiquetas': 2,
         }
 
         # Sobrescrevemos o client para que o mock funcione
@@ -122,10 +153,12 @@ class TestClient(TestCase):
 
         service = mk.return_value.service
 
-        service.getStatusCartaoPostagem.return_value = 'Normal'
-        ret = self.cliente.get_status_cartao_postagem(**params)
-        self.assertEqual(ret, 'Normal')
+        service.solicitaEtiquetas.return_value = 'DL76023727 BR,DL76023728 BR'
+        ret = self.cliente.solicita_etiquetas(**params)
 
-        service.getStatusCartaoPostagem.return_value = 'Cancelado'
-        ret = self.cliente.get_status_cartao_postagem(**params)
-        self.assertEqual(ret, 'Cancelado')
+        etiquetas = [
+            'DL76023727 BR',
+            'DL76023728 BR',
+        ]
+
+        self.assertListEqual(etiquetas, ret)
