@@ -46,13 +46,8 @@ def validar(key, string):
         msg_erro {Str} -- Mensagem de erro
 
     Raises:
-        TypeError -- Quando o parametro string não é uma string.
-        ValueError -- Quando a string fornecida não coincide com sua
-        expressão regular.
+        ValueError -- Quando a string fornecida não coincide com sua expressão regular.
     """
-    if not isinstance(string, str):
-        raise TypeError('parâmetro "string" deve do tipo str. '
-                        'Tipo encontrado: %s' % type(string))
 
     if not re.search(regex_map[key]['regex'], string):
         raise ValueError(regex_map[key]['msg_erro'])
@@ -64,16 +59,8 @@ def trim(string):
     Arguments:
         string {str} -- String a ser formatada.
 
-    Raises:
-        TypeError -- Quando o parâmetro string não é do tipo str
-
     Returns:
         str -- Nova string formatada.
     """
-
-    if not isinstance(string, str):
-        raise TypeError(
-            """Parâmetro 'string'"' deve ser do tipo str.
-            Tipo encontrado: %s""" % type(string))
 
     return CARACTERES_NUMERICOS.sub('', string)

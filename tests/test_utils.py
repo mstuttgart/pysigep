@@ -18,7 +18,6 @@ class TestUtils(TestCase):
         # Realizando os testes com CEP invalidos que lancam excecao
         self.assertRaises(ValueError, validar, 'cep', '3750313A')
         self.assertRaises(ValueError, validar, 'cep', '3750313')
-        self.assertRaises(TypeError, validar, 'cep', 37503130)
 
     def test_validar_cod_administrativo(self):
 
@@ -29,7 +28,6 @@ class TestUtils(TestCase):
         self.assertRaises(ValueError, validar,
                           'codAdministrativo', '123456789')
         self.assertRaises(ValueError, validar, 'codAdministrativo', '1234567')
-        self.assertRaises(TypeError, validar, 'codAdministrativo', 12345678)
 
     def test_trim(self):
         self.assertEqual(trim('37.503-130'), '37503130')
