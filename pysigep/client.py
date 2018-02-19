@@ -134,17 +134,16 @@ class SOAPClient:
 
     def solicita_etiquetas(self, tipo_destinatario, cnpj, id_servico, qtd_etiquetas):
         """Retorna uma dada quantidade de etiquetas sem o digito verificador.
-        
+
         Arguments:
             tipo_destinatario {str} -- Identificação com a letra “C”, de cliente
             cnpj {str} -- CNPJ da empresa.
             id_servico {int} -- Id do serviço, porderá ser obtido no método buscaCliente().
             qtd_etiquetas {int} -- Quantidade de etiquetas a serem solicitadas.
-        
+
         Returns:
             list -- Lista de etiquetas
         """
-
 
         params = {
             'tipoDestinatario': tipo_destinatario,

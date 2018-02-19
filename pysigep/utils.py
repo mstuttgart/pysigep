@@ -38,11 +38,11 @@ regex_map = {
     'tipoDestinatario': {
         'regex': r'^\w{1}$',
         'msg_erro': 'Tipo de destinatario incorreto.',
-    },    
+    },
     'cnpj': {
         'regex': r'^\d{14}$',
         'msg_erro': 'CNPJ inválido.',
-    },    
+    },
 }
 
 
