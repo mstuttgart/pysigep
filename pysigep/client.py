@@ -43,8 +43,8 @@ class SOAPClient:
             self.cliente = zeep.Client(self.url)
         except KeyError:
             raise KeyError(
-                'Ambiente inválido! Valor deve ser 1 para PRODUCAO e 2 '
-                'para HOMOLOGACAO')
+                'Ambiente inválido! Valor deve ser 1 para HOMOLOGACAO e 2 '
+                'para PRODUCAO')
 
     @property
     def url(self):
