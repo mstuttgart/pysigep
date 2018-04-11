@@ -161,3 +161,30 @@ class SOAPClient:
         etiquetas_lista = etiquetas_str.split(',')
 
         return etiquetas_lista
+
+    def gera_digito_verificador_etiquetas(self, etiquetas, online=True):
+        """Este método retorna o DV - Dígito Verificador de um lista de etiquetas.
+
+        Arguments:
+            etiquetas {list} -- Lista de etiquetas sem o digito verificador.
+
+        Keyword Arguments:
+            online {bool} -- indica se o dv será buscado no webservice dos correios ou gerado localmente (default: {True})
+
+        Returns:
+            list -- lista contendo os dv correspondentes as etiquetas fornecidas.
+        """
+
+        params = {
+            'etiquetas': etiquetas,
+            'usuario': self.usuario,
+            'senha': self.senha,
+        }
+
+        for etiqueta in etiquetas:
+            validar('etiqueta', etiqueta)
+
+        if online:
+            digitos = self.cliente.service.geraDigitoVerificadorEtiquetas(**params)
+
+        return digitos
