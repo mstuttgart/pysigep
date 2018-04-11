@@ -135,7 +135,6 @@ class TestSOAPClient(TestCase):
 
         service_mk.verificaDisponibilidadeServico.assert_called_with(**params)
 
-
     @mock.patch('zeep.Client')
     def test_solicita_etiquetas(self, mk):
 
@@ -162,3 +161,21 @@ class TestSOAPClient(TestCase):
         ]
 
         self.assertListEqual(etiquetas, ret)
+
+    @mock.patch('zeep.Client')
+    def test_gera_digito_verificador_etiquetas(self, mk):
+        params = {
+            'etiquetas': ['DL76023727 BR', 'DL76023728 BR'],
+        }
+
+        # Sobrescrevemos o client para que o mock funcione
+        self.cliente = SOAPClient(ambiente=HOMOLOGACAO,
+                                  senha=HOMOG_SENHA,
+                                  usuario=HOMOG_USUARIO)
+
+        service = mk.return_value.service
+
+        service.geraDigitoVerificadorEtiquetas.return_value = [2, 6]
+        ret = self.cliente.gera_digito_verificador_etiquetas(**params)
+
+        self.assertListEqual(ret, [2, 6])
