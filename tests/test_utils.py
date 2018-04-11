@@ -29,5 +29,23 @@ class TestUtils(TestCase):
                           'codAdministrativo', '123456789')
         self.assertRaises(ValueError, validar, 'codAdministrativo', '1234567')
 
+    def test_validar_etiqueta(self):
+
+        # Validamos uma etiqueta correta
+        validar('etiqueta', 'DL76023727 BR')
+
+        # Validamos etiquetas invalidas
+        with self.assertRaises(ValueError):
+            validar('etiqueta', 'DL76023727BR')
+
+        with self.assertRaises(ValueError):
+            validar('etiqueta', 'DL760237275BR')
+
+        with self.assertRaises(ValueError):
+            validar('etiqueta', '3L76023727 BR')
+
+        with self.assertRaises(ValueError):
+            validar('etiqueta', 'DLA6023727 BR')
+
     def test_trim(self):
         self.assertEqual(trim('37.503-130'), '37503130')

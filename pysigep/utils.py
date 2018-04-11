@@ -43,6 +43,10 @@ regex_map = {
         'regex': r'^\d{14}$',
         'msg_erro': 'CNPJ inválido.',
     },
+    'etiqueta': {
+        'regex': r'^[A-Z]{2}\d{8} BR$',
+        'msg_erro': 'Etiqueta inválida. A etiqueta deve possuir 13 caracters e ser do formato: "AA00000000 BR"'
+    }
 }
 
 
