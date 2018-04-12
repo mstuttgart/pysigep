@@ -1,6 +1,6 @@
-from unittest import TestCase
+from unittest import TestCase, mock
 
-from pysigep.utils import validar, trim
+from pysigep.utils import validar, trim, gera_digito_verificador
 
 
 class TestUtils(TestCase):
@@ -46,6 +46,31 @@ class TestUtils(TestCase):
 
         with self.assertRaises(ValueError):
             validar('etiqueta', 'DLA6023727 BR')
+
+    def test_gera_digito_verificador(self):
+
+        etiquetas = [
+            'DL76023727 BR',
+            'DL76023728 BR',
+        ]
+
+        ret = gera_digito_verificador(etiquetas)
+        self.assertListEqual(ret, [2, 6])
+
+        with self.assertRaises(ValueError):
+            gera_digito_verificador(['DL76023727BR'])
+
+        with self.assertRaises(ValueError):
+            gera_digito_verificador(['DL760237274 BR'])
+
+        with mock.patch('pysigep.utils.sum') as mk:
+            mk.return_value = 0
+            ret = gera_digito_verificador(['DL76023727 BR'])
+            self.assertListEqual(ret, [5])
+
+            mk.return_value = 1
+            ret = gera_digito_verificador(['DL76023727 BR'])
+            self.assertListEqual(ret, [0])
 
     def test_trim(self):
         self.assertEqual(trim('37.503-130'), '37503130')
