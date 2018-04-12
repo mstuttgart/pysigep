@@ -1,6 +1,6 @@
 import zeep
 
-from .utils import URLS, validar, trim
+from .utils import URLS, validar, trim, gera_digito_verificador
 
 
 class SOAPClient:
@@ -162,7 +162,7 @@ class SOAPClient:
 
         return etiquetas_lista
 
-    def gera_digito_verificador_etiquetas(self, etiquetas, online=True):
+    def gera_digito_verificador_etiquetas(self, etiquetas, offline=True):
         """Este método retorna o DV - Dígito Verificador de um lista de etiquetas.
 
         Arguments:
@@ -184,7 +184,10 @@ class SOAPClient:
         for etiqueta in etiquetas:
             validar('etiqueta', etiqueta)
 
-        if online:
-            digitos = self.cliente.service.geraDigitoVerificadorEtiquetas(**params)
+        if offline:
+            digitos = gera_digito_verificador(params['etiquetas'])
+        else:
+            digitos = self.cliente.service.geraDigitoVerificadorEtiquetas(
+                **params)
 
         return digitos
