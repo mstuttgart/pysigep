@@ -1,9 +1,0 @@
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:cli="http://cliente.bean.master.sigep.bsb.correios.com.br/">
-    <soapenv:Header/>
-    <soapenv:Body>
-        <cli:consultaCEP>
-            <cep>{{ cep }}</cep>
-        </cli:consultaCEP>
-    </soapenv:Body>
-</soapenv:Envelope>
