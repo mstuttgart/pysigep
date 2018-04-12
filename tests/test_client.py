@@ -176,6 +176,10 @@ class TestSOAPClient(TestCase):
         service = mk.return_value.service
 
         service.geraDigitoVerificadorEtiquetas.return_value = [2, 6]
-        ret = self.cliente.gera_digito_verificador_etiquetas(**params)
 
+        ret = self.cliente.gera_digito_verificador_etiquetas(**params)
+        self.assertListEqual(ret, [2, 6])
+
+        ret = self.cliente.gera_digito_verificador_etiquetas(**params,
+                                                             offline=False)
         self.assertListEqual(ret, [2, 6])
