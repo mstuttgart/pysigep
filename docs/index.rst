@@ -25,6 +25,7 @@ Features
     contributing
     authors
     history
+    modules
 
 Encontrou algum erro? Tem alguma sugestão para melhorar a PySIGEP? Deixe-me saber.
 Contribuições são muito bem vindas!
