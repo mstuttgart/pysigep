@@ -51,11 +51,10 @@ lint: ## check style with flake8
 	flake8 pysigep tests
 
 check-setup: ## valida readme.rst e setup.py
-python setup.py check --restructuredtext
+	python setup.py check --restructuredtext
 
 test: ## run tests quickly with the default Python
-	
-		python setup.py test
+	python setup.py test
 
 test-all: ## run tests on every Python version with tox
 	tox
