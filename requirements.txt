@@ -1,8 +1,4 @@
 coveralls==1.1
-Jinja2==2.9.6
-lxml==3.7.3
-Pillow==4.1.0
-requests==2.13.0
 flake8==3.4.1
 tox==2.7.0
 zeep==2.4.0
