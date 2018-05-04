@@ -3,14 +3,13 @@ PySIGEP
 =======
 
 .. image:: https://img.shields.io/travis/mstuttgart/pysigep/develop.svg?style=flat-square
-        :target: https://travis-ci.org/mstuttgart/pysigep
+    :target: https://travis-ci.org/mstuttgart/pysigep
 
 .. image:: https://img.shields.io/coveralls/mstuttgart/pysigep/develop.svg?style=flat-square
-        :target: https://coveralls.io/github/mstuttgart/pysigep?branch=develop
+    :target: https://coveralls.io/github/mstuttgart/pysigep?branch=develop
 
 .. image:: https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat-square
-   :target: https://landscape.io/github/mstuttgart/pysigep/develop
-   :alt: Code Health
+    :target: https://landscape.io/github/mstuttgart/pysigep/develop
 
 .. image:: https://img.shields.io/pypi/v/pysigep.svg?style=flat-square
     :target: https://pypi.python.org/pypi/pysigep
@@ -21,13 +20,7 @@ PySIGEP
 .. image:: https://img.shields.io/pypi/l/pysigep.svg?style=flat-square
     :target: https://github.com/mstuttgart/pysigep/blob/develop/LICENSE
 
-.. image:: https://readthedocs.org/projects/pysigep/badge/?version=latest
-        :target: https://pysigep.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
-
 Interface python para uso dos serviços fornecidos pelo SIGEPWeb dos Correios.
-
-* Documentation: https://pysigep.readthedocs.io.
 
 Sobre
 -----
@@ -44,6 +37,14 @@ Features
 -  Verificar disponibilidade de um dado serviço.
 -  Gerar etiquetas para postagem de mercadoria.
 
+Documentação
+------------
+
+Para mais detalhes sobre a PyCEPCorreios, por gentileza, consulte a documentação oficial (também disponível em Inglẽs):
+
+* Documentação online: https://pysigep.readthedocs.io.
+* Documentação PDF: `download <https://media.readthedocs.org/pdf/pysigep/stable/pysigep.pdf>`_
+
 Instalação
 ----------
 
@@ -51,8 +52,31 @@ A versão atual **ainda esta em fase de desenvolvimento**, sendo que os recursos
 disponiveis podem ser removidos sem aviso prévio. Portanto, não é recomendável
 seu uso em ambiente de produção.
 
+Aviso de *bugs*, dúvidas e sugestões
+------------------------------------
+
+Para dúvidas, sugestões e relatórios de *bugs*, por gentileza, crie uma *issue*:
+
+- Issue Tracker: https://github.com/mstuttgart/pysigep/issues
+
+Como contribuir
+---------------
+
+Deseja participar do desenvolvimento da PyCepCorreios? Torne-se um contribuidor do PyCEPCorreios!
+visite a documentação para verificar a *guideline* de contribuição:
+
+- Veja `aqui <https://pysigep.readthedocs.io/pt/latest/contributing.html>`_.
+
+Contribuidores
+--------------
+
+Agradecimentos aos seguintes contribuidores pelo esforço de fazer a PyCEPCorreios
+melhor:
+
+- Lista de contribuidores: https://github.com/mstuttgart/pysigep/graphs/contributors
+
 
 Créditos
 --------
 
-Copyright (C) 2016-2017 por Michell Stuttgart Faria
+Copyright (C) 2017-2018 por Michell Stuttgart
