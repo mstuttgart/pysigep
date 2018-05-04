@@ -7,7 +7,7 @@ Desenvolvedor
 
 PySIGEP foi desenvolvido originalmente por:
 
-* Michell Stuttgart <michellstut@gmail.com>
+* Michell Stuttgart (https://github.com/mstuttgart)
 
 Contribuidores
 --------------
