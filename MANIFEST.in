@@ -1,13 +1,7 @@
-include AUTHORS.rst
 include CONTRIBUTING.rst
-include HISTORY.rst
 include LICENSE
 include README.rst
 include MANIFEST.in
-
-include pysigep/templates/*.xml
-include pysigep/correios/data/layout.xsd
-include pysigep/correios/data/fonts/*.ttf
 
 recursive-include tests *
 recursive-exclude * __pycache__
