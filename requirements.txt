@@ -3,3 +3,4 @@ flake8==3.4.1
 tox==2.7.0
 zeep==2.4.0
 Sphinx==1.6.2
+watchdog
