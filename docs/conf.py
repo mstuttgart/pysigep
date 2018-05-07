@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PySIGEP'
-copyright = u"2017, Michell Stuttgart"
+copyright = u"2017-2018, Michell Stuttgart"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -125,7 +125,7 @@ html_theme_options = {
     'github_type': 'star',
     'github_banner': True,
     'travis_button': True,
-    'sidebar_collapse': False,
+    'sidebar_collapse': True,
     'logo_name': True,
     'description': 'Interface para os serviços do SIGEPWeb dos Correios',
     'sidebar_includehidden': True,
