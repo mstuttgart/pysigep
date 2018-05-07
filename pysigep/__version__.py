@@ -1,7 +1,7 @@
 __title__ = 'pysigep'
 __description__ = 'API python para uso dos serviços fornecidos pelo ' \
                   'SIGEPWeb dos Correios '
-__version__ = '0.4.4'
+__version__ = '0.1.0'
 __url__ = 'https://github.com/mstuttgart/pysigep'
 __download_url__ = 'https://github.com/mstuttgart/pysigep'
 __author__ = 'Michell Stuttgart'
