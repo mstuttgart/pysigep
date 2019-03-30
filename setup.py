@@ -13,11 +13,8 @@ about = {}
 with open(version_path, 'r') as f:
     exec(f.read(), about)
 
-with open('README.rst', 'r') as readme_file:
+with open('README.md', 'r') as readme_file:
     readme = readme_file.read()
-
-with open('docs/history.rst', 'r') as history_file:
-    history = history_file.read()
 
 requirements = [
     'zeep',
@@ -41,7 +38,8 @@ setup(
     name=about['__title__'],
     version=about['__version__'],
     description=about['__description__'],
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
+    long_description_content_type='text/markdown',
     author=about['__author__'],
     author_email=about['__author_email__'],
     maintainer=about['__maintainer__'],
