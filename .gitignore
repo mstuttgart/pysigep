@@ -67,3 +67,4 @@ target/
 /htmlcov
 main.py.
 .vscode/
+.env/
