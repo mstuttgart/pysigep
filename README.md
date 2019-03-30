@@ -53,10 +53,9 @@ facilidade e rapidez na preparação das postagens e gestão das informações s
 
 ## Documentação
 
-Para mais detalhes sobre a PyCEPCorreios, por gentileza, consulte a documentação oficial (também disponível em Inglẽs):
+Para mais detalhes sobre a PyCEPCorreios, por gentileza, consulte a documentação oficial:
 
-* Documentação online: https://pysigep.readthedocs.io.
-* Documentação PDF: [download](https://media.readthedocs.org/pdf/pysigep/stable/pysigep.pdf).
+* Documentação online: [aqui](https://mstuttgart.github.io/pysigep/).
 
 ## Instalação
 
