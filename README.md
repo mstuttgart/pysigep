@@ -18,7 +18,7 @@
     <img src="https://img.shields.io/coveralls/mstuttgart/pysigep/develop.svg?style=flat-square" alt="Installs">
   </a>
   <a href="https://landscape.io/github/mstuttgart/pysigep/develop">
-      <img src="https://landscape.io/github/mstuttgart/pysigep/develop/landscape.svg?style=flat-square" alt="Ratings">
+      <img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability/mstuttgart/pysigep.svg?style=flat-square">
   </a>
   <a href="https://pypi.org/project/pysigep">
       <img src="https://img.shields.io/pypi/v/pysigep.svg?style=flat-square" alt="Ratings">
