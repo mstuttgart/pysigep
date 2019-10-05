@@ -68,3 +68,4 @@ target/
 main.py.
 .vscode/
 .env/
+.venv/
