@@ -80,7 +80,7 @@ class SOAPClient:
 
         Arguments:
             id_contrato {str} -- Número do contrato
-            id_cartao_postagem {str} -- Cartão de postagem vinculado ao contrato        
+            id_cartao_postagem {str} -- Cartão de postagem vinculado ao contrato
 
         Returns:
             dict -- Dict contendo os dados do contrato do clinte
