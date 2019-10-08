@@ -162,13 +162,16 @@ class TestSOAPClient(TestCase):
 
         service_mk = mk.return_value.service
 
-        service_mk.verificaDisponibilidadeServico.return_value = True
+        service_mk.verificaDisponibilidadeServico.return_value = '0#'
         ret = cliente.verifica_disponibilidade_servico(**params)
-        self.assertTrue(ret)
+        self.assertEqual(ret, '0#')
 
-        service_mk.verificaDisponibilidadeServico.return_value = False
+        msg_erro = '-888#Erro ao calcular tarifa no SGPB. ERP-007: '\
+        'CEP de origem nao pode postar para o CEP de destino informado(-1).'
+
+        service_mk.verificaDisponibilidadeServico.return_value = msg_erro
         ret = cliente.verifica_disponibilidade_servico(**params)
-        self.assertFalse(ret)
+        self.assertEqual(ret, msg_erro)
 
         params = {
             'codAdministrativo': HOMOG_CODIGO_ADMIN,
