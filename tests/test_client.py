@@ -78,6 +78,52 @@ class TestSOAPClient(TestCase):
         service_mk.consultaCEP.assert_called_with(cep='37503130')
 
     @mock.patch('zeep.Client')
+    def test_busca_client(self, mk):
+
+        class MockClass:
+            def __init__(self, dictionary):
+                for k, v in dictionary.items():
+                    setattr(self, k, v)
+
+        end_esperado = {
+            'cnpj': 'Santo Antônio',
+            'cep': '37503130',
+            'cidade': 'Itajubá',
+            'complemento': None,
+            'complemento2': '- até 214/215',
+            'end': 'Rua Geraldino Campista',
+            'id': 0,
+            'uf': 'MG',
+            'unidadesPostagem': [],
+        }
+
+        # Criamos o cliente SOAP
+        cliente = SOAPClient(ambiente=HOMOLOGACAO,
+                             senha=HOMOG_SENHA,
+                             usuario=HOMOG_USUARIO)
+
+        service_mk = mk.return_value.service
+
+        # Criamos o mock para o valor de retorno
+        service_mk.consultaCEP.return_value = MockClass(end_esperado)
+
+        # Realizamos a consulta de CEP
+        endereco = cliente.consulta_cep('37.503-130')
+
+        self.assertEqual(endereco.bairro, 'Santo Antônio')
+        self.assertEqual(endereco.cep, '37503130')
+        self.assertEqual(endereco.cidade, 'Itajubá')
+        self.assertEqual(endereco.complemento, None)
+        self.assertEqual(endereco.complemento2, '- até 214/215')
+        self.assertEqual(endereco.end, 'Rua Geraldino Campista')
+        self.assertEqual(endereco.id, 0)
+        self.assertEqual(endereco.uf, 'MG')
+        self.assertEqual(endereco.unidadesPostagem, [])
+
+        # Verifica se o metodo consultaCEP foi chamado com os parametros corretos
+        service_mk.consultaCEP.assert_called_with(cep='37503130')
+
+    @mock.patch('zeep.Client')
     def test_get_status_cartao_postagem(self, mk):
 
         params = {

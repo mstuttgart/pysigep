@@ -23,6 +23,14 @@ regex_map = {
         'regex': r'^\d{8}$',
         'msg_erro': 'Código Adminsitrativo deve ser formado apenas por números e conter 8 digitos.',
     },
+    'idContrato': {
+        'regex': r'^\d{10}$',
+        'msg_erro': 'ID do contrato deve ser formado apenas por números e conter 10 digitos.',
+    },
+    'idCartaoPostagem': {
+        'regex': r'^\d{10}$',
+        'msg_erro': 'ID do cartão de postagem deve ser formado apenas por números e conter 10 digitos.',
+    },
     'numeroServico': {
         'regex': r'^\d{5}$',
         'msg_erro': 'Código do Serviço deve ser formado apenas por números e conter 5 digitos.',
