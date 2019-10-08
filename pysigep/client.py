@@ -83,7 +83,7 @@ class SOAPClient:
             id_cartao_postagem {str} -- Cartão de postagem vinculado ao contrato        
 
         Returns:
-            buscaClienteResponse -- Objeto contendo os dados do cartão e do contrato
+            dict -- Dict contendo os dados do contrato do clinte
         """
 
         params = {
@@ -97,7 +97,9 @@ class SOAPClient:
         validar('idContrato', params['idContrato'])
         validar('idCartaoPostagem', params['idCartaoPostagem'])
 
-        return self.cliente.service.buscaCliente(**params)
+        # Realizamos a consulta e convertermos a saida pra Dict (ao inves de um objeto)
+        # Facilitando o manuseio do conteudo retornado
+        return zeep.helpers.serialize_object(self.cliente.service.buscaCliente(**params), target_cls=dict)
 
     def verifica_disponibilidade_servico(self,
                                          cod_administrativo,
