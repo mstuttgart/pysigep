@@ -114,7 +114,7 @@ class SOAPClient:
             cep_destino {str} -- Número do CEP sem ponto e/ou hífen.
 
         Returns:
-            {Boolean} -- True para serviço disponível, False caso contrário.
+            {str} -- código do erro#motivo.
         """
 
         params = {
