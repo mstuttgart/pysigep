@@ -63,7 +63,7 @@ class SOAPClient:
             cep {str} -- Número do CEP sem ponto e/ou hífen.
 
         Returns:
-            enderecoERP -- objeto contendo os dados do endereco
+            dict -- Dict contendo os dados do endereco
         """
 
         param = {
@@ -72,7 +72,7 @@ class SOAPClient:
 
         validar('cep', param['cep'])
 
-        return self.cliente.service.consultaCEP(**param)
+        return zeep.helpers.serialize_object(self.cliente.service.consultaCEP(**param), target_cls=dict)
 
     def busca_cliente(self, id_contrato, id_cartao_postagem):
         """Este método retorna os serviços disponíveis do contrato
