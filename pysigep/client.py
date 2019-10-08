@@ -74,6 +74,31 @@ class SOAPClient:
 
         return self.cliente.service.consultaCEP(**param)
 
+    def busca_cliente(self, id_contrato, id_cartao_postagem):
+        """Este método retorna os serviços disponíveis do contrato
+        para um determinado cartão de postagem.
+
+        Arguments:
+            id_contrato {str} -- Número do contrato
+            id_cartao_postagem {str} -- Cartão de postagem vinculado ao contrato        
+
+        Returns:
+            buscaClienteResponse -- Objeto contendo os dados do cartão e do contrato
+        """
+
+        params = {
+            'idContrato': id_contrato,
+            'idCartaoPostagem': id_cartao_postagem,
+            'usuario': self.usuario,
+            'senha': self.senha,
+        }
+
+        # Validamos cada ums dos parametros segundo a documentacao
+        validar('idContrato', params['idContrato'])
+        validar('idCartaoPostagem', params['idCartaoPostagem'])
+
+        return self.cliente.service.buscaCliente(**params)
+
     def verifica_disponibilidade_servico(self,
                                          cod_administrativo,
                                          numero_servico,
