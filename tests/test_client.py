@@ -87,12 +87,12 @@ class TestSOAPClient(TestCase):
         # Realizamos a busca pelo clinte
         res = cliente.busca_cliente(id_contrato='9992157880', id_cartao_postagem='0067599079')
 
-        self.assertEqual(res.cnpj, '34028316000103      ')
-        self.assertEqual(res.contratos[0].cartoesPostagem[0].codigoAdministrativo, '17000190  ')
-        self.assertEqual(res.contratos[0].cartoesPostagem[0].numero, '0067599079')
-        self.assertEqual(res.contratos[0].cartoesPostagem[0].servicos[0].codigo, '40215                    ')
-        self.assertEqual(res.contratos[0].cartoesPostagem[0].servicos[0].id, 104707)
-        self.assertEqual(res.contratos[0].codigoDiretoria, '          10')
+        self.assertEqual(res['cnpj'], '34028316000103      ')
+        self.assertEqual(res['contratos'][0]['cartoesPostagem'][0]['codigoAdministrativo'], '17000190  ')
+        self.assertEqual(res['contratos'][0]['cartoesPostagem'][0]['numero'], '0067599079')
+        self.assertEqual(res['contratos'][0]['cartoesPostagem'][0]['servicos'][0]['codigo'], '40215                    ')
+        self.assertEqual(res['contratos'][0]['cartoesPostagem'][0]['servicos'][0]['id'], 104707)
+        self.assertEqual(res['contratos'][0]['codigoDiretoria'], '          10')
 
     @mock.patch('zeep.Client')
     def test_get_status_cartao_postagem(self, mk):
