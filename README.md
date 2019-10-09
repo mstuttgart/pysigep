@@ -53,7 +53,7 @@ facilidade e rapidez na preparação das postagens e gestão das informações s
 
 ## Documentação
 
-Para mais detalhes sobre a PyCEPCorreios, por gentileza, consulte a documentação oficial:
+Para mais detalhes sobre a PySIGEP, por gentileza, consulte a documentação oficial:
 
 * Documentação online: [aqui](https://mstuttgart.github.io/pysigep/).
 
@@ -73,14 +73,14 @@ Para dúvidas, sugestões e relatórios de *bugs*, por gentileza, crie uma *issu
 
 ## Como Contribuir
 
-Deseja participar do desenvolvimento da PyCepCorreios? Torne-se um contribuidor do PyCEPCorreios!
+Deseja participar do desenvolvimento da PySIGEP? Torne-se um contribuidor do PySIGEP!
 visite a documentação para verificar a *guideline* de contribuição:
 
 - Veja [aqui](https://pysigep.readthedocs.io/pt/latest/contributing.html).
 
 ### Contribuidores
 
-Agradecimentos aos seguintes contribuidores pelo esforço de fazer a PyCEPCorreios
+Agradecimentos aos seguintes contribuidores pelo esforço de fazer a PySIGEP
 melhor:
 
 - Lista de contribuidores: [aqui](https://github.com/mstuttgart/pysigep/graphs/contributors).
