@@ -37,6 +37,9 @@
   <a href="#créditos">Créditos</a>
 </p>
 
+> [!CAUTION]
+> Esta biblioteca esta arquivada porque o serviço do SIGEPWeb foi descontinuado pelos Correios em Agosto/2024, sendo susbtituido pelo *Plataforma de Pré-Postagem (PPN)*.
+
 
 ## Sobre
 
